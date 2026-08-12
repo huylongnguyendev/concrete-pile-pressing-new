@@ -7,12 +7,12 @@ import {
 	useMatches,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { Toaster } from "sonner";
 import { Footer } from "#/components/base/footer/Footer";
 import { Header } from "#/components/base/header/Header";
-import { getCompanyFn } from "#/lib/db/services/company.service";
+import { getCompanyFn } from "#/db/services/company.service";
 import { AppProvider } from "#/providers/AppProvider";
 import appCss from "../styles.css?url";
-import { Toaster } from "sonner";
 
 interface RootRouteContext {
 	queryClient: QueryClient;
@@ -75,5 +75,3 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 		</html>
 	);
 }
-
-

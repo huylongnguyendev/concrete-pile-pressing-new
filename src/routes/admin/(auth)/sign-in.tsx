@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Button } from "#/components/ui/button";
 import {
@@ -19,7 +19,7 @@ import {
 } from "#/components/ui/field";
 import { Input } from "#/components/ui/input";
 import { Spinner } from "#/components/ui/spinner";
-import { signInFn } from "#/lib/db/services/auth.service";
+import { signInFn } from "#/db/services/auth.service";
 import { type SignIn, SignInSchema } from "#/schema/auth.schema";
 
 export const Route = createFileRoute("/admin/(auth)/sign-in")({
@@ -28,6 +28,8 @@ export const Route = createFileRoute("/admin/(auth)/sign-in")({
 });
 
 function RouteComponent() {
+	const navigate = useNavigate();
+
 	const form = useForm({
 		defaultValues: {
 			identicator: "",
@@ -41,8 +43,10 @@ function RouteComponent() {
 		onSubmit: async ({ value }) => {
 			const result = await signInFn({ data: value });
 
-			if (result.success) toast.success(result.message);
-			else toast.error(result.message);
+			if (result.success) {
+				toast.success(result.message);
+				navigate({to: "/admin"})
+			} else toast.error(result.message);
 		},
 	});
 

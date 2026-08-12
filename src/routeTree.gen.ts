@@ -16,6 +16,10 @@ import { Route as DichVuRouteImport } from './routes/dich-vu'
 import { Route as DuAnRouteImport } from './routes/du-an'
 import { Route as LienHeRouteImport } from './routes/lien-he'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
+import { Route as AdminCustomersRouteImport } from './routes/admin/customers'
+import { Route as AdminEmployeesRouteImport } from './routes/admin/employees'
+import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminauthSignInRouteImport } from './routes/admin/(auth)/sign-in'
 import { Route as AdminauthSignUpRouteImport } from './routes/admin/(auth)/sign-up'
@@ -55,6 +59,26 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminEmployeesRoute = AdminEmployeesRouteImport.update({
+  id: '/employees',
+  path: '/employees',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -78,6 +102,10 @@ export interface FileRoutesByFullPath {
   '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/employees': typeof AdminEmployeesRoute
+  '/admin/projects': typeof AdminProjectsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/sign-in': typeof AdminauthSignInRoute
@@ -89,6 +117,10 @@ export interface FileRoutesByTo {
   '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/employees': typeof AdminEmployeesRoute
+  '/admin/projects': typeof AdminProjectsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin': typeof AdminIndexRoute
   '/admin/sign-in': typeof AdminauthSignInRoute
@@ -102,6 +134,10 @@ export interface FileRoutesById {
   '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/employees': typeof AdminEmployeesRoute
+  '/admin/projects': typeof AdminProjectsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/(auth)/sign-in': typeof AdminauthSignInRoute
@@ -116,6 +152,10 @@ export interface FileRouteTypes {
     | '/dich-vu'
     | '/du-an'
     | '/lien-he'
+    | '/admin/analytics'
+    | '/admin/customers'
+    | '/admin/employees'
+    | '/admin/projects'
     | '/admin/settings'
     | '/admin/'
     | '/admin/sign-in'
@@ -127,6 +167,10 @@ export interface FileRouteTypes {
     | '/dich-vu'
     | '/du-an'
     | '/lien-he'
+    | '/admin/analytics'
+    | '/admin/customers'
+    | '/admin/employees'
+    | '/admin/projects'
     | '/admin/settings'
     | '/admin'
     | '/admin/sign-in'
@@ -139,6 +183,10 @@ export interface FileRouteTypes {
     | '/dich-vu'
     | '/du-an'
     | '/lien-he'
+    | '/admin/analytics'
+    | '/admin/customers'
+    | '/admin/employees'
+    | '/admin/projects'
     | '/admin/settings'
     | '/admin/'
     | '/admin/(auth)/sign-in'
@@ -205,6 +253,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/customers': {
+      id: '/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/employees': {
+      id: '/admin/employees'
+      path: '/employees'
+      fullPath: '/admin/employees'
+      preLoaderRoute: typeof AdminEmployeesRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/settings': {
       id: '/admin/settings'
       path: '/settings'
@@ -230,6 +306,10 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteRouteChildren {
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminCustomersRoute: typeof AdminCustomersRoute
+  AdminEmployeesRoute: typeof AdminEmployeesRoute
+  AdminProjectsRoute: typeof AdminProjectsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminauthSignInRoute: typeof AdminauthSignInRoute
@@ -237,6 +317,10 @@ interface AdminRouteRouteChildren {
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminCustomersRoute: AdminCustomersRoute,
+  AdminEmployeesRoute: AdminEmployeesRoute,
+  AdminProjectsRoute: AdminProjectsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminauthSignInRoute: AdminauthSignInRoute,

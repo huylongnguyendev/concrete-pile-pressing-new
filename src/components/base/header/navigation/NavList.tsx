@@ -25,7 +25,7 @@ export function NavList() {
 				isOpenMenu && "top-0",
 			)}
 		>
-			<ul className="flex max-lg:flex-col items-center lg:gap-4 capitalize font-semibold text-muted-foreground">
+			<ul className="flex max-lg:flex-col items-center lg:gap-8 capitalize font-semibold text-muted-foreground">
 				<li className="ms-auto lg:hidden">
 					<CloseMenu />
 				</li>

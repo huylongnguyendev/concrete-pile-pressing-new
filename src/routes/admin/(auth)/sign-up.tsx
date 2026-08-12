@@ -1,6 +1,8 @@
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
+import { Button } from "#/components/ui/button";
 import {
 	Card,
 	CardAction,
@@ -10,13 +12,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "#/components/ui/card";
-import { type SignUp, SignUpSchema } from "#/schema/auth.schema";
 import { Field, FieldError, FieldLabel } from "#/components/ui/field";
 import { Input } from "#/components/ui/input";
-import { Button } from "#/components/ui/button";
 import { Spinner } from "#/components/ui/spinner";
-import { signUpFn } from "#/lib/db/services/auth.service";
-import { toast } from "sonner";
+import { signUpFn } from "#/db/services/auth.service";
+import { type SignUp, SignUpSchema } from "#/schema/auth.schema";
 
 export const Route = createFileRoute("/admin/(auth)/sign-up")({
 	staticData: { isShowNav: false },

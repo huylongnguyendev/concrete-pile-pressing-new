@@ -6,7 +6,7 @@ export function ContactCta() {
 		<Button asChild>
 			<a href="to:+84967386080">
 				<PhoneCallIcon />
-				<span>Tư vấn Miễn phí</span>
+				<span className="max-lg:hidden">Tư vấn Miễn phí</span>
 			</a>
 		</Button>
 	);
