@@ -1,6 +1,6 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
-import { useEffect, useState } from "react";
-import { themeCollection } from "#/lib/theme";
+import { useState } from "react";
+import { collections } from "#/lib/screen";
 import {
 	Card,
 	CardContent,
@@ -22,33 +22,41 @@ import { Switch } from "../ui/switch";
 export function ScreenSetting() {
 	const [fontSize, setFontSize] = useState<number[]>([16]);
 
-	const { data: prefs } = useLiveQuery((q) =>
-		q.from({ pref: themeCollection }).where(({ pref }) => eq(pref.id, "theme")),
+	const { data } = useLiveQuery((q) =>
+		q.from({ pref: collections }).where(({ pref }) => eq(pref.id, "ui")),
 	);
 
-	const currentPref = prefs[0];
+	const currentPref = data[0];
+
 	const currentTheme = currentPref?.mode ?? "light";
 	const isDarkMode = currentTheme === "dark";
 
 	const toggleTheme = () => {
 		const next = currentTheme === "dark" ? "light" : "dark";
 
-		if (currentPref) {
-			themeCollection.update("theme", (draft) => {
+		if (currentPref)
+			collections.update("ui", (draft) => {
 				draft.mode = next;
 			});
-		} else {
-			themeCollection.insert({ id: "theme", mode: next });
-		}
-
-		document.documentElement.classList.remove("dark", "light");
-		document.documentElement.classList.add(next);
+		else collections.insert({ id: "ui", mode: next, size: fontSize[0] });
 	};
 
-	useEffect(() => {
-		document.documentElement.classList.remove("dark", "light");
-		document.documentElement.classList.add(currentTheme);
-	}, [currentTheme]);
+	const handleFontSize = (value: number[]) => {
+		const nextSize = value[0];
+
+		if (currentPref)
+			collections.update("ui", (draft) => {
+				draft.size = nextSize;
+			});
+		else
+			collections.insert({
+				id: "ui",
+				mode: currentTheme,
+				size: nextSize,
+			});
+
+		setFontSize(value);
+	};
 
 	return (
 		<Card>
@@ -85,15 +93,15 @@ export function ScreenSetting() {
 							</p>
 						</div>
 						<span className="text-sm font-bold text-primary px-2 py-1 bg-primary/10 dark:bg-primary dark:text-primary-foreground rounded-md">
-							{fontSize[0]}px
+							{currentPref ? [currentPref.size] : fontSize[0]}px
 						</span>
 					</div>
 					<Slider
-						defaultValue={[16]}
+						defaultValue={currentPref ? [currentPref.size] : [16]}
 						min={12}
 						max={20}
 						step={1}
-						onValueChange={setFontSize}
+						onValueChange={handleFontSize}
 						className="w-full max-w-xs mt-4"
 					/>
 				</div>

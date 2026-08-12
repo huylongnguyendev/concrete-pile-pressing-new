@@ -20,6 +20,7 @@ import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
 
 export default function ProtectSetting() {
+
 	return (
 		<Card>
 			<CardHeader>

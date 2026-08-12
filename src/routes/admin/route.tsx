@@ -1,5 +1,8 @@
+import { eq, useLiveQuery } from "@tanstack/react-db";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "#/components/ui/sidebar";
+import { collections } from "#/lib/screen";
 import { AppSidebar } from "#/providers/AppSidebar";
 
 export const Route = createFileRoute("/admin")({
@@ -9,6 +12,26 @@ export const Route = createFileRoute("/admin")({
 });
 
 function RouteComponent() {
+	const { data } = useLiveQuery((q) =>
+		q.from({ pref: collections }).where(({ pref }) => eq(pref.id, "ui")),
+	);
+	const currentPref = data[0];
+
+	const currentTheme = currentPref?.mode ?? "light";
+	const currentFontSize = currentPref?.size;
+
+	useEffect(() => {
+		document.documentElement.classList.remove("dark", "light");
+		document.documentElement.classList.add(currentTheme);
+
+		if (!currentFontSize) return;
+
+		document.documentElement.style.setProperty(
+			"--base-font-size",
+			`${currentFontSize}px`,
+		);
+	}, [currentTheme, currentFontSize]);
+
 	return (
 		<SidebarProvider>
 			<AppSidebar />
