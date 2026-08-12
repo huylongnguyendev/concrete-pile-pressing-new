@@ -4,6 +4,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Header } from "#/components/base/header/Header";
 import appCss from "../styles.css?url";
 import { AppProvider } from "#/providers/AppProvider";
+import { Footer } from "#/components/base/footer/Footer";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -39,6 +40,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<AppProvider>
 					<Header />
 					{children}
+					<Footer />
 				</AppProvider>
 				<TanStackDevtools
 					config={{

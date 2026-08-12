@@ -10,43 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DichVuRouteImport } from './routes/dich-vu'
+import { Route as BangGiaRouteImport } from './routes/bang-gia'
+import { Route as DuAnRouteImport } from './routes/du-an'
+import { Route as LienHeRouteImport } from './routes/lien-he'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DichVuRoute = DichVuRouteImport.update({
-  id: '/dich-vu',
-  path: '/dich-vu',
+const BangGiaRoute = BangGiaRouteImport.update({
+  id: '/bang-gia',
+  path: '/bang-gia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DuAnRoute = DuAnRouteImport.update({
+  id: '/du-an',
+  path: '/du-an',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LienHeRoute = LienHeRouteImport.update({
+  id: '/lien-he',
+  path: '/lien-he',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dich-vu': typeof DichVuRoute
+  '/bang-gia': typeof BangGiaRoute
+  '/du-an': typeof DuAnRoute
+  '/lien-he': typeof LienHeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dich-vu': typeof DichVuRoute
+  '/bang-gia': typeof BangGiaRoute
+  '/du-an': typeof DuAnRoute
+  '/lien-he': typeof LienHeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/dich-vu': typeof DichVuRoute
+  '/bang-gia': typeof BangGiaRoute
+  '/du-an': typeof DuAnRoute
+  '/lien-he': typeof LienHeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dich-vu'
+  fullPaths: '/' | '/bang-gia' | '/du-an' | '/lien-he'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dich-vu'
-  id: '__root__' | '/' | '/dich-vu'
+  to: '/' | '/bang-gia' | '/du-an' | '/lien-he'
+  id: '__root__' | '/' | '/bang-gia' | '/du-an' | '/lien-he'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DichVuRoute: typeof DichVuRoute
+  BangGiaRoute: typeof BangGiaRoute
+  DuAnRoute: typeof DuAnRoute
+  LienHeRoute: typeof LienHeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,11 +78,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dich-vu': {
-      id: '/dich-vu'
-      path: '/dich-vu'
-      fullPath: '/dich-vu'
-      preLoaderRoute: typeof DichVuRouteImport
+    '/bang-gia': {
+      id: '/bang-gia'
+      path: '/bang-gia'
+      fullPath: '/bang-gia'
+      preLoaderRoute: typeof BangGiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/du-an': {
+      id: '/du-an'
+      path: '/du-an'
+      fullPath: '/du-an'
+      preLoaderRoute: typeof DuAnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lien-he': {
+      id: '/lien-he'
+      path: '/lien-he'
+      fullPath: '/lien-he'
+      preLoaderRoute: typeof LienHeRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -70,7 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DichVuRoute: DichVuRoute,
+  BangGiaRoute: BangGiaRoute,
+  DuAnRoute: DuAnRoute,
+  LienHeRoute: LienHeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
