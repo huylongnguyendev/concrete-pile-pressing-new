@@ -10,18 +10,34 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as BangGiaRouteImport } from './routes/bang-gia'
+import { Route as DichVuRouteImport } from './routes/dich-vu'
 import { Route as DuAnRouteImport } from './routes/du-an'
 import { Route as LienHeRouteImport } from './routes/lien-he'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminauthSignInRouteImport } from './routes/admin/(auth)/sign-in'
+import { Route as AdminauthSignUpRouteImport } from './routes/admin/(auth)/sign-up'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BangGiaRoute = BangGiaRouteImport.update({
   id: '/bang-gia',
   path: '/bang-gia',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DichVuRoute = DichVuRouteImport.update({
+  id: '/dich-vu',
+  path: '/dich-vu',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DuAnRoute = DuAnRouteImport.update({
@@ -34,37 +50,106 @@ const LienHeRoute = LienHeRouteImport.update({
   path: '/lien-he',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminauthSignInRoute = AdminauthSignInRouteImport.update({
+  id: '/(auth)/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminauthSignUpRoute = AdminauthSignUpRouteImport.update({
+  id: '/(auth)/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
+  '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/sign-in': typeof AdminauthSignInRoute
+  '/admin/sign-up': typeof AdminauthSignUpRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bang-gia': typeof BangGiaRoute
+  '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/sign-in': typeof AdminauthSignInRoute
+  '/admin/sign-up': typeof AdminauthSignUpRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
+  '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/(auth)/sign-in': typeof AdminauthSignInRoute
+  '/admin/(auth)/sign-up': typeof AdminauthSignUpRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bang-gia' | '/du-an' | '/lien-he'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/bang-gia'
+    | '/dich-vu'
+    | '/du-an'
+    | '/lien-he'
+    | '/admin/settings'
+    | '/admin/'
+    | '/admin/sign-in'
+    | '/admin/sign-up'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bang-gia' | '/du-an' | '/lien-he'
-  id: '__root__' | '/' | '/bang-gia' | '/du-an' | '/lien-he'
+  to:
+    | '/'
+    | '/bang-gia'
+    | '/dich-vu'
+    | '/du-an'
+    | '/lien-he'
+    | '/admin/settings'
+    | '/admin'
+    | '/admin/sign-in'
+    | '/admin/sign-up'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/bang-gia'
+    | '/dich-vu'
+    | '/du-an'
+    | '/lien-he'
+    | '/admin/settings'
+    | '/admin/'
+    | '/admin/(auth)/sign-in'
+    | '/admin/(auth)/sign-up'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
   BangGiaRoute: typeof BangGiaRoute
+  DichVuRoute: typeof DichVuRoute
   DuAnRoute: typeof DuAnRoute
   LienHeRoute: typeof LienHeRoute
 }
@@ -78,11 +163,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bang-gia': {
       id: '/bang-gia'
       path: '/bang-gia'
       fullPath: '/bang-gia'
       preLoaderRoute: typeof BangGiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dich-vu': {
+      id: '/dich-vu'
+      path: '/dich-vu'
+      fullPath: '/dich-vu'
+      preLoaderRoute: typeof DichVuRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/du-an': {
@@ -99,12 +198,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LienHeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/(auth)/sign-in': {
+      id: '/admin/(auth)/sign-in'
+      path: '/sign-in'
+      fullPath: '/admin/sign-in'
+      preLoaderRoute: typeof AdminauthSignInRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/(auth)/sign-up': {
+      id: '/admin/(auth)/sign-up'
+      path: '/sign-up'
+      fullPath: '/admin/sign-up'
+      preLoaderRoute: typeof AdminauthSignUpRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
   }
 }
 
+interface AdminRouteRouteChildren {
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AdminauthSignInRoute: typeof AdminauthSignInRoute
+  AdminauthSignUpRoute: typeof AdminauthSignUpRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AdminauthSignInRoute: AdminauthSignInRoute,
+  AdminauthSignUpRoute: AdminauthSignUpRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
   BangGiaRoute: BangGiaRoute,
+  DichVuRoute: DichVuRoute,
   DuAnRoute: DuAnRoute,
   LienHeRoute: LienHeRoute,
 }

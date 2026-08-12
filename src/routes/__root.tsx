@@ -1,12 +1,24 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
+import {
+	createRootRouteWithContext,
+	HeadContent,
+	Scripts,
+	useMatches,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { Header } from "#/components/base/header/Header";
-import appCss from "../styles.css?url";
-import { AppProvider } from "#/providers/AppProvider";
 import { Footer } from "#/components/base/footer/Footer";
+import { Header } from "#/components/base/header/Header";
+import { getCompanyFn } from "#/lib/db/services/company.service";
+import { AppProvider } from "#/providers/AppProvider";
+import appCss from "../styles.css?url";
+import { Toaster } from "sonner";
 
-export const Route = createRootRoute({
+interface RootRouteContext {
+	queryClient: QueryClient;
+}
+
+export const Route = createRootRouteWithContext<RootRouteContext>()({
 	head: () => ({
 		meta: [
 			{
@@ -27,10 +39,14 @@ export const Route = createRootRoute({
 			},
 		],
 	}),
+	loader: async () => await getCompanyFn(),
+	staleTime: Infinity,
 	shellComponent: RootDocument,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+	const matches = useMatches();
+	const isShowNav = !matches.some((m) => m.staticData?.isShowNav === false);
 	return (
 		<html lang="en">
 			<head>
@@ -38,9 +54,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				<AppProvider>
-					<Header />
+					{isShowNav && <Header />}
 					{children}
-					<Footer />
+					{isShowNav && <Footer />}
+					<Toaster closeButton richColors />
 				</AppProvider>
 				<TanStackDevtools
 					config={{

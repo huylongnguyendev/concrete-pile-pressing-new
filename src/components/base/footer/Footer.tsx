@@ -1,3 +1,4 @@
+import { useLoaderData } from "@tanstack/react-router";
 import {
 	Building2Icon,
 	MailIcon,
@@ -7,6 +8,7 @@ import {
 } from "lucide-react";
 
 export function Footer() {
+	const { company } = useLoaderData({ from: "__root__" });
 	return (
 		<footer className="bg-zinc-900 text-zinc-300 border-t border-zinc-800">
 			<div className="box py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
@@ -87,15 +89,22 @@ export function Footer() {
 						<li className="flex items-center gap-3">
 							<PhoneCallIcon className="w-5 h-5 text-primary shrink-0" />
 							<a
-								href="tel:0123456789"
+								href={`tel:${company?.phoneNumber}`}
 								className="hover:text-white transition-colors font-bold text-white"
 							>
-								0123.456.789
+								{company?.phoneNumber[0].replace("+84", "0") ?? "0967.386.080"}
 							</a>
 						</li>
-						<li className="flex items-center gap-3">
-							<MailIcon className="w-5 h-5 text-primary shrink-0" />
-							<span>epcocmiennam@gmail.com</span>
+						<li>
+							<a
+								href={`mailto:${company?.address ?? "epcocbetonghungdung@gmail.com"}`}
+								className="flex items-center gap-3"
+							>
+								<MailIcon className="w-5 h-5 text-primary shrink-0" />
+								<span>
+									{company?.address ?? "epcocbetonghungdung@gmail.com"}
+								</span>
+							</a>
 						</li>
 					</ul>
 				</div>

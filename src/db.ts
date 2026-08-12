@@ -1,16 +1,16 @@
-import { neon } from "@neondatabase/serverless";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "./generated/prisma/client";
 
-let client: ReturnType<typeof neon>;
-const DATABASE_URL = process.env.DATABASE_URL;
+const adapter = new PrismaPg({
+	connectionString: process.env.DATABASE_URL,
+});
 
-export async function getClient() {
-	if (!DATABASE_URL) {
-		return undefined;
-	}
+declare global {
+	var __prisma: PrismaClient | undefined;
+}
 
-	if (!client) {
-		client = await neon(DATABASE_URL);
-	}
+export const prisma = globalThis.__prisma || new PrismaClient({ adapter });
 
-	return client;
+if (process.env.NODE_ENV !== "production") {
+	globalThis.__prisma = prisma;
 }
