@@ -48,7 +48,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 	const matches = useMatches();
 	const isShowNav = !matches.some((m) => m.staticData?.isShowNav === false);
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>
@@ -75,3 +75,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 		</html>
 	);
 }
+
+
