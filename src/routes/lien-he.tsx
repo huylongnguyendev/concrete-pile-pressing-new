@@ -1,3 +1,4 @@
+import { useAppStore } from "@lavaz/store";
 import { createFileRoute } from "@tanstack/react-router";
 import {
 	CheckCircle2Icon,
@@ -17,13 +18,20 @@ import {
 	CardHeader,
 	CardTitle,
 } from "#/components/ui/card";
+import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
+import { store } from "#/store/store";
 
 export const Route = createFileRoute("/lien-he")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const [{ phoneNumber, emails, addresses }] = useAppStore(
+		store.company,
+		(s) => s,
+	);
+
 	return (
 		<div className="pt-20 min-h-screen flex flex-col">
 			{/* Hero Header của trang Liên hệ */}
@@ -104,10 +112,11 @@ function RouteComponent() {
 													Số điện thoại
 												</p>
 												<a
-													href="tel:0123456789"
+													href={`tel:${phoneNumber[0].number ?? "+84967386080"}`}
 													className="text-primary font-bold hover:underline mt-0.5 block"
 												>
-													0123.456.789
+													{phoneNumber[0].number.replace("+84", "0") ??
+														"0967.386.080"}
 												</a>
 											</div>
 										</div>
@@ -120,9 +129,12 @@ function RouteComponent() {
 												<p className="font-semibold text-foreground">
 													Hộp thư điện tử
 												</p>
-												<p className="text-muted-foreground mt-0.5">
-													epcocmiennam@gmail.com
-												</p>
+												<a
+													href={`mailto:${emails[0].mail ?? "epcocbetonghungdung@gmail.com"}`}
+													className="text-primary font-bold hover:underline mt-0.5 block"
+												>
+													{emails[0].mail ?? "epcocbetonghungdung@gmail.com"}
+												</a>
 											</div>
 										</div>
 
@@ -189,22 +201,20 @@ function RouteComponent() {
 													<Label className="text-xs sm:text-sm font-semibold text-foreground">
 														Họ và Tên của bạn
 													</Label>
-													<input
+													<Input
 														type="text"
 														required
 														placeholder="Ví dụ: Anh Nam"
-														className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
 													/>
 												</div>
 												<div className="space-y-2">
 													<Label className="text-xs sm:text-sm font-semibold text-foreground">
 														Số Điện Thoại
 													</Label>
-													<input
+													<Input
 														type="tel"
 														required
 														placeholder="Ví dụ: 0912345xxx"
-														className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
 													/>
 												</div>
 											</div>

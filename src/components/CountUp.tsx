@@ -1,5 +1,5 @@
 import type { QuickStat } from "#/data/hero.data";
-import { useCountUp } from "#/hooks/useCountUp";
+import { useCountUp } from "#/hooks/use-count-up";
 
 export function CountUp({ item, index }: { item: QuickStat; index: number }) {
   const { count, setElementRef } = useCountUp({

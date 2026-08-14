@@ -23,6 +23,21 @@ export * from './enums.ts';
  */
 export type Company = Prisma.CompanyModel
 /**
+ * Model PhoneNumber
+ * 
+ */
+export type PhoneNumber = Prisma.PhoneNumberModel
+/**
+ * Model Email
+ * 
+ */
+export type Email = Prisma.EmailModel
+/**
+ * Model Address
+ * 
+ */
+export type Address = Prisma.AddressModel
+/**
  * Model User
  * 
  */

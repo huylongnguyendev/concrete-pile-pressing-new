@@ -7,7 +7,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 import {
 	Field,
 	FieldContent,
@@ -15,12 +15,11 @@ import {
 	FieldGroup,
 	FieldLabel,
 	FieldTitle,
-} from "../ui/field";
-import { Input } from "../ui/input";
-import { Switch } from "../ui/switch";
+} from "../../ui/field";
+import { Input } from "../../ui/input";
+import { Switch } from "../../ui/switch";
 
 export default function ProtectSetting() {
-
 	return (
 		<Card>
 			<CardHeader>

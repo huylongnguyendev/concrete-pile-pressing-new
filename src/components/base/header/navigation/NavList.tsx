@@ -1,11 +1,11 @@
-import { navList } from "#/data/nav.data";
 import { useAppStore } from "@lavaz/store";
+import { useRef } from "react";
+import { navList } from "#/data/nav.data";
+import { useClickOutside } from "#/hooks/use-click-outside";
+import { cn } from "#/lib/utils";
+import { store } from "#/store/store";
 import { CloseMenu } from "../actions/CloseMenu";
 import { NavItem } from "./NavItem";
-import { store } from "#/store/store";
-import { cn } from "#/lib/utils";
-import { useClickOutside } from "#/hooks/useClickOutside";
-import { useRef } from "react";
 
 export function NavList() {
 	const [isOpenMenu, { setCloseMenu }] = useAppStore(

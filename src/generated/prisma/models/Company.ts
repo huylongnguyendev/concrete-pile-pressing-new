@@ -26,23 +26,18 @@ export type AggregateCompany = {
 
 export type CompanyMinAggregateOutputType = {
   id: string | null
-  email: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type CompanyMaxAggregateOutputType = {
   id: string | null
-  email: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type CompanyCountAggregateOutputType = {
   id: number
-  phoneNumber: number
-  email: number
-  address: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -51,23 +46,18 @@ export type CompanyCountAggregateOutputType = {
 
 export type CompanyMinAggregateInputType = {
   id?: true
-  email?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type CompanyMaxAggregateInputType = {
   id?: true
-  email?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type CompanyCountAggregateInputType = {
   id?: true
-  phoneNumber?: true
-  email?: true
-  address?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -147,9 +137,6 @@ export type CompanyGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type CompanyGroupByOutputType = {
   id: string
-  phoneNumber: string[]
-  email: string
-  address: string[]
   createdAt: Date
   updatedAt: Date
   _count: CompanyCountAggregateOutputType | null
@@ -177,20 +164,20 @@ export type CompanyWhereInput = {
   OR?: Prisma.CompanyWhereInput[]
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   id?: Prisma.StringFilter<"Company"> | string
-  phoneNumber?: Prisma.StringNullableListFilter<"Company">
-  email?: Prisma.StringFilter<"Company"> | string
-  address?: Prisma.StringNullableListFilter<"Company">
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
+  phoneNumber?: Prisma.PhoneNumberListRelationFilter
+  emails?: Prisma.EmailListRelationFilter
+  addresses?: Prisma.AddressListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  address?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  phoneNumber?: Prisma.PhoneNumberOrderByRelationAggregateInput
+  emails?: Prisma.EmailOrderByRelationAggregateInput
+  addresses?: Prisma.AddressOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -198,18 +185,15 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
   OR?: Prisma.CompanyWhereInput[]
   NOT?: Prisma.CompanyWhereInput | Prisma.CompanyWhereInput[]
-  phoneNumber?: Prisma.StringNullableListFilter<"Company">
-  email?: Prisma.StringFilter<"Company"> | string
-  address?: Prisma.StringNullableListFilter<"Company">
   createdAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
+  phoneNumber?: Prisma.PhoneNumberListRelationFilter
+  emails?: Prisma.EmailListRelationFilter
+  addresses?: Prisma.AddressListRelationFilter
 }, "id">
 
 export type CompanyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  address?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CompanyCountOrderByAggregateInput
@@ -222,181 +206,383 @@ export type CompanyScalarWhereWithAggregatesInput = {
   OR?: Prisma.CompanyScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CompanyScalarWhereWithAggregatesInput | Prisma.CompanyScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  phoneNumber?: Prisma.StringNullableListFilter<"Company">
-  email?: Prisma.StringWithAggregatesFilter<"Company"> | string
-  address?: Prisma.StringNullableListFilter<"Company">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Company"> | Date | string
 }
 
 export type CompanyCreateInput = {
   id?: string
-  phoneNumber?: Prisma.CompanyCreatephoneNumberInput | string[]
-  email: string
-  address?: Prisma.CompanyCreateaddressInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber?: Prisma.PhoneNumberCreateNestedManyWithoutCompanyInput
+  emails?: Prisma.EmailCreateNestedManyWithoutCompanyInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
   id?: string
-  phoneNumber?: Prisma.CompanyCreatephoneNumberInput | string[]
-  email: string
-  address?: Prisma.CompanyCreateaddressInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  phoneNumber?: Prisma.PhoneNumberUncheckedCreateNestedManyWithoutCompanyInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutCompanyInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.CompanyUpdatephoneNumberInput | string[]
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.CompanyUpdateaddressInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.PhoneNumberUpdateManyWithoutCompanyNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutCompanyNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.CompanyUpdatephoneNumberInput | string[]
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.CompanyUpdateaddressInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.PhoneNumberUncheckedUpdateManyWithoutCompanyNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutCompanyNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
   id?: string
-  phoneNumber?: Prisma.CompanyCreatephoneNumberInput | string[]
-  email: string
-  address?: Prisma.CompanyCreateaddressInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type CompanyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.CompanyUpdatephoneNumberInput | string[]
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.CompanyUpdateaddressInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CompanyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.CompanyUpdatephoneNumberInput | string[]
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.CompanyUpdateaddressInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type StringNullableListFilter<$PrismaModel = never> = {
-  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
-  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
-  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  isEmpty?: boolean
-}
-
 export type CompanyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  address?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CompanyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CompanyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
-export type CompanyCreatephoneNumberInput = {
-  set: string[]
-}
-
-export type CompanyCreateaddressInput = {
-  set: string[]
+export type CompanyNullableScalarRelationFilter = {
+  is?: Prisma.CompanyWhereInput | null
+  isNot?: Prisma.CompanyWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type CompanyUpdatephoneNumberInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
-export type CompanyUpdateaddressInput = {
-  set?: string[]
-  push?: string | string[]
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type CompanyCreateNestedOneWithoutPhoneNumberInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutPhoneNumberInput, Prisma.CompanyUncheckedCreateWithoutPhoneNumberInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutPhoneNumberInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneWithoutPhoneNumberNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutPhoneNumberInput, Prisma.CompanyUncheckedCreateWithoutPhoneNumberInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutPhoneNumberInput
+  upsert?: Prisma.CompanyUpsertWithoutPhoneNumberInput
+  disconnect?: Prisma.CompanyWhereInput | boolean
+  delete?: Prisma.CompanyWhereInput | boolean
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutPhoneNumberInput, Prisma.CompanyUpdateWithoutPhoneNumberInput>, Prisma.CompanyUncheckedUpdateWithoutPhoneNumberInput>
+}
+
+export type CompanyCreateNestedOneWithoutEmailsInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutEmailsInput, Prisma.CompanyUncheckedCreateWithoutEmailsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutEmailsInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneWithoutEmailsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutEmailsInput, Prisma.CompanyUncheckedCreateWithoutEmailsInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutEmailsInput
+  upsert?: Prisma.CompanyUpsertWithoutEmailsInput
+  disconnect?: Prisma.CompanyWhereInput | boolean
+  delete?: Prisma.CompanyWhereInput | boolean
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutEmailsInput, Prisma.CompanyUpdateWithoutEmailsInput>, Prisma.CompanyUncheckedUpdateWithoutEmailsInput>
+}
+
+export type CompanyCreateNestedOneWithoutAddressesInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutAddressesInput, Prisma.CompanyUncheckedCreateWithoutAddressesInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutAddressesInput
+  connect?: Prisma.CompanyWhereUniqueInput
+}
+
+export type CompanyUpdateOneWithoutAddressesNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyCreateWithoutAddressesInput, Prisma.CompanyUncheckedCreateWithoutAddressesInput>
+  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutAddressesInput
+  upsert?: Prisma.CompanyUpsertWithoutAddressesInput
+  disconnect?: Prisma.CompanyWhereInput | boolean
+  delete?: Prisma.CompanyWhereInput | boolean
+  connect?: Prisma.CompanyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutAddressesInput, Prisma.CompanyUpdateWithoutAddressesInput>, Prisma.CompanyUncheckedUpdateWithoutAddressesInput>
+}
+
+export type CompanyCreateWithoutPhoneNumberInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  emails?: Prisma.EmailCreateNestedManyWithoutCompanyInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutPhoneNumberInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutCompanyInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutPhoneNumberInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutPhoneNumberInput, Prisma.CompanyUncheckedCreateWithoutPhoneNumberInput>
+}
+
+export type CompanyUpsertWithoutPhoneNumberInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutPhoneNumberInput, Prisma.CompanyUncheckedUpdateWithoutPhoneNumberInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutPhoneNumberInput, Prisma.CompanyUncheckedCreateWithoutPhoneNumberInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutPhoneNumberInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutPhoneNumberInput, Prisma.CompanyUncheckedUpdateWithoutPhoneNumberInput>
+}
+
+export type CompanyUpdateWithoutPhoneNumberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emails?: Prisma.EmailUpdateManyWithoutCompanyNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutPhoneNumberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutCompanyNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutEmailsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: Prisma.PhoneNumberCreateNestedManyWithoutCompanyInput
+  addresses?: Prisma.AddressCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutEmailsInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: Prisma.PhoneNumberUncheckedCreateNestedManyWithoutCompanyInput
+  addresses?: Prisma.AddressUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutEmailsInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutEmailsInput, Prisma.CompanyUncheckedCreateWithoutEmailsInput>
+}
+
+export type CompanyUpsertWithoutEmailsInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutEmailsInput, Prisma.CompanyUncheckedUpdateWithoutEmailsInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutEmailsInput, Prisma.CompanyUncheckedCreateWithoutEmailsInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutEmailsInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutEmailsInput, Prisma.CompanyUncheckedUpdateWithoutEmailsInput>
+}
+
+export type CompanyUpdateWithoutEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.PhoneNumberUpdateManyWithoutCompanyNestedInput
+  addresses?: Prisma.AddressUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutEmailsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.PhoneNumberUncheckedUpdateManyWithoutCompanyNestedInput
+  addresses?: Prisma.AddressUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyCreateWithoutAddressesInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: Prisma.PhoneNumberCreateNestedManyWithoutCompanyInput
+  emails?: Prisma.EmailCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyUncheckedCreateWithoutAddressesInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: Prisma.PhoneNumberUncheckedCreateNestedManyWithoutCompanyInput
+  emails?: Prisma.EmailUncheckedCreateNestedManyWithoutCompanyInput
+}
+
+export type CompanyCreateOrConnectWithoutAddressesInput = {
+  where: Prisma.CompanyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutAddressesInput, Prisma.CompanyUncheckedCreateWithoutAddressesInput>
+}
+
+export type CompanyUpsertWithoutAddressesInput = {
+  update: Prisma.XOR<Prisma.CompanyUpdateWithoutAddressesInput, Prisma.CompanyUncheckedUpdateWithoutAddressesInput>
+  create: Prisma.XOR<Prisma.CompanyCreateWithoutAddressesInput, Prisma.CompanyUncheckedCreateWithoutAddressesInput>
+  where?: Prisma.CompanyWhereInput
+}
+
+export type CompanyUpdateToOneWithWhereWithoutAddressesInput = {
+  where?: Prisma.CompanyWhereInput
+  data: Prisma.XOR<Prisma.CompanyUpdateWithoutAddressesInput, Prisma.CompanyUncheckedUpdateWithoutAddressesInput>
+}
+
+export type CompanyUpdateWithoutAddressesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.PhoneNumberUpdateManyWithoutCompanyNestedInput
+  emails?: Prisma.EmailUpdateManyWithoutCompanyNestedInput
+}
+
+export type CompanyUncheckedUpdateWithoutAddressesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.PhoneNumberUncheckedUpdateManyWithoutCompanyNestedInput
+  emails?: Prisma.EmailUncheckedUpdateManyWithoutCompanyNestedInput
+}
+
+
+/**
+ * Count Type CompanyCountOutputType
+ */
+
+export type CompanyCountOutputType = {
+  phoneNumber: number
+  emails: number
+  addresses: number
+}
+
+export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  phoneNumber?: boolean | CompanyCountOutputTypeCountPhoneNumberArgs
+  emails?: boolean | CompanyCountOutputTypeCountEmailsArgs
+  addresses?: boolean | CompanyCountOutputTypeCountAddressesArgs
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompanyCountOutputType
+   */
+  select?: Prisma.CompanyCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountPhoneNumberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PhoneNumberWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountEmailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailWhereInput
+}
+
+/**
+ * CompanyCountOutputType without action
+ */
+export type CompanyCountOutputTypeCountAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AddressWhereInput
+}
 
 
 export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  address?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  phoneNumber?: boolean | Prisma.Company$phoneNumberArgs<ExtArgs>
+  emails?: boolean | Prisma.Company$emailsArgs<ExtArgs>
+  addresses?: boolean | Prisma.Company$addressesArgs<ExtArgs>
+  _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  address?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  address?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["company"]>
 
 export type CompanySelectScalar = {
   id?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  address?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "phoneNumber" | "email" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  phoneNumber?: boolean | Prisma.Company$phoneNumberArgs<ExtArgs>
+  emails?: boolean | Prisma.Company$emailsArgs<ExtArgs>
+  addresses?: boolean | Prisma.Company$addressesArgs<ExtArgs>
+  _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type CompanyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Company"
-  objects: {}
+  objects: {
+    phoneNumber: Prisma.$PhoneNumberPayload<ExtArgs>[]
+    emails: Prisma.$EmailPayload<ExtArgs>[]
+    addresses: Prisma.$AddressPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    phoneNumber: string[]
-    email: string
-    address: string[]
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["company"]>
@@ -793,6 +979,9 @@ readonly fields: CompanyFieldRefs;
  */
 export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  phoneNumber<T extends Prisma.Company$phoneNumberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$phoneNumberArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhoneNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emails<T extends Prisma.Company$emailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$emailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  addresses<T extends Prisma.Company$addressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -823,9 +1012,6 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface CompanyFieldRefs {
   readonly id: Prisma.FieldRef<"Company", 'String'>
-  readonly phoneNumber: Prisma.FieldRef<"Company", 'String[]'>
-  readonly email: Prisma.FieldRef<"Company", 'String'>
-  readonly address: Prisma.FieldRef<"Company", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"Company", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Company", 'DateTime'>
 }
@@ -845,6 +1031,10 @@ export type CompanyFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  /**
    * Filter, which Company to fetch.
    */
   where: Prisma.CompanyWhereUniqueInput
@@ -863,6 +1053,10 @@ export type CompanyFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  /**
    * Filter, which Company to fetch.
    */
   where: Prisma.CompanyWhereUniqueInput
@@ -880,6 +1074,10 @@ export type CompanyFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Company
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
   /**
    * Filter, which Company to fetch.
    */
@@ -929,6 +1127,10 @@ export type CompanyFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  /**
    * Filter, which Company to fetch.
    */
   where?: Prisma.CompanyWhereInput
@@ -976,6 +1178,10 @@ export type CompanyFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Company
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
   /**
    * Filter, which Companies to fetch.
    */
@@ -1025,6 +1231,10 @@ export type CompanyCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  /**
    * The data needed to create a Company.
    */
   data: Prisma.XOR<Prisma.CompanyCreateInput, Prisma.CompanyUncheckedCreateInput>
@@ -1072,6 +1282,10 @@ export type CompanyUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Company
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
   /**
    * The data needed to update a Company.
    */
@@ -1139,6 +1353,10 @@ export type CompanyUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  /**
    * The filter to search for the Company to update in case it exists.
    */
   where: Prisma.CompanyWhereUniqueInput
@@ -1165,6 +1383,10 @@ export type CompanyDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  /**
    * Filter which Company to delete.
    */
   where: Prisma.CompanyWhereUniqueInput
@@ -1185,6 +1407,78 @@ export type CompanyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Company.phoneNumber
+ */
+export type Company$phoneNumberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PhoneNumber
+   */
+  select?: Prisma.PhoneNumberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PhoneNumber
+   */
+  omit?: Prisma.PhoneNumberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PhoneNumberInclude<ExtArgs> | null
+  where?: Prisma.PhoneNumberWhereInput
+  orderBy?: Prisma.PhoneNumberOrderByWithRelationInput | Prisma.PhoneNumberOrderByWithRelationInput[]
+  cursor?: Prisma.PhoneNumberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PhoneNumberScalarFieldEnum | Prisma.PhoneNumberScalarFieldEnum[]
+}
+
+/**
+ * Company.emails
+ */
+export type Company$emailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Email
+   */
+  select?: Prisma.EmailSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Email
+   */
+  omit?: Prisma.EmailOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailInclude<ExtArgs> | null
+  where?: Prisma.EmailWhereInput
+  orderBy?: Prisma.EmailOrderByWithRelationInput | Prisma.EmailOrderByWithRelationInput[]
+  cursor?: Prisma.EmailWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailScalarFieldEnum | Prisma.EmailScalarFieldEnum[]
+}
+
+/**
+ * Company.addresses
+ */
+export type Company$addressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Address
+   */
+  select?: Prisma.AddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Address
+   */
+  omit?: Prisma.AddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AddressInclude<ExtArgs> | null
+  where?: Prisma.AddressWhereInput
+  orderBy?: Prisma.AddressOrderByWithRelationInput | Prisma.AddressOrderByWithRelationInput[]
+  cursor?: Prisma.AddressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AddressScalarFieldEnum | Prisma.AddressScalarFieldEnum[]
+}
+
+/**
  * Company without action
  */
 export type CompanyDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1196,4 +1490,8 @@ export type CompanyDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Company
    */
   omit?: Prisma.CompanyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyInclude<ExtArgs> | null
 }

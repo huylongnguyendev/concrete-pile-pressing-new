@@ -1,4 +1,4 @@
-import { useLoaderData } from "@tanstack/react-router";
+import { useAppStore } from "@lavaz/store";
 import {
 	Building2Icon,
 	MailIcon,
@@ -6,9 +6,15 @@ import {
 	PhoneCallIcon,
 	ShieldCheckIcon,
 } from "lucide-react";
+import { Separator } from "#/components/ui/separator";
+import { store } from "#/store/store";
 
 export function Footer() {
-	const { company } = useLoaderData({ from: "__root__" });
+	const [{ phoneNumber, emails, addresses, id }] = useAppStore(
+		store.company,
+		(s) => s,
+	);
+
 	return (
 		<footer className="bg-zinc-900 text-zinc-300 border-t border-zinc-800">
 			<div className="box py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
@@ -82,30 +88,77 @@ export function Footer() {
 						Liên Hệ Trực Tiếp
 					</h3>
 					<ul className="space-y-3 text-sm text-zinc-400 font-medium">
-						<li className="flex items-start gap-3">
-							<MapPinIcon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-							<span>Khu vực Biên Hòa, Đồng Nai & Các vùng lân cận</span>
-						</li>
-						<li className="flex items-center gap-3">
-							<PhoneCallIcon className="w-5 h-5 text-primary shrink-0" />
-							<a
-								href={`tel:${company?.phoneNumber}`}
-								className="hover:text-white transition-colors font-bold text-white"
-							>
-								{company?.phoneNumber[0].replace("+84", "0") ?? "0967.386.080"}
-							</a>
-						</li>
-						<li>
-							<a
-								href={`mailto:${company?.address ?? "epcocbetonghungdung@gmail.com"}`}
-								className="flex items-center gap-3"
-							>
-								<MailIcon className="w-5 h-5 text-primary shrink-0" />
-								<span>
-									{company?.address ?? "epcocbetonghungdung@gmail.com"}
-								</span>
-							</a>
-						</li>
+						{id ? (
+							<>
+								{phoneNumber.map((phone, i) => (
+									<li key={phone?.id} className="flex items-center gap-3">
+										<a
+											href={`tel:${phone?.number}`}
+											className="hover:text-white transition-colors font-bold text-white"
+										>
+											{phone?.number.replace("+84", "0") ?? "0967.386.080"}
+										</a>
+										{i < phoneNumber.length - 1 ? (
+											<Separator orientation="vertical" />
+										) : null}
+									</li>
+								))}
+								{emails.map((email, i) => (
+									<li key={email?.id} className="flex items-center gap-3">
+										<a
+											href={`tel:${email?.mail}`}
+											className="hover:text-white transition-colors font-bold text-white"
+										>
+											{email?.mail.replace("+84", "0") ?? "0967.386.080"}
+										</a>
+										{i < phoneNumber.length - 1 ? (
+											<Separator orientation="vertical" />
+										) : null}
+									</li>
+								))}
+								{addresses.map((add, i) => (
+									<li key={add?.id} className="flex items-center gap-3">
+										<a
+											href={`tel:${add?.address}`}
+											className="hover:text-white transition-colors font-bold text-white"
+										>
+											{add?.address.replace("+84", "0") ?? "0967.386.080"}
+										</a>
+										{i < phoneNumber.length - 1 ? (
+											<Separator orientation="vertical" />
+										) : null}
+									</li>
+								))}
+							</>
+						) : (
+							<>
+								<li className="flex items-start gap-3">
+									<MapPinIcon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+									<span>Khu vực Biên Hòa, Đồng Nai & Các vùng lân cận</span>
+								</li>
+								<li className="flex items-center gap-3">
+									<PhoneCallIcon className="w-5 h-5 text-primary shrink-0" />
+									<a
+										href={`tel:${phoneNumber[0]?.number}`}
+										className="hover:text-white transition-colors font-bold text-white"
+									>
+										{phoneNumber[0]?.number.replace("+84", "0") ??
+											"0967.386.080"}
+									</a>
+								</li>
+								<li>
+									<a
+										href={`mailto:${emails[0]?.mail ?? "epcocbetonghungdung@gmail.com"}`}
+										className="flex items-center gap-3"
+									>
+										<MailIcon className="w-5 h-5 text-primary shrink-0" />
+										<span>
+											{emails[0]?.mail ?? "epcocbetonghungdung@gmail.com"}
+										</span>
+									</a>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</div>

@@ -398,6 +398,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Company: 'Company',
+  PhoneNumber: 'PhoneNumber',
+  Email: 'Email',
+  Address: 'Address',
   User: 'User'
 } as const
 
@@ -414,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "company" | "user"
+    modelProps: "company" | "phoneNumber" | "email" | "address" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -489,6 +492,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CompanyCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CompanyCountAggregateOutputType> | number
+        }
+      }
+    }
+    PhoneNumber: {
+      payload: Prisma.$PhoneNumberPayload<ExtArgs>
+      fields: Prisma.PhoneNumberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PhoneNumberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PhoneNumberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>
+        }
+        findFirst: {
+          args: Prisma.PhoneNumberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PhoneNumberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>
+        }
+        findMany: {
+          args: Prisma.PhoneNumberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>[]
+        }
+        create: {
+          args: Prisma.PhoneNumberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>
+        }
+        createMany: {
+          args: Prisma.PhoneNumberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PhoneNumberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>[]
+        }
+        delete: {
+          args: Prisma.PhoneNumberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>
+        }
+        update: {
+          args: Prisma.PhoneNumberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>
+        }
+        deleteMany: {
+          args: Prisma.PhoneNumberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PhoneNumberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PhoneNumberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>[]
+        }
+        upsert: {
+          args: Prisma.PhoneNumberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PhoneNumberPayload>
+        }
+        aggregate: {
+          args: Prisma.PhoneNumberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePhoneNumber>
+        }
+        groupBy: {
+          args: Prisma.PhoneNumberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PhoneNumberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PhoneNumberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PhoneNumberCountAggregateOutputType> | number
+        }
+      }
+    }
+    Email: {
+      payload: Prisma.$EmailPayload<ExtArgs>
+      fields: Prisma.EmailFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EmailFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EmailFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>
+        }
+        findFirst: {
+          args: Prisma.EmailFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EmailFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>
+        }
+        findMany: {
+          args: Prisma.EmailFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>[]
+        }
+        create: {
+          args: Prisma.EmailCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>
+        }
+        createMany: {
+          args: Prisma.EmailCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EmailCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>[]
+        }
+        delete: {
+          args: Prisma.EmailDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>
+        }
+        update: {
+          args: Prisma.EmailUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>
+        }
+        deleteMany: {
+          args: Prisma.EmailDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EmailUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EmailUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>[]
+        }
+        upsert: {
+          args: Prisma.EmailUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EmailPayload>
+        }
+        aggregate: {
+          args: Prisma.EmailAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEmail>
+        }
+        groupBy: {
+          args: Prisma.EmailGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EmailCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EmailCountAggregateOutputType> | number
+        }
+      }
+    }
+    Address: {
+      payload: Prisma.$AddressPayload<ExtArgs>
+      fields: Prisma.AddressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AddressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AddressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        findFirst: {
+          args: Prisma.AddressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AddressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        findMany: {
+          args: Prisma.AddressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>[]
+        }
+        create: {
+          args: Prisma.AddressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        createMany: {
+          args: Prisma.AddressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AddressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>[]
+        }
+        delete: {
+          args: Prisma.AddressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        update: {
+          args: Prisma.AddressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        deleteMany: {
+          args: Prisma.AddressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AddressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AddressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>[]
+        }
+        upsert: {
+          args: Prisma.AddressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AddressPayload>
+        }
+        aggregate: {
+          args: Prisma.AddressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAddress>
+        }
+        groupBy: {
+          args: Prisma.AddressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AddressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AddressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AddressCountAggregateOutputType> | number
         }
       }
     }
@@ -607,14 +832,44 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const CompanyScalarFieldEnum = {
   id: 'id',
-  phoneNumber: 'phoneNumber',
-  email: 'email',
-  address: 'address',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const PhoneNumberScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+} as const
+
+export type PhoneNumberScalarFieldEnum = (typeof PhoneNumberScalarFieldEnum)[keyof typeof PhoneNumberScalarFieldEnum]
+
+
+export const EmailScalarFieldEnum = {
+  id: 'id',
+  mail: 'mail',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+} as const
+
+export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
+
+
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  address: 'address',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -868,6 +1123,9 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   company?: Prisma.CompanyOmit
+  phoneNumber?: Prisma.PhoneNumberOmit
+  email?: Prisma.EmailOmit
+  address?: Prisma.AddressOmit
   user?: Prisma.UserOmit
 }
 

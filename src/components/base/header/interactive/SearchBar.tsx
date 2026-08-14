@@ -1,20 +1,20 @@
 import { useAppStore } from "@lavaz/store";
 import { SearchIcon, XIcon } from "lucide-react";
 import { useRef, useState } from "react";
+import { Button } from "#/components/ui/button";
 import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupInput,
 } from "#/components/ui/input-group";
-import { cn } from "#/lib/utils";
-import { store } from "#/store/store";
-import { useClickOutside } from "#/hooks/useClickOutside";
-import { Button } from "#/components/ui/button";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger,
 } from "#/components/ui/tooltip";
+import { useClickOutside } from "#/hooks/use-click-outside";
+import { cn } from "#/lib/utils";
+import { store } from "#/store/store";
 
 export function SearchBar() {
 	const [value, setValue] = useState<string>("");

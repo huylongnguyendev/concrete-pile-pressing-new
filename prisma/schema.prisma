@@ -8,12 +8,39 @@ datasource db {
 }
 
 model Company {
-  id          String   @id @default(uuid())
-  phoneNumber String[]
-  email       String
-  address     String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String        @id @default(uuid())
+  phoneNumber PhoneNumber[]
+  emails      Email[]
+  addresses   Address[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model PhoneNumber {
+  id        String   @id @default(uuid())
+  number    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+}
+
+model Email {
+  id        String   @id @default(uuid())
+  mail      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
+}
+
+model Address {
+  id        String   @id @default(uuid())
+  address   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  company   Company? @relation(fields: [companyId], references: [id])
+  companyId String?
 }
 
 model User {

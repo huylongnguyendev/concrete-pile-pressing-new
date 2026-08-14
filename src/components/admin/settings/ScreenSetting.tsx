@@ -7,7 +7,7 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 import {
 	Field,
 	FieldContent,
@@ -15,9 +15,9 @@ import {
 	FieldGroup,
 	FieldLabel,
 	FieldTitle,
-} from "../ui/field";
-import { Slider } from "../ui/slider";
-import { Switch } from "../ui/switch";
+} from "../../ui/field";
+import { Slider } from "../../ui/slider";
+import { Switch } from "../../ui/switch";
 
 export function ScreenSetting() {
 	const [fontSize, setFontSize] = useState<number[]>([16]);

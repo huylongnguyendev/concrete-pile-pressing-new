@@ -12,11 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as BangGiaRouteImport } from './routes/bang-gia'
-import { Route as DichVuRouteImport } from './routes/dich-vu'
 import { Route as DuAnRouteImport } from './routes/du-an'
 import { Route as LienHeRouteImport } from './routes/lien-he'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
+import { Route as AdminCompanyRouteImport } from './routes/admin/company'
 import { Route as AdminCustomersRouteImport } from './routes/admin/customers'
 import { Route as AdminEmployeesRouteImport } from './routes/admin/employees'
 import { Route as AdminMessageRouteImport } from './routes/admin/message'
@@ -40,11 +40,6 @@ const BangGiaRoute = BangGiaRouteImport.update({
   path: '/bang-gia',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DichVuRoute = DichVuRouteImport.update({
-  id: '/dich-vu',
-  path: '/dich-vu',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DuAnRoute = DuAnRouteImport.update({
   id: '/du-an',
   path: '/du-an',
@@ -63,6 +58,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminCompanyRoute = AdminCompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminCustomersRoute = AdminCustomersRouteImport.update({
@@ -105,10 +105,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
-  '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/company': typeof AdminCompanyRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
   '/admin/message': typeof AdminMessageRoute
@@ -121,10 +121,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bang-gia': typeof BangGiaRoute
-  '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/company': typeof AdminCompanyRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
   '/admin/message': typeof AdminMessageRoute
@@ -139,10 +139,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
-  '/dich-vu': typeof DichVuRoute
   '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/company': typeof AdminCompanyRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
   '/admin/message': typeof AdminMessageRoute
@@ -158,10 +158,10 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/bang-gia'
-    | '/dich-vu'
     | '/du-an'
     | '/lien-he'
     | '/admin/analytics'
+    | '/admin/company'
     | '/admin/customers'
     | '/admin/employees'
     | '/admin/message'
@@ -174,10 +174,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/bang-gia'
-    | '/dich-vu'
     | '/du-an'
     | '/lien-he'
     | '/admin/analytics'
+    | '/admin/company'
     | '/admin/customers'
     | '/admin/employees'
     | '/admin/message'
@@ -191,10 +191,10 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/bang-gia'
-    | '/dich-vu'
     | '/du-an'
     | '/lien-he'
     | '/admin/analytics'
+    | '/admin/company'
     | '/admin/customers'
     | '/admin/employees'
     | '/admin/message'
@@ -209,7 +209,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   BangGiaRoute: typeof BangGiaRoute
-  DichVuRoute: typeof DichVuRoute
   DuAnRoute: typeof DuAnRoute
   LienHeRoute: typeof LienHeRoute
 }
@@ -235,13 +234,6 @@ declare module '@tanstack/react-router' {
       path: '/bang-gia'
       fullPath: '/bang-gia'
       preLoaderRoute: typeof BangGiaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dich-vu': {
-      id: '/dich-vu'
-      path: '/dich-vu'
-      fullPath: '/dich-vu'
-      preLoaderRoute: typeof DichVuRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/du-an': {
@@ -270,6 +262,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/admin/analytics'
       preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/company': {
+      id: '/admin/company'
+      path: '/company'
+      fullPath: '/admin/company'
+      preLoaderRoute: typeof AdminCompanyRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/customers': {
@@ -326,6 +325,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteRouteChildren {
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminCompanyRoute: typeof AdminCompanyRoute
   AdminCustomersRoute: typeof AdminCustomersRoute
   AdminEmployeesRoute: typeof AdminEmployeesRoute
   AdminMessageRoute: typeof AdminMessageRoute
@@ -338,6 +338,7 @@ interface AdminRouteRouteChildren {
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminCompanyRoute: AdminCompanyRoute,
   AdminCustomersRoute: AdminCustomersRoute,
   AdminEmployeesRoute: AdminEmployeesRoute,
   AdminMessageRoute: AdminMessageRoute,
@@ -356,7 +357,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
   BangGiaRoute: BangGiaRoute,
-  DichVuRoute: DichVuRoute,
   DuAnRoute: DuAnRoute,
   LienHeRoute: LienHeRoute,
 }

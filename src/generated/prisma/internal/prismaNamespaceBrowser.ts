@@ -52,6 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Company: 'Company',
+  PhoneNumber: 'PhoneNumber',
+  Email: 'Email',
+  Address: 'Address',
   User: 'User'
 } as const
 
@@ -73,14 +76,44 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const CompanyScalarFieldEnum = {
   id: 'id',
-  phoneNumber: 'phoneNumber',
-  email: 'email',
-  address: 'address',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
+
+
+export const PhoneNumberScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+} as const
+
+export type PhoneNumberScalarFieldEnum = (typeof PhoneNumberScalarFieldEnum)[keyof typeof PhoneNumberScalarFieldEnum]
+
+
+export const EmailScalarFieldEnum = {
+  id: 'id',
+  mail: 'mail',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+} as const
+
+export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
+
+
+export const AddressScalarFieldEnum = {
+  id: 'id',
+  address: 'address',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  companyId: 'companyId'
+} as const
+
+export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

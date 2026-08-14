@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import ProtectSetting from "#/components/settings/ProtectSetting";
-import { ScreenSetting } from "#/components/settings/ScreenSetting";
+import ProtectSetting from "#/components/admin/settings/ProtectSetting";
+import { ScreenSetting } from "#/components/admin/settings/ScreenSetting";
 
 export const Route = createFileRoute("/admin/settings")({
 	component: RouteComponent,

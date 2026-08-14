@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {
 	ChevronRightIcon,
+	GlobeIcon,
 	LayoutDashboardIcon,
 	LogOutIcon,
 	MessageCircleIcon,
@@ -111,6 +112,20 @@ export function AppSidebar() {
 							})}
 						</SidebarMenu>
 					</SidebarGroupContent>
+				</SidebarGroup>
+
+				<SidebarGroup>
+					{open && <SidebarGroupLabel>Thiết lập website</SidebarGroupLabel>}
+					<SidebarMenu>
+						<SidebarMenuItem>
+							<SidebarMenuButton asChild tooltip={"Thiết lập website"}>
+								<Link to="/admin/company">
+									<GlobeIcon />
+									<span>Thiết lập website</span>
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
 				</SidebarGroup>
 			</SidebarContent>
 

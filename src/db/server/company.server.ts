@@ -2,18 +2,24 @@ import { prisma } from "#/db";
 
 const getCompanyServer = async () => {
 	try {
-		const companies = await prisma.company.findMany();
+		const companies = await prisma.company.findMany({
+			include: {
+				addresses: { select: { id: true, address: true } },
+				phoneNumber: { select: { id: true, number: true } },
+				emails: { select: { id: true, mail: true } },
+			},
+		});
 
 		return {
 			success: true,
 			message: "Lấy thông tin thành công",
-			company: companies[0] || null,
+			companies: companies,
 		};
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
 		return {
 			success: false,
-			message: "Lỗi hệ thống",
+			message: error instanceof Error ? error.message : "Lỗi hệ thống",
+			companies: [],
 		};
 	}
 };
