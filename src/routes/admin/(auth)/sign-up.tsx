@@ -19,7 +19,7 @@ import { signUpFn } from "#/db/services/auth.service";
 import { type SignUp, SignUpSchema } from "#/schema/auth.schema";
 
 export const Route = createFileRoute("/admin/(auth)/sign-up")({
-	staticData: { isShowNav: false },
+	staticData: { isShowSidebar: false },
 	component: RouteComponent,
 });
 

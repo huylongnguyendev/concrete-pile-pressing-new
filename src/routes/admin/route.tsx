@@ -1,5 +1,5 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "#/components/ui/sidebar";
 import { collections } from "#/lib/screen";
@@ -15,6 +15,12 @@ function RouteComponent() {
 	const { data } = useLiveQuery((q) =>
 		q.from({ pref: collections }).where(({ pref }) => eq(pref.id, "ui")),
 	);
+
+	const matches = useMatches();
+	const isShowSidebar = !matches.some(
+		(m) => m.staticData?.isShowSidebar === false,
+	);
+
 	const currentPref = data[0];
 
 	const currentTheme = currentPref?.mode ?? "light";
@@ -34,9 +40,11 @@ function RouteComponent() {
 
 	return (
 		<SidebarProvider>
-			<AppSidebar />
+			{isShowSidebar && <AppSidebar />}
 			<div className="px-4 w-full">
-				<SidebarTrigger variant={"outline"} className="mt-2" />
+				{isShowSidebar && (
+					<SidebarTrigger variant={"outline"} className="mt-2" />
+				)}
 				<Outlet />
 			</div>
 		</SidebarProvider>

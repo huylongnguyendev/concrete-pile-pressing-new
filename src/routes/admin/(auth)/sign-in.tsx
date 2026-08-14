@@ -23,7 +23,7 @@ import { signInFn } from "#/db/services/auth.service";
 import { type SignIn, SignInSchema } from "#/schema/auth.schema";
 
 export const Route = createFileRoute("/admin/(auth)/sign-in")({
-	staticData: { isShowNav: false },
+	staticData: { isShowSidebar: false },
 	component: RouteComponent,
 });
 
@@ -45,7 +45,7 @@ function RouteComponent() {
 
 			if (result.success) {
 				toast.success(result.message);
-				navigate({to: "/admin"})
+				navigate({ to: "/admin" });
 			} else toast.error(result.message);
 		},
 	});

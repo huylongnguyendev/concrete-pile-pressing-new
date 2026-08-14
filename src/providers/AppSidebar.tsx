@@ -3,10 +3,12 @@ import {
 	ChevronRightIcon,
 	LayoutDashboardIcon,
 	LogOutIcon,
+	MessageCircleIcon,
 	SettingsIcon,
 	User2Icon,
 	UserCog2Icon,
 } from "lucide-react";
+import { Badge } from "#/components/ui/badge";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -68,6 +70,24 @@ export function AppSidebar() {
 								</SidebarMenuButton>
 							</SidebarMenuItem>
 						)}
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								className="relative"
+								asChild
+								tooltip={"Tin nhắn"}
+							>
+								<Link to={"/admin/message"}>
+									<MessageCircleIcon />
+									<span>TIn nhắn</span>
+									<Badge
+										className="absolute size-3 p-0 top-1 right-0"
+										variant={"destructive"}
+									>
+										<span className="absolute size-3 bg-red-600 animate-ping" />
+									</Badge>
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
 					</SidebarMenu>
 				</SidebarGroup>
 
