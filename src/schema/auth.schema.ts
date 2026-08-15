@@ -40,7 +40,13 @@ const SignInSchema = z.object({
 	remember: z.boolean().optional(),
 });
 
+const ConfirmSchema = z.object({
+	password: z.string().min(1, { message: "Vui lòng nhập mật khẩu" }),
+});
+
 type SignIn = z.infer<typeof SignInSchema>;
 type SignUp = z.infer<typeof SignUpSchema>;
+type ConfirmType = z.infer<typeof ConfirmSchema>;
 
-export { SignUpSchema, SignInSchema, type SignUp, type SignIn };
+export { SignUpSchema, SignInSchema, ConfirmSchema };
+export type { SignUp, SignIn, ConfirmType };

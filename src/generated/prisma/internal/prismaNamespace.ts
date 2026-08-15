@@ -842,6 +842,7 @@ export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeo
 export const PhoneNumberScalarFieldEnum = {
   id: 'id',
   number: 'number',
+  priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   companyId: 'companyId'
@@ -853,6 +854,7 @@ export type PhoneNumberScalarFieldEnum = (typeof PhoneNumberScalarFieldEnum)[key
 export const EmailScalarFieldEnum = {
   id: 'id',
   mail: 'mail',
+  priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   companyId: 'companyId'
@@ -864,6 +866,7 @@ export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof Em
 export const AddressScalarFieldEnum = {
   id: 'id',
   address: 'address',
+  priority: 'priority',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   companyId: 'companyId'
@@ -876,6 +879,7 @@ export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
   phoneNumber: 'phoneNumber',
+  fullName: 'fullName',
   email: 'email',
   hash: 'hash',
   role: 'role',
@@ -941,6 +945,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 

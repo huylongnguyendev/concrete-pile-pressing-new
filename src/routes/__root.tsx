@@ -1,4 +1,3 @@
-import { useAppStore } from "@lavaz/store";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
@@ -9,14 +8,13 @@ import {
 	useMatches,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { useEffect } from "react";
 import { Toaster } from "sonner";
 import { Footer } from "#/components/base/footer/Footer";
 import { Header } from "#/components/base/header/Header";
 import { getCompanyFn } from "#/db/services/company.service";
 import { AppProvider } from "#/providers/AppProvider";
-import { store } from "#/store/store";
 import appCss from "../styles.css?url";
+import { PageLoading } from "#/components/pending/client/PageLoading";
 
 interface RootRouteContext {
 	queryClient: QueryClient;
@@ -43,36 +41,19 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 		],
 	}),
-	loader: async () => await getCompanyFn(),
-	staleTime: Infinity,
+	loader: ({ context }) =>
+		context.queryClient.prefetchQuery({
+			queryKey: ["company"],
+			queryFn: () => getCompanyFn(),
+			staleTime: 60 * 1000 * 5,
+		}),
 	shellComponent: RootDocument,
+	pendingComponent: () => <PageLoading />,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-	const { companies } = Route.useLoaderData();
 	const matches = useMatches();
 	const isShowNav = !matches.some((m) => m.staticData?.isShowNav === false);
-	const [, { setInfo }] = useAppStore(store.company, (s) => s);
-
-	useEffect(() => {
-		const safeCompanies = Array.isArray(companies) ? companies : [];
-
-		if (safeCompanies.length === 0)
-			setInfo({
-				id: "",
-				phoneNumber: [{ id: "", number: "+84967386080" }],
-				addresses: [{ id: "", address: "address" }],
-				emails: [{ id: "", mail: "epcocbetonghungdung@gmail.com" }],
-			});
-		else {
-			const phoneNumber = safeCompanies[0].phoneNumber;
-			const addresses = safeCompanies[0].addresses;
-			const emails = safeCompanies[0].emails;
-			const id = safeCompanies[0].id;
-
-			setInfo({ id, addresses, emails, phoneNumber });
-		}
-	}, [companies, setInfo]);
 
 	return (
 		<html lang="en" suppressHydrationWarning>

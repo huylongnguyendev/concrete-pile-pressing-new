@@ -1,12 +1,18 @@
-import { useAppStore } from "@lavaz/store";
-import { MailIcon, SmartphoneIcon } from "lucide-react";
-import { store } from "#/store/store";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { MailIcon, MapPin, SmartphoneIcon } from "lucide-react";
+import { getCompanyFn } from "#/db/services/company.service";
 
 export function HeaderTop() {
-	const [{ phoneNumber, emails, addresses }] = useAppStore(
-		store.company,
-		(s) => s,
-	);
+	const { data } = useSuspenseQuery({
+		queryKey: ["company"],
+		queryFn: () => getCompanyFn(),
+		staleTime: 60 * 1000 * 5,
+	});
+
+	const company = data?.companies[0];
+	const phoneNumber = company?.phoneNumber ?? [];
+	const emails = company?.emails ?? [];
+	const addresses = company?.addresses ?? [];
 
 	return (
 		<div className="py-1 bg-primary text-primary-foreground">
@@ -16,17 +22,19 @@ export function HeaderTop() {
 					className="inline-flex justify-center items-center gap-1 text-sm"
 				>
 					<SmartphoneIcon size={16} />
-					<span>
-						{phoneNumber[0]?.number.replace("+84", "0") ?? "0967.386.080"}
-					</span>
+					<span>{phoneNumber[0]?.number.replace("+84", "0")}</span>
 				</a>
 				<a
-					href={`mailto:${emails[0]?.mail ?? "epcocbetonghungdung@gmail.com"}`}
+					href={`mailto:${emails[0]?.mail}`}
 					className="inline-flex justify-center items-center gap-1 text-sm"
 				>
 					<MailIcon size={16} />
-					<span>{emails[0]?.mail ?? "epcocbetonghungdung@gmail.com"}</span>
+					<span>{emails[0]?.mail}</span>
 				</a>
+				<p className="inline-flex justify-center items-center gap-1 text-sm">
+					<MapPin />
+					<span>{addresses[0]?.address}</span>
+				</p>
 			</div>
 		</div>
 	);

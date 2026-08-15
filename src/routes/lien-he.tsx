@@ -20,20 +20,33 @@ import {
 } from "#/components/ui/card";
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/label";
-import { store } from "#/store/store";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { getCompanyFn } from "#/db/services/company.service";
 
 export const Route = createFileRoute("/lien-he")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const [{ phoneNumber, emails, addresses }] = useAppStore(
-		store.company,
-		(s) => s,
-	);
+	const { data } = useSuspenseQuery({
+		queryKey: ["company"],
+		queryFn: () => getCompanyFn(),
+		staleTime: 60 * 1000 * 5,
+	});
+
+	const company = data?.companies[0];
+
+	// Lấy phần tử ưu tiên hoặc phần tử đầu tiên một cách an toàn
+	const phoneObj =
+		company?.phoneNumber?.find((p) => p.priority) || company?.phoneNumber?.[0];
+	const emailObj =
+		company?.emails?.find((e) => e.priority) || company?.emails?.[0];
+
+	const phoneNumber = phoneObj?.number ?? "";
+	const email = emailObj?.mail ?? "";
 
 	return (
-		<div className="pt-20 min-h-screen flex flex-col">
+		<div className="pt-20 flex-1 flex flex-col">
 			{/* Hero Header của trang Liên hệ */}
 			<Section className="bg-gray-50/50 dark:bg-zinc-900/50 pt-12 pb-8 lg:py-16">
 				<div className="text-center max-w-3xl mx-auto">
@@ -71,7 +84,7 @@ function RouteComponent() {
 			</Section>
 
 			{/* Nội dung chính: Thông tin liên hệ & Form */}
-			<Section>
+			<Section className="flex-1">
 				<div className="py-8 lg:py-12 max-w-6xl mx-auto">
 					<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
 						{/* Cột Thông Tin (Bên trái - Chiếm 1 cột trên lg) */}
@@ -112,11 +125,10 @@ function RouteComponent() {
 													Số điện thoại
 												</p>
 												<a
-													href={`tel:${phoneNumber[0].number ?? "+84967386080"}`}
+													href={`tel:${phoneNumber}`}
 													className="text-primary font-bold hover:underline mt-0.5 block"
 												>
-													{phoneNumber[0].number.replace("+84", "0") ??
-														"0967.386.080"}
+													{phoneNumber.replace("+84", "0")}
 												</a>
 											</div>
 										</div>
@@ -130,10 +142,10 @@ function RouteComponent() {
 													Hộp thư điện tử
 												</p>
 												<a
-													href={`mailto:${emails[0].mail ?? "epcocbetonghungdung@gmail.com"}`}
+													href={`mailto:${email}`}
 													className="text-primary font-bold hover:underline mt-0.5 block"
 												>
-													{emails[0].mail ?? "epcocbetonghungdung@gmail.com"}
+													{email}
 												</a>
 											</div>
 										</div>

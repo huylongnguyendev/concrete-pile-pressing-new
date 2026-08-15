@@ -19,6 +19,7 @@ model Company {
 model PhoneNumber {
   id        String   @id @default(uuid())
   number    String
+  priority   Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   company   Company? @relation(fields: [companyId], references: [id])
@@ -28,6 +29,7 @@ model PhoneNumber {
 model Email {
   id        String   @id @default(uuid())
   mail      String
+  priority   Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   company   Company? @relation(fields: [companyId], references: [id])
@@ -37,6 +39,7 @@ model Email {
 model Address {
   id        String   @id @default(uuid())
   address   String
+  priority   Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   company   Company? @relation(fields: [companyId], references: [id])
@@ -47,6 +50,7 @@ model User {
   id          String  @id @default(uuid())
   username    String  @unique
   phoneNumber String  @unique
+  fullName    String
   email       String?
   hash        String
   role        Role    @default(STAFF)
@@ -60,3 +64,10 @@ enum Role {
   DEV
   STAFF
 }
+
+//badung83
+//0967386080
+//Badung_1983
+
+//nguyenbadung291982@gmail.com
+//Số 90 đường Bình Phú, Phường Tam Phú, Tp.Thủ Đức, Tp.HCM

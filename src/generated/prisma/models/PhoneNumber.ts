@@ -27,6 +27,7 @@ export type AggregatePhoneNumber = {
 export type PhoneNumberMinAggregateOutputType = {
   id: string | null
   number: string | null
+  priority: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   companyId: string | null
@@ -35,6 +36,7 @@ export type PhoneNumberMinAggregateOutputType = {
 export type PhoneNumberMaxAggregateOutputType = {
   id: string | null
   number: string | null
+  priority: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   companyId: string | null
@@ -43,6 +45,7 @@ export type PhoneNumberMaxAggregateOutputType = {
 export type PhoneNumberCountAggregateOutputType = {
   id: number
   number: number
+  priority: number
   createdAt: number
   updatedAt: number
   companyId: number
@@ -53,6 +56,7 @@ export type PhoneNumberCountAggregateOutputType = {
 export type PhoneNumberMinAggregateInputType = {
   id?: true
   number?: true
+  priority?: true
   createdAt?: true
   updatedAt?: true
   companyId?: true
@@ -61,6 +65,7 @@ export type PhoneNumberMinAggregateInputType = {
 export type PhoneNumberMaxAggregateInputType = {
   id?: true
   number?: true
+  priority?: true
   createdAt?: true
   updatedAt?: true
   companyId?: true
@@ -69,6 +74,7 @@ export type PhoneNumberMaxAggregateInputType = {
 export type PhoneNumberCountAggregateInputType = {
   id?: true
   number?: true
+  priority?: true
   createdAt?: true
   updatedAt?: true
   companyId?: true
@@ -150,6 +156,7 @@ export type PhoneNumberGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type PhoneNumberGroupByOutputType = {
   id: string
   number: string
+  priority: boolean
   createdAt: Date
   updatedAt: Date
   companyId: string | null
@@ -179,6 +186,7 @@ export type PhoneNumberWhereInput = {
   NOT?: Prisma.PhoneNumberWhereInput | Prisma.PhoneNumberWhereInput[]
   id?: Prisma.StringFilter<"PhoneNumber"> | string
   number?: Prisma.StringFilter<"PhoneNumber"> | string
+  priority?: Prisma.BoolFilter<"PhoneNumber"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PhoneNumber"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PhoneNumber"> | Date | string
   companyId?: Prisma.StringNullableFilter<"PhoneNumber"> | string | null
@@ -188,6 +196,7 @@ export type PhoneNumberWhereInput = {
 export type PhoneNumberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   companyId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -200,6 +209,7 @@ export type PhoneNumberWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PhoneNumberWhereInput[]
   NOT?: Prisma.PhoneNumberWhereInput | Prisma.PhoneNumberWhereInput[]
   number?: Prisma.StringFilter<"PhoneNumber"> | string
+  priority?: Prisma.BoolFilter<"PhoneNumber"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PhoneNumber"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PhoneNumber"> | Date | string
   companyId?: Prisma.StringNullableFilter<"PhoneNumber"> | string | null
@@ -209,6 +219,7 @@ export type PhoneNumberWhereUniqueInput = Prisma.AtLeast<{
 export type PhoneNumberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   companyId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -223,6 +234,7 @@ export type PhoneNumberScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PhoneNumberScalarWhereWithAggregatesInput | Prisma.PhoneNumberScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PhoneNumber"> | string
   number?: Prisma.StringWithAggregatesFilter<"PhoneNumber"> | string
+  priority?: Prisma.BoolWithAggregatesFilter<"PhoneNumber"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PhoneNumber"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PhoneNumber"> | Date | string
   companyId?: Prisma.StringNullableWithAggregatesFilter<"PhoneNumber"> | string | null
@@ -231,6 +243,7 @@ export type PhoneNumberScalarWhereWithAggregatesInput = {
 export type PhoneNumberCreateInput = {
   id?: string
   number: string
+  priority: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   company?: Prisma.CompanyCreateNestedOneWithoutPhoneNumberInput
@@ -239,6 +252,7 @@ export type PhoneNumberCreateInput = {
 export type PhoneNumberUncheckedCreateInput = {
   id?: string
   number: string
+  priority: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   companyId?: string | null
@@ -247,6 +261,7 @@ export type PhoneNumberUncheckedCreateInput = {
 export type PhoneNumberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneWithoutPhoneNumberNestedInput
@@ -255,6 +270,7 @@ export type PhoneNumberUpdateInput = {
 export type PhoneNumberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -263,6 +279,7 @@ export type PhoneNumberUncheckedUpdateInput = {
 export type PhoneNumberCreateManyInput = {
   id?: string
   number: string
+  priority: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   companyId?: string | null
@@ -271,6 +288,7 @@ export type PhoneNumberCreateManyInput = {
 export type PhoneNumberUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -278,6 +296,7 @@ export type PhoneNumberUpdateManyMutationInput = {
 export type PhoneNumberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   companyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -296,6 +315,7 @@ export type PhoneNumberOrderByRelationAggregateInput = {
 export type PhoneNumberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -304,6 +324,7 @@ export type PhoneNumberCountOrderByAggregateInput = {
 export type PhoneNumberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -312,6 +333,7 @@ export type PhoneNumberMaxOrderByAggregateInput = {
 export type PhoneNumberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
@@ -359,6 +381,10 @@ export type PhoneNumberUncheckedUpdateManyWithoutCompanyNestedInput = {
   deleteMany?: Prisma.PhoneNumberScalarWhereInput | Prisma.PhoneNumberScalarWhereInput[]
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
@@ -366,6 +392,7 @@ export type NullableStringFieldUpdateOperationsInput = {
 export type PhoneNumberCreateWithoutCompanyInput = {
   id?: string
   number: string
+  priority: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -373,6 +400,7 @@ export type PhoneNumberCreateWithoutCompanyInput = {
 export type PhoneNumberUncheckedCreateWithoutCompanyInput = {
   id?: string
   number: string
+  priority: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -409,6 +437,7 @@ export type PhoneNumberScalarWhereInput = {
   NOT?: Prisma.PhoneNumberScalarWhereInput | Prisma.PhoneNumberScalarWhereInput[]
   id?: Prisma.StringFilter<"PhoneNumber"> | string
   number?: Prisma.StringFilter<"PhoneNumber"> | string
+  priority?: Prisma.BoolFilter<"PhoneNumber"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PhoneNumber"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PhoneNumber"> | Date | string
   companyId?: Prisma.StringNullableFilter<"PhoneNumber"> | string | null
@@ -417,6 +446,7 @@ export type PhoneNumberScalarWhereInput = {
 export type PhoneNumberCreateManyCompanyInput = {
   id?: string
   number: string
+  priority: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -424,6 +454,7 @@ export type PhoneNumberCreateManyCompanyInput = {
 export type PhoneNumberUpdateWithoutCompanyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -431,6 +462,7 @@ export type PhoneNumberUpdateWithoutCompanyInput = {
 export type PhoneNumberUncheckedUpdateWithoutCompanyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -438,6 +470,7 @@ export type PhoneNumberUncheckedUpdateWithoutCompanyInput = {
 export type PhoneNumberUncheckedUpdateManyWithoutCompanyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.StringFieldUpdateOperationsInput | string
+  priority?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -447,6 +480,7 @@ export type PhoneNumberUncheckedUpdateManyWithoutCompanyInput = {
 export type PhoneNumberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   number?: boolean
+  priority?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   companyId?: boolean
@@ -456,6 +490,7 @@ export type PhoneNumberSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type PhoneNumberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   number?: boolean
+  priority?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   companyId?: boolean
@@ -465,6 +500,7 @@ export type PhoneNumberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type PhoneNumberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   number?: boolean
+  priority?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   companyId?: boolean
@@ -474,12 +510,13 @@ export type PhoneNumberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type PhoneNumberSelectScalar = {
   id?: boolean
   number?: boolean
+  priority?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   companyId?: boolean
 }
 
-export type PhoneNumberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "createdAt" | "updatedAt" | "companyId", ExtArgs["result"]["phoneNumber"]>
+export type PhoneNumberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "priority" | "createdAt" | "updatedAt" | "companyId", ExtArgs["result"]["phoneNumber"]>
 export type PhoneNumberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   company?: boolean | Prisma.PhoneNumber$companyArgs<ExtArgs>
 }
@@ -498,6 +535,7 @@ export type $PhoneNumberPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     number: string
+    priority: boolean
     createdAt: Date
     updatedAt: Date
     companyId: string | null
@@ -927,6 +965,7 @@ export interface Prisma__PhoneNumberClient<T, Null = never, ExtArgs extends runt
 export interface PhoneNumberFieldRefs {
   readonly id: Prisma.FieldRef<"PhoneNumber", 'String'>
   readonly number: Prisma.FieldRef<"PhoneNumber", 'String'>
+  readonly priority: Prisma.FieldRef<"PhoneNumber", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"PhoneNumber", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PhoneNumber", 'DateTime'>
   readonly companyId: Prisma.FieldRef<"PhoneNumber", 'String'>

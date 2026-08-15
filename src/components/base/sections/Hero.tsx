@@ -5,6 +5,9 @@ import { Button } from "#/components/ui/button";
 import { quickFeature, quickStat } from "#/data/hero.data";
 import { Animate } from "../animation/Animate";
 import { Section } from "./Section";
+import { HerroAction } from "#/components/HerroAction";
+import { Suspense } from "react";
+import { HeroActionSkeleton } from "#/components/pending/client/HeroActionSkeleton";
 
 export function Hero() {
 	return (
@@ -86,33 +89,9 @@ export function Hero() {
 						})}
 					</div>
 
-					<Animate
-						initial={{ opacity: 0, transform: "translateY(20px)" }}
-						animate={{ opacity: 1, transform: "translateY(0px)" }}
-						transition={{ delay: 2.4 }}
-						className="mt-6 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-					>
-						<Button
-							variant={"secondary"}
-							asChild
-							className="w-full sm:w-auto px-6 py-3 h-auto capitalize shadow-sm hover:shadow transition-all"
-						>
-							<Link to="/du-an">
-								<Building2Icon className="w-5 h-5 mr-2 shrink-0" />
-								<span>công trình đã thi công</span>
-							</Link>
-						</Button>
-
-						<Button
-							asChild
-							className="w-full sm:w-auto px-6 py-3 h-auto shadow-sm hover:shadow transition-all"
-						>
-							<a href="tel:0123456789">
-								<PhoneCallIcon className="w-5 h-5 mr-2 shrink-0" />
-								<span>Tư vấn Miễn phí</span>
-							</a>
-						</Button>
-					</Animate>
+					<Suspense fallback={<HeroActionSkeleton />}>
+						<HerroAction />
+					</Suspense>
 				</div>
 
 				<Animate

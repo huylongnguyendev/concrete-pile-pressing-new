@@ -1,8 +1,24 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getCompanyServer } from "../server/company.server";
+import { authMiddleware } from "../middleware/auth.middleware";
+import {
+	getCompanyServer,
+	updateCompanyServer,
+} from "../server/company.server";
+import type { Company } from "#/types/company.type";
 
 const getCompanyFn = createServerFn({ method: "GET" }).handler(
 	async () => await getCompanyServer(),
 );
 
-export { getCompanyFn };
+const updateCompanyFn = createServerFn({ method: "POST" })
+	.middleware([authMiddleware])
+	.validator((data: Company) => data)
+	.handler(
+		async ({ context, data }) =>
+			await updateCompanyServer(data, {
+				id: context.session.userId,
+				role: context.session.role,
+			}),
+	);
+
+export { getCompanyFn, updateCompanyFn };

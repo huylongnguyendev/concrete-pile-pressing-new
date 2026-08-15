@@ -1,14 +1,15 @@
 import { hash, verify } from "argon2";
 import { prisma } from "#/db";
 import type { Role } from "#/generated/prisma/enums";
-import type { SignIn, SignUp } from "#/schema/auth.schema";
+import type { ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
+import { useAppSession } from "#/lib/utils/session";
 
 const signUpServer = async ({ data }: { data: SignUp }) => {
 	const adminCode = process.env.ADMIN;
 	const devCode = process.env.DEV;
 
 	try {
-		const { username, phoneNumber, password, code } = data;
+		const { username, phoneNumber, password, code, email, fullName } = data;
 
 		const user = await prisma.user.findFirst({
 			where: { OR: [{ username }, { phoneNumber }] },
@@ -32,6 +33,8 @@ const signUpServer = async ({ data }: { data: SignUp }) => {
 			data: {
 				username,
 				phoneNumber,
+				email,
+				fullName,
 				role,
 				hash: hashed,
 			},
@@ -51,6 +54,8 @@ const signUpServer = async ({ data }: { data: SignUp }) => {
 };
 
 const signInServer = async ({ data }: { data: SignIn }) => {
+	const session = await useAppSession();
+
 	try {
 		const { identicator, password } = data;
 
@@ -74,6 +79,8 @@ const signInServer = async ({ data }: { data: SignIn }) => {
 				message: "Tên đăng nhập hoặc mật khẩu không đúng!",
 			};
 
+		session.update({ userId: user.id, role: user.role });
+
 		return {
 			success: true,
 			message: "Đăng nhập thành công!",
@@ -87,4 +94,41 @@ const signInServer = async ({ data }: { data: SignIn }) => {
 	}
 };
 
-export { signUpServer, signInServer };
+const confirmServer = async (
+	data: ConfirmType & { id: string; role: Role },
+) => {
+	try {
+		const { id, password, role } = data;
+		const user = await prisma.user.findUnique({
+			where: { id },
+			select: { hash: true },
+		});
+
+		if (!user || role !== "ADMIN")
+			return {
+				success: false,
+				message: "Bạn không có quyền thực hiện thao tác này!",
+			};
+
+		const isValidPassword = await verify(user.hash, password);
+
+		if (!isValidPassword)
+			return {
+				success: false,
+				message: "Không thể thực hiện xác thực!",
+			};
+
+		return {
+			success: true,
+			message: "Xác thực thành công!",
+		};
+	} catch (error) {
+		if (error instanceof Error) throw new Error(error.message);
+		return {
+			success: false,
+			message: "Lỗi hệ thống!",
+		};
+	}
+};
+
+export { signUpServer, signInServer, confirmServer };

@@ -1,13 +1,20 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
 import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { Dialog } from "#/components/ui/dialog";
 import { SidebarProvider, SidebarTrigger } from "#/components/ui/sidebar";
 import { collections } from "#/lib/screen";
 import { AppSidebar } from "#/providers/AppSidebar";
+import { getCompanyFn } from "#/db/services/company.service";
 
 export const Route = createFileRoute("/admin")({
 	staticData: { isShowNav: false },
 	ssr: "data-only",
+	loader: ({ context }) =>
+		context.queryClient.ensureQueryData({
+			queryKey: ["company"],
+			queryFn: () => getCompanyFn(),
+		}),
 	component: RouteComponent,
 });
 
@@ -39,14 +46,16 @@ function RouteComponent() {
 	}, [currentTheme, currentFontSize]);
 
 	return (
-		<SidebarProvider>
-			{isShowSidebar && <AppSidebar />}
-			<div className="px-4 w-full">
-				{isShowSidebar && (
-					<SidebarTrigger variant={"outline"} className="mt-2" />
-				)}
-				<Outlet />
-			</div>
-		</SidebarProvider>
+		<Dialog>
+			<SidebarProvider>
+				{isShowSidebar && <AppSidebar />}
+				<div className="px-4 w-full">
+					{isShowSidebar && (
+						<SidebarTrigger variant={"outline"} className="mt-2" />
+					)}
+					<Outlet />
+				</div>
+			</SidebarProvider>
+		</Dialog>
 	);
 }
