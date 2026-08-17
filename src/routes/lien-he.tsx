@@ -1,4 +1,4 @@
-import { useAppStore } from "@lavaz/store";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
 	CheckCircle2Icon,
@@ -6,11 +6,10 @@ import {
 	MailIcon,
 	MapPinIcon,
 	PhoneCallIcon,
-	SendIcon,
 } from "lucide-react";
 import { Animate } from "#/components/base/animation/Animate";
 import { Section } from "#/components/base/sections/Section";
-import { Button } from "#/components/ui/button";
+import { ContactBox } from "#/components/contact/ContactBox";
 import {
 	Card,
 	CardContent,
@@ -18,25 +17,16 @@ import {
 	CardHeader,
 	CardTitle,
 } from "#/components/ui/card";
-import { Input } from "#/components/ui/input";
-import { Label } from "#/components/ui/label";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getCompanyFn } from "#/db/services/company.service";
+import { companyQuery } from "#/db/query/company.query";
 
 export const Route = createFileRoute("/lien-he")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const { data } = useSuspenseQuery({
-		queryKey: ["company"],
-		queryFn: () => getCompanyFn(),
-		staleTime: 60 * 1000 * 5,
-	});
+	const { data } = useSuspenseQuery(companyQuery);
 
 	const company = data?.companies[0];
-
-	// Lấy phần tử ưu tiên hoặc phần tử đầu tiên một cách an toàn
 	const phoneObj =
 		company?.phoneNumber?.find((p) => p.priority) || company?.phoneNumber?.[0];
 	const emailObj =
@@ -47,7 +37,6 @@ function RouteComponent() {
 
 	return (
 		<div className="pt-20 flex-1 flex flex-col">
-			{/* Hero Header của trang Liên hệ */}
 			<Section className="bg-gray-50/50 dark:bg-zinc-900/50 pt-12 pb-8 lg:py-16">
 				<div className="text-center max-w-3xl mx-auto">
 					<Animate
@@ -182,123 +171,7 @@ function RouteComponent() {
 						</div>
 
 						{/* Cột Form Gửi Yêu Cầu Tư Vấn (Bên phải - Chiếm 2 cột trên lg) */}
-						<div className="lg:col-span-2">
-							<Animate
-								initial={{ opacity: 0, transform: "translateX(20px)" }}
-								animate={{ opacity: 1, transform: "translateX(0px)" }}
-								transition={{ delay: 0.2 }}
-							>
-								<Card className="border-border/60 shadow-sm">
-									<CardHeader>
-										<CardTitle className="text-2xl">
-											Gửi Yêu Cầu Tư Vấn & Báo Giá
-										</CardTitle>
-										<CardDescription>
-											Điền thông tin chi tiết công trình, kỹ sư của chúng tôi sẽ
-											liên hệ lại ngay lập tức
-										</CardDescription>
-									</CardHeader>
-									<CardContent>
-										<form
-											onSubmit={(e) => {
-												e.preventDefault();
-												alert(
-													"Đã gửi yêu cầu thành công! Chúng tôi sẽ liên hệ lại sớm nhất.",
-												);
-											}}
-											className="space-y-6"
-										>
-											<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-												<div className="space-y-2">
-													<Label className="text-xs sm:text-sm font-semibold text-foreground">
-														Họ và Tên của bạn
-													</Label>
-													<Input
-														type="text"
-														required
-														placeholder="Ví dụ: Anh Nam"
-													/>
-												</div>
-												<div className="space-y-2">
-													<Label className="text-xs sm:text-sm font-semibold text-foreground">
-														Số Điện Thoại
-													</Label>
-													<Input
-														type="tel"
-														required
-														placeholder="Ví dụ: 0912345xxx"
-													/>
-												</div>
-											</div>
-
-											<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-												<div className="space-y-2">
-													<Label className="text-xs sm:text-sm font-semibold text-foreground">
-														Khu Vực Thi Công
-													</Label>
-													<select className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all">
-														<option value="bien-hoa">
-															TP. Biên Hòa, Đồng Nai
-														</option>
-														<option value="long-thanh">
-															Huyện Long Thành, Đồng Nai
-														</option>
-														<option value="nhon-trach">
-															Huyện Nhơn Trạch, Đồng Nai
-														</option>
-														<option value="vung-tau">
-															TP. Vũng Tàu, BR-VT
-														</option>
-														<option value="ba-ria">TP. Bà Rịa, BR-VT</option>
-														<option value="phu-my">Thị xã Phú Mỹ, BR-VT</option>
-														<option value="khac">Khu vực khác miền Nam</option>
-													</select>
-												</div>
-												<div className="space-y-2">
-													<Label className="text-xs sm:text-sm font-semibold text-foreground">
-														Giải Pháp Quan Tâm
-													</Label>
-													<select className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all">
-														<option value="ep-tai">
-															Ép cọc tải sắt (Công trình lớn)
-														</option>
-														<option value="ep-neo">
-															Ép cọc neo (Nhà dân, hẻm nhỏ)
-														</option>
-														<option value="cung-cap-coc">
-															Cung cấp cọc BTCT cốt thép
-														</option>
-														<option value="tu-van-chung">
-															Tư vấn chung / Khảo sát địa chất
-														</option>
-													</select>
-												</div>
-											</div>
-
-											<div className="space-y-2">
-												<Label className="text-xs sm:text-sm font-semibold text-foreground">
-													Nội dung yêu cầu chi tiết (Quy mô nhà, số tầng...)
-												</Label>
-												<textarea
-													rows={4}
-													placeholder="Ví dụ: Tôi muốn ép cọc cho nhà dân 3 tầng diện tích 5x15m tại Biên Hòa..."
-													className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-												></textarea>
-											</div>
-
-											<Button
-												type="submit"
-												size="lg"
-												className="w-full py-4 h-auto text-base font-bold shadow-md"
-											>
-												<SendIcon className="w-5 h-5 mr-2" />
-												<span>Gửi Yêu Cầu Tư Vấn Miễn Phí</span>
-											</Button>
-										</form>
-									</CardContent>
-								</Card>
-							</Animate>
-						</div>
+						<ContactBox />
 					</div>
 				</div>
 			</Section>

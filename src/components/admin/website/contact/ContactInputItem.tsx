@@ -38,7 +38,7 @@ export function ContactInputItem({
 		store.confirmPassword,
 		(s) => s.isConfirm,
 	);
-	const [currentValue, setCurrentValue] = useState<string>(value);
+	const [currentValue, setCurrentValue] = useState<string>("");
 	const { debounced } = useDebounce(currentValue);
 
 	useEffect(() => {
@@ -50,6 +50,10 @@ export function ContactInputItem({
 		setPriority({ id, type });
 		setIsConfirm(false);
 	}, [isConfirm, setPriority, id, type, setIsConfirm]);
+
+	useEffect(() => {
+		setCurrentValue(value);
+	}, [value]);
 
 	return (
 		<div className="flex items-center gap-2">

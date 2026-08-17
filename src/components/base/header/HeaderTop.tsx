@@ -1,13 +1,9 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { MailIcon, MapPin, SmartphoneIcon } from "lucide-react";
-import { getCompanyFn } from "#/db/services/company.service";
+import { companyQuery } from "#/db/query/company.query";
 
 export function HeaderTop() {
-	const { data } = useSuspenseQuery({
-		queryKey: ["company"],
-		queryFn: () => getCompanyFn(),
-		staleTime: 60 * 1000 * 5,
-	});
+	const { data } = useSuspenseQuery(companyQuery);
 
 	const company = data?.companies[0];
 	const phoneNumber = company?.phoneNumber ?? [];

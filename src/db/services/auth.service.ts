@@ -2,10 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import type { ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
 import { authMiddleware } from "../middleware/auth.middleware";
 import {
+	changePasswordServer,
 	confirmServer,
 	signInServer,
 	signUpServer,
 } from "../server/auth.server";
+import type { ChangePassword } from "#/schema/change-password.schema";
 
 const signUpFn = createServerFn({ method: "POST" })
 	.validator((data: SignUp) => data)
@@ -27,4 +29,11 @@ const confirmPasswordFn = createServerFn({ method: "POST" })
 			}),
 	);
 
-export { signUpFn, signInFn, confirmPasswordFn };
+const changePasswordFn = createServerFn({ method: "POST" })
+	.middleware([authMiddleware])
+	.validator((data: ChangePassword) => data)
+	.handler(
+		async ({ context, data }) =>
+			await changePasswordServer({ ...data, userId: context.session.userId }),
+	);
+export { signUpFn, signInFn, confirmPasswordFn, changePasswordFn };

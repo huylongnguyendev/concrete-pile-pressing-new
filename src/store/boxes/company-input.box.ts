@@ -1,13 +1,16 @@
 import { createBox } from "@lavaz/store";
 import type { Company, ContactType } from "#/types/company.type";
 
-interface CompanyInputState extends Company {}
+interface CompanyInputState extends Company {
+	canSubmit: boolean;
+}
 
 const initialState = {
 	id: "data-default",
 	phoneNumber: [{ id: "", number: "" }],
 	addresses: [{ id: "", address: "" }],
 	emails: [{ id: "", mail: "" }],
+	canSubmit: false,
 } satisfies CompanyInputState as CompanyInputState;
 
 const getNewID = (index: number) => {
@@ -43,14 +46,14 @@ export const companyInputBox = createBox(initialState, (set) => ({
 				const newValue = current.map((item) =>
 					item.id === id ? { ...item, [currentKey]: value } : item,
 				);
-				return { ...prev, [type]: newValue };
+				return { ...prev, [type]: newValue, canSubmit: true };
 			} else {
 				const newId = getNewID(current.length + 1);
 				const newValue = [...current, { id: newId, [currentKey]: value }];
-				return { ...prev, [type]: newValue };
+				return { ...prev, [type]: newValue, canSubmit: true };
 			}
 		}),
-	setAll: (state: CompanyInputState) => set((prev) => ({ ...prev, ...state })),
+	setAll: (state: CompanyInputState) => set(state),
 	setRemove: ({ id, type }: { id: string; type: ContactType }) =>
 		set((prev) => {
 			const current = prev[type];
@@ -83,6 +86,6 @@ export const companyInputBox = createBox(initialState, (set) => ({
 						: item,
 			);
 
-			return { ...prev, [type]: newValue };
+			return { ...prev, [type]: newValue, canSubmit: true };
 		}),
 })).create();

@@ -1,16 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo } from "react";
-import { Contact } from "#/components/admin/website/Contact";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "#/components/ui/card";
+import { Contact } from "#/components/admin/website/contact/Contact";
+import { Display } from "#/components/admin/website/display/Display";
+import { ConfirmPassword } from "#/components/dialog/ConfirmPassword";
 import { getCompanyFn } from "#/db/services/company.service";
 import type { Company } from "#/types/company.type";
-import { ConfirmPassword } from "#/components/dialog/ConfirmPassword";
 
 export const Route = createFileRoute("/admin/company")({
 	component: RouteComponent,
@@ -42,16 +36,7 @@ function RouteComponent() {
 
 			<div className="space-y-6">
 				<Contact company={company} />
-
-				<Card>
-					<CardHeader>
-						<CardTitle>Hiển thị</CardTitle>
-						<CardDescription>
-							Tùy chọn hiển thị trên website của bạn
-						</CardDescription>
-					</CardHeader>
-					<CardContent></CardContent>
-				</Card>
+				<Display />
 			</div>
 			<ConfirmPassword />
 		</div>

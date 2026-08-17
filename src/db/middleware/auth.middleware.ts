@@ -13,6 +13,6 @@ export const authMiddleware = createMiddleware({ type: "function" })
 		}
 
 		return next({
-			context: { session: session.data }, // ✅ truyền session xuống handler
+			context: { session: session.data },
 		});
 	});

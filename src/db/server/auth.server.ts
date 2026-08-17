@@ -1,8 +1,9 @@
 import { hash, verify } from "argon2";
 import { prisma } from "#/db";
 import type { Role } from "#/generated/prisma/enums";
-import type { ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
 import { useAppSession } from "#/lib/utils/session";
+import type { ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
+import type { ChangePassword } from "#/schema/change-password.schema";
 
 const signUpServer = async ({ data }: { data: SignUp }) => {
 	const adminCode = process.env.ADMIN;
@@ -54,7 +55,7 @@ const signUpServer = async ({ data }: { data: SignUp }) => {
 };
 
 const signInServer = async ({ data }: { data: SignIn }) => {
-	const session = await useAppSession();
+	const session = await useAppSession(data.remember);
 
 	try {
 		const { identicator, password } = data;
@@ -79,7 +80,7 @@ const signInServer = async ({ data }: { data: SignIn }) => {
 				message: "Tên đăng nhập hoặc mật khẩu không đúng!",
 			};
 
-		session.update({ userId: user.id, role: user.role });
+		await session.update({ userId: user.id, role: user.role });
 
 		return {
 			success: true,
@@ -131,4 +132,63 @@ const confirmServer = async (
 	}
 };
 
-export { signUpServer, signInServer, confirmServer };
+const changePasswordServer = async ({
+	confirmPassword,
+	newPassword,
+	password,
+	userId,
+}: ChangePassword & { userId: string }) => {
+	const session = await useAppSession();
+
+	try {
+		if (newPassword !== confirmPassword)
+			return {
+				success: false,
+				message: "Xác nhận mật khẩu mới không khớp!",
+			};
+
+		const user = await prisma.user.findUnique({
+			where: { id: userId },
+			select: { id: true, hash: true },
+		});
+
+		if (!user)
+			return {
+				success: false,
+				message: "Tài khoản không tồn tại hoặc không hợp lệ!",
+			};
+
+		const isValidPassword = await verify(user.hash, password);
+
+		if (!isValidPassword)
+			return {
+				success: false,
+				message: "Mật khẩu không đúng!",
+			};
+
+		if (newPassword === user.hash) {
+			await session.clear();
+			return {
+				success: false,
+				message: "Không thể thay đổi với mật khẩu này!",
+			};
+		}
+
+		const hashed = await hash(password);
+
+		await prisma.user.update({
+			where: { id: user.id },
+			data: { hash: hashed },
+		});
+
+		return { success: true, message: "Thay đổi mật khẩu thành công!" };
+	} catch (error) {
+		if (error instanceof Error) throw new Error(error.message);
+		return {
+			success: false,
+			message: "Lỗi hệ thống!",
+		};
+	}
+};
+
+export { signUpServer, signInServer, confirmServer, changePasswordServer };

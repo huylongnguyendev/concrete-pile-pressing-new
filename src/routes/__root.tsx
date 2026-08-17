@@ -1,4 +1,5 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import { FormDevtoolsPanel } from "@tanstack/react-form-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtoolsPanel } from "@tanstack/react-query-devtools";
 import {
@@ -11,10 +12,10 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
 import { Footer } from "#/components/base/footer/Footer";
 import { Header } from "#/components/base/header/Header";
-import { getCompanyFn } from "#/db/services/company.service";
+import { PageLoading } from "#/components/pending/client/PageLoading";
+import { companyQuery } from "#/db/query/company.query";
 import { AppProvider } from "#/providers/AppProvider";
 import appCss from "../styles.css?url";
-import { PageLoading } from "#/components/pending/client/PageLoading";
 
 interface RootRouteContext {
 	queryClient: QueryClient;
@@ -41,12 +42,7 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 		],
 	}),
-	loader: ({ context }) =>
-		context.queryClient.prefetchQuery({
-			queryKey: ["company"],
-			queryFn: () => getCompanyFn(),
-			staleTime: 60 * 1000 * 5,
-		}),
+	loader: ({ context }) => context.queryClient.prefetchQuery(companyQuery),
 	shellComponent: RootDocument,
 	pendingComponent: () => <PageLoading />,
 });
@@ -79,6 +75,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						{
 							name: "Tanstack Query",
 							render: <ReactQueryDevtoolsPanel />,
+						},
+						{
+							name: "Tanstack Form",
+							render: <FormDevtoolsPanel />,
 						},
 					]}
 				/>

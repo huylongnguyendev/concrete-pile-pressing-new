@@ -20,10 +20,13 @@ import { Route as AdminCompanyRouteImport } from './routes/admin/company'
 import { Route as AdminCustomersRouteImport } from './routes/admin/customers'
 import { Route as AdminEmployeesRouteImport } from './routes/admin/employees'
 import { Route as AdminMessageRouteImport } from './routes/admin/message'
-import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
+import { Route as AdminPrivatePolicyRouteImport } from './routes/admin/private-policy'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
+import { Route as AdminUserIdChangePasswordRouteImport } from './routes/admin/$userId/change-password'
+import { Route as AdminUserIdSettingRouteImport } from './routes/admin/$userId/setting'
 import { Route as AdminauthSignInRouteImport } from './routes/admin/(auth)/sign-in'
 import { Route as AdminauthSignUpRouteImport } from './routes/admin/(auth)/sign-up'
+import { Route as AdminProjectsIndexRouteImport } from './routes/admin/projects/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -80,14 +83,25 @@ const AdminMessageRoute = AdminMessageRouteImport.update({
   path: '/message',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminProjectsRoute = AdminProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
+const AdminPrivatePolicyRoute = AdminPrivatePolicyRouteImport.update({
+  id: '/private-policy',
+  path: '/private-policy',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminUserIdChangePasswordRoute =
+  AdminUserIdChangePasswordRouteImport.update({
+    id: '/$userId/change-password',
+    path: '/$userId/change-password',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminUserIdSettingRoute = AdminUserIdSettingRouteImport.update({
+  id: '/$userId/setting',
+  path: '/$userId/setting',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminauthSignInRoute = AdminauthSignInRouteImport.update({
@@ -98,6 +112,11 @@ const AdminauthSignInRoute = AdminauthSignInRouteImport.update({
 const AdminauthSignUpRoute = AdminauthSignUpRouteImport.update({
   id: '/(auth)/sign-up',
   path: '/sign-up',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminProjectsIndexRoute = AdminProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 
@@ -112,11 +131,14 @@ export interface FileRoutesByFullPath {
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
   '/admin/message': typeof AdminMessageRoute
-  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/private-policy': typeof AdminPrivatePolicyRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
+  '/admin/$userId/setting': typeof AdminUserIdSettingRoute
   '/admin/sign-in': typeof AdminauthSignInRoute
   '/admin/sign-up': typeof AdminauthSignUpRoute
+  '/admin/projects/': typeof AdminProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -128,11 +150,14 @@ export interface FileRoutesByTo {
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
   '/admin/message': typeof AdminMessageRoute
-  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/private-policy': typeof AdminPrivatePolicyRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin': typeof AdminIndexRoute
+  '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
+  '/admin/$userId/setting': typeof AdminUserIdSettingRoute
   '/admin/sign-in': typeof AdminauthSignInRoute
   '/admin/sign-up': typeof AdminauthSignUpRoute
+  '/admin/projects': typeof AdminProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -146,11 +171,14 @@ export interface FileRoutesById {
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
   '/admin/message': typeof AdminMessageRoute
-  '/admin/projects': typeof AdminProjectsRoute
+  '/admin/private-policy': typeof AdminPrivatePolicyRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
+  '/admin/$userId/setting': typeof AdminUserIdSettingRoute
   '/admin/(auth)/sign-in': typeof AdminauthSignInRoute
   '/admin/(auth)/sign-up': typeof AdminauthSignUpRoute
+  '/admin/projects/': typeof AdminProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -165,11 +193,14 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/employees'
     | '/admin/message'
-    | '/admin/projects'
+    | '/admin/private-policy'
     | '/admin/settings'
     | '/admin/'
+    | '/admin/$userId/change-password'
+    | '/admin/$userId/setting'
     | '/admin/sign-in'
     | '/admin/sign-up'
+    | '/admin/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -181,11 +212,14 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/employees'
     | '/admin/message'
-    | '/admin/projects'
+    | '/admin/private-policy'
     | '/admin/settings'
     | '/admin'
+    | '/admin/$userId/change-password'
+    | '/admin/$userId/setting'
     | '/admin/sign-in'
     | '/admin/sign-up'
+    | '/admin/projects'
   id:
     | '__root__'
     | '/'
@@ -198,11 +232,14 @@ export interface FileRouteTypes {
     | '/admin/customers'
     | '/admin/employees'
     | '/admin/message'
-    | '/admin/projects'
+    | '/admin/private-policy'
     | '/admin/settings'
     | '/admin/'
+    | '/admin/$userId/change-password'
+    | '/admin/$userId/setting'
     | '/admin/(auth)/sign-in'
     | '/admin/(auth)/sign-up'
+    | '/admin/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -292,11 +329,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMessageRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/projects': {
-      id: '/admin/projects'
-      path: '/projects'
-      fullPath: '/admin/projects'
-      preLoaderRoute: typeof AdminProjectsRouteImport
+    '/admin/private-policy': {
+      id: '/admin/private-policy'
+      path: '/private-policy'
+      fullPath: '/admin/private-policy'
+      preLoaderRoute: typeof AdminPrivatePolicyRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/settings': {
@@ -304,6 +341,20 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/admin/settings'
       preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/$userId/change-password': {
+      id: '/admin/$userId/change-password'
+      path: '/$userId/change-password'
+      fullPath: '/admin/$userId/change-password'
+      preLoaderRoute: typeof AdminUserIdChangePasswordRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/$userId/setting': {
+      id: '/admin/$userId/setting'
+      path: '/$userId/setting'
+      fullPath: '/admin/$userId/setting'
+      preLoaderRoute: typeof AdminUserIdSettingRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/(auth)/sign-in': {
@@ -320,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminauthSignUpRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/projects/': {
+      id: '/admin/projects/'
+      path: '/projects'
+      fullPath: '/admin/projects/'
+      preLoaderRoute: typeof AdminProjectsIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
   }
 }
 
@@ -329,11 +387,14 @@ interface AdminRouteRouteChildren {
   AdminCustomersRoute: typeof AdminCustomersRoute
   AdminEmployeesRoute: typeof AdminEmployeesRoute
   AdminMessageRoute: typeof AdminMessageRoute
-  AdminProjectsRoute: typeof AdminProjectsRoute
+  AdminPrivatePolicyRoute: typeof AdminPrivatePolicyRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminUserIdChangePasswordRoute: typeof AdminUserIdChangePasswordRoute
+  AdminUserIdSettingRoute: typeof AdminUserIdSettingRoute
   AdminauthSignInRoute: typeof AdminauthSignInRoute
   AdminauthSignUpRoute: typeof AdminauthSignUpRoute
+  AdminProjectsIndexRoute: typeof AdminProjectsIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
@@ -342,11 +403,14 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminCustomersRoute: AdminCustomersRoute,
   AdminEmployeesRoute: AdminEmployeesRoute,
   AdminMessageRoute: AdminMessageRoute,
-  AdminProjectsRoute: AdminProjectsRoute,
+  AdminPrivatePolicyRoute: AdminPrivatePolicyRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminUserIdChangePasswordRoute: AdminUserIdChangePasswordRoute,
+  AdminUserIdSettingRoute: AdminUserIdSettingRoute,
   AdminauthSignInRoute: AdminauthSignInRoute,
   AdminauthSignUpRoute: AdminauthSignUpRoute,
+  AdminProjectsIndexRoute: AdminProjectsIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(

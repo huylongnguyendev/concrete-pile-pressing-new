@@ -26,13 +26,9 @@ const getCompanyServer = async () => {
 	}
 };
 
-const updateCompanyServer = async (
-	data: Company,
-	user: { id: string; role: Role },
-) => {
+const updateCompanyServer = async (data: Company, role: Role) => {
 	try {
 		const { addresses, emails, phoneNumber, id: companyId } = data;
-		const { id, role } = user;
 		if (
 			addresses.length === 0 &&
 			emails.length === 0 &&
@@ -42,12 +38,8 @@ const updateCompanyServer = async (
 				success: false,
 				message: "Thông tin không hợp lệ!",
 			};
-		const exsitingUser = await prisma.user.findFirst({
-			where: { AND: [{ id }, { role }] },
-			select: { id: true },
-		});
 
-		if (!exsitingUser)
+		if (role !== "ADMIN")
 			return {
 				success: false,
 				message: "Không thể thực hiện yêu cầu!",

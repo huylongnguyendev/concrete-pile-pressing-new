@@ -66,3 +66,8 @@ export type Address = Prisma.AddressModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel

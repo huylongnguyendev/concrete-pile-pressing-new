@@ -1,16 +1,12 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { Building2Icon, PhoneCallIcon } from "lucide-react";
-import { getCompanyFn } from "#/db/services/company.service";
+import { companyQuery } from "#/db/query/company.query";
 import { Animate } from "./base/animation/Animate";
 import { Button } from "./ui/button";
 
 export function HerroAction() {
-	const { data } = useSuspenseQuery({
-		queryKey: ["company"],
-		queryFn: () => getCompanyFn(),
-		staleTime: 60 * 1000 * 5,
-	});
+	const { data } = useSuspenseQuery(companyQuery);
 	const phoneNumber =
 		data?.companies[0]?.phoneNumber?.find((p) => p.priority) ||
 		data?.companies[0]?.phoneNumber?.[0];

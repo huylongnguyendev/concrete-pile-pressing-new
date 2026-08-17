@@ -1,5 +1,6 @@
 import { useAppStore } from "@lavaz/store";
-import { useEffect, useMemo } from "react";
+import { SaveIcon } from "lucide-react";
+import { useEffect } from "react";
 import { Button } from "#/components/ui/button";
 import {
 	Card,
@@ -11,22 +12,14 @@ import {
 	CardTitle,
 } from "#/components/ui/card";
 import { FieldGroup } from "#/components/ui/field";
+import { Spinner } from "#/components/ui/spinner";
+import { useUpdateContactMutation } from "#/hooks/query/use-contact-query";
 import { store } from "#/store/store";
-import type {
-	Address,
-	Company,
-	Email,
-	PhoneNumberItem,
-} from "#/types/company.type";
+import type { Company } from "#/types/company.type";
 import { ContactInputForm } from "./ContactInputForm";
 import { AddressForm } from "./input-forms/AddressForm";
 import { EmailForm } from "./input-forms/EmailForm";
 import { PhoneForm } from "./input-forms/PhoneForm";
-import { useUpdateContactMutation } from "#/hooks/query/use-contact-query";
-import { SaveIcon } from "lucide-react";
-import { Spinner } from "#/components/ui/spinner";
-
-type GenericContactItem = PhoneNumberItem | Email | Address;
 
 export function Contact({ company }: { company: Company }) {
 	const { id, addresses, emails, phoneNumber } = company;
@@ -37,66 +30,34 @@ export function Contact({ company }: { company: Company }) {
 	);
 	const { mutate, isPending } = useUpdateContactMutation();
 
+	const handleReset = () => {
+		setAll(
+			id
+				? { id, addresses, emails, phoneNumber, canSubmit: false }
+				: {
+						id: "",
+						phoneNumber: [{ id: "", number: "", priority: true }],
+						addresses: [{ id: "", address: "", priority: true }],
+						emails: [{ id: "", mail: "", priority: true }],
+						canSubmit: false,
+					},
+		);
+	};
+
 	useEffect(() => {
 		const value = id
-			? { id, addresses, emails, phoneNumber }
+			? { id, addresses, emails, phoneNumber, canSubmit: false }
 			: {
 					id: "",
 					phoneNumber: [{ id: "", number: "", priority: true }],
 					addresses: [{ id: "", address: "", priority: true }],
 					emails: [{ id: "", mail: "", priority: true }],
+					canSubmit: false,
 				};
 		setAll(value);
 	}, [setAll, id, addresses, phoneNumber, emails]);
 
-	const canSubmit = useMemo(() => {
-		const isDifferent = (
-			arr1: GenericContactItem[],
-			arr2: GenericContactItem[],
-			key: "number" | "address" | "mail",
-		) => {
-			if (arr1.length !== arr2.length) return true;
-
-			const getUniqueMap = (arr: GenericContactItem[]) =>
-				Array.from(
-					new Map(
-						arr.map((item) => [
-							String(item[key as keyof GenericContactItem] ?? ""),
-							item,
-						]),
-					).values(),
-				);
-
-			const unique1 = getUniqueMap(arr1);
-			const unique2 = getUniqueMap(arr2);
-
-			if (unique1.length !== unique2.length) return true;
-
-			return unique1.some((item1) => {
-				const val1 = item1[key as keyof GenericContactItem];
-				const matchItem = unique2.find(
-					(item2) => item2[key as keyof GenericContactItem] === val1,
-				);
-
-				if (!matchItem) return true;
-				return matchItem.priority !== item1.priority;
-			});
-		};
-
-		const hasPhoneChanged = isDifferent(
-			phoneNumber,
-			values.phoneNumber,
-			"number",
-		);
-		const hasAddressChanged = isDifferent(
-			addresses,
-			values.addresses,
-			"address",
-		);
-		const hasMailChanged = isDifferent(emails, values.emails, "mail");
-
-		return hasPhoneChanged || hasAddressChanged || hasMailChanged;
-	}, [phoneNumber, addresses, emails, values]);
+	const canSubmit = values.canSubmit;
 
 	return (
 		<Card>
@@ -139,11 +100,10 @@ export function Contact({ company }: { company: Company }) {
 			</CardContent>
 			<CardFooter>
 				<CardAction className="flex justify-end gap-2 w-full">
-					<Button variant={"secondary"}>Hủy bỏ</Button>
-					<Button
-						disabled={!canSubmit || isPending}
-						onClick={() => mutate(values)}
-					>
+					<Button variant={"secondary"} onClick={handleReset}>
+						Hủy bỏ
+					</Button>
+					<Button disabled={!canSubmit} onClick={() => mutate(values)}>
 						{isPending ? (
 							<>
 								<Spinner />

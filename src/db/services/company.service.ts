@@ -15,10 +15,7 @@ const updateCompanyFn = createServerFn({ method: "POST" })
 	.validator((data: Company) => data)
 	.handler(
 		async ({ context, data }) =>
-			await updateCompanyServer(data, {
-				id: context.session.userId,
-				role: context.session.role,
-			}),
+			await updateCompanyServer(data, context.session.role),
 	);
 
 export { getCompanyFn, updateCompanyFn };
