@@ -29,9 +29,11 @@ export function SignOut() {
 				<DialogClose asChild>
 					<Button variant={"destructive"}>Hủy bỏ</Button>
 				</DialogClose>
-				<Button variant={"ghost"} onClick={handleSignOut}>
-					Xác nhận
-				</Button>
+				<DialogClose asChild>
+					<Button variant={"ghost"} onClick={handleSignOut}>
+						Xác nhận
+					</Button>
+				</DialogClose>
 			</DialogFooter>
 		</DialogContent>
 	);

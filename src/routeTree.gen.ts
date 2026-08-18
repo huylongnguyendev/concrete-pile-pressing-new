@@ -19,7 +19,6 @@ import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
 import { Route as AdminCompanyRouteImport } from './routes/admin/company'
 import { Route as AdminCustomersRouteImport } from './routes/admin/customers'
 import { Route as AdminEmployeesRouteImport } from './routes/admin/employees'
-import { Route as AdminMessageRouteImport } from './routes/admin/message'
 import { Route as AdminPrivatePolicyRouteImport } from './routes/admin/private-policy'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminUserIdChangePasswordRouteImport } from './routes/admin/$userId/change-password'
@@ -79,11 +78,6 @@ const AdminEmployeesRoute = AdminEmployeesRouteImport.update({
   path: '/employees',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminMessageRoute = AdminMessageRouteImport.update({
-  id: '/message',
-  path: '/message',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
 const AdminPrivatePolicyRoute = AdminPrivatePolicyRouteImport.update({
   id: '/private-policy',
   path: '/private-policy',
@@ -136,7 +130,6 @@ export interface FileRoutesByFullPath {
   '/admin/company': typeof AdminCompanyRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
-  '/admin/message': typeof AdminMessageRoute
   '/admin/private-policy': typeof AdminPrivatePolicyRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
@@ -156,7 +149,6 @@ export interface FileRoutesByTo {
   '/admin/company': typeof AdminCompanyRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
-  '/admin/message': typeof AdminMessageRoute
   '/admin/private-policy': typeof AdminPrivatePolicyRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin': typeof AdminIndexRoute
@@ -178,7 +170,6 @@ export interface FileRoutesById {
   '/admin/company': typeof AdminCompanyRoute
   '/admin/customers': typeof AdminCustomersRoute
   '/admin/employees': typeof AdminEmployeesRoute
-  '/admin/message': typeof AdminMessageRoute
   '/admin/private-policy': typeof AdminPrivatePolicyRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
@@ -201,7 +192,6 @@ export interface FileRouteTypes {
     | '/admin/company'
     | '/admin/customers'
     | '/admin/employees'
-    | '/admin/message'
     | '/admin/private-policy'
     | '/admin/settings'
     | '/admin/'
@@ -221,7 +211,6 @@ export interface FileRouteTypes {
     | '/admin/company'
     | '/admin/customers'
     | '/admin/employees'
-    | '/admin/message'
     | '/admin/private-policy'
     | '/admin/settings'
     | '/admin'
@@ -242,7 +231,6 @@ export interface FileRouteTypes {
     | '/admin/company'
     | '/admin/customers'
     | '/admin/employees'
-    | '/admin/message'
     | '/admin/private-policy'
     | '/admin/settings'
     | '/admin/'
@@ -334,13 +322,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEmployeesRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/message': {
-      id: '/admin/message'
-      path: '/message'
-      fullPath: '/admin/message'
-      preLoaderRoute: typeof AdminMessageRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
     '/admin/private-policy': {
       id: '/admin/private-policy'
       path: '/private-policy'
@@ -405,7 +386,6 @@ interface AdminRouteRouteChildren {
   AdminCompanyRoute: typeof AdminCompanyRoute
   AdminCustomersRoute: typeof AdminCustomersRoute
   AdminEmployeesRoute: typeof AdminEmployeesRoute
-  AdminMessageRoute: typeof AdminMessageRoute
   AdminPrivatePolicyRoute: typeof AdminPrivatePolicyRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -422,7 +402,6 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminCompanyRoute: AdminCompanyRoute,
   AdminCustomersRoute: AdminCustomersRoute,
   AdminEmployeesRoute: AdminEmployeesRoute,
-  AdminMessageRoute: AdminMessageRoute,
   AdminPrivatePolicyRoute: AdminPrivatePolicyRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminIndexRoute: AdminIndexRoute,

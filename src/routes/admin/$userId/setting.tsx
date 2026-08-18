@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-	EllipsisVerticalIcon,
 	LogOutIcon,
 	Repeat2Icon,
 	ShieldEllipsisIcon,
 } from "lucide-react";
+import { Suspense } from "react";
+import { UserInfo } from "#/components/admin/user/UserInfo";
 import { SignOut } from "#/components/dialog/SignOut";
-import { Avatar, AvatarImage } from "#/components/ui/avatar";
 import { Button } from "#/components/ui/button";
 import {
 	Card,
@@ -18,8 +18,6 @@ import {
 	CardTitle,
 } from "#/components/ui/card";
 import { DialogTrigger } from "#/components/ui/dialog";
-import { UserInfo } from "#/components/admin/user/UserInfo";
-import { Suspense } from "react";
 
 export const Route = createFileRoute("/admin/$userId/setting")({
 	component: RouteComponent,
