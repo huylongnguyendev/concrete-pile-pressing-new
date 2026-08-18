@@ -1,3 +1,5 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import {
 	ChevronRightIcon,
 	LogOutIcon,
@@ -11,13 +13,12 @@ import {
 	DropdownMenuTrigger,
 } from "#/components/ui/dropdown-menu";
 import { SidebarMenuButton, SidebarMenuItem } from "#/components/ui/sidebar";
-import { cn } from "#/lib/utils";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { Skeleton } from "#/components/ui/skeleton";
 import { userQuery } from "#/db/query/user.query";
-import { Link } from "@tanstack/react-router";
+import { cn } from "#/lib/utils";
 
 export function UserSidebar({ open }: { open: boolean }) {
-	// const { data } = useSuspenseQuery(userQuery);
+	const { data, isPending } = useSuspenseQuery(userQuery);
 
 	return (
 		<SidebarMenuItem>
@@ -34,24 +35,51 @@ export function UserSidebar({ open }: { open: boolean }) {
 						{open ? (
 							<>
 								<div className="flex items-center gap-2">
-									<User2Icon className="w-5 h-5" />
-									<div className="text-left leading-tight">
-										<p className="font-medium">Username</p>
+									{data.success ? (
+										<img
+											src="https://api.dicebear.com/10.x/adventurer-neutral/svg?seed=1xx5hf8t"
+											alt="avatar"
+											className="size-5 rounded-full"
+										/>
+									) : (
+										<User2Icon className="w-5 h-5" />
+									)}
+									<div className="text-left leading-tight space-y-1">
+										<p className="font-medium">
+											{isPending ? (
+												<Skeleton className="w-full h-4" />
+											) : (
+												data?.user?.fullName
+											)}
+										</p>
 										<p className="font-semibold text-xs text-muted-foreground">
-											role
+											{isPending ? (
+												<Skeleton className="w-full h-4" />
+											) : (
+												data?.user?.role
+											)}
 										</p>
 									</div>
 								</div>
 								<ChevronRightIcon className="w-4 h-4 text-muted-foreground" />
 							</>
+						) : data.success ? (
+							<img
+								src="https://api.dicebear.com/10.x/adventurer-neutral/svg?seed=1xx5hf8t"
+								alt="avatar"
+								className="size-full absolute rounded-full"
+							/>
 						) : (
-							<User2Icon />
+							<User2Icon className="w-5 h-5" />
 						)}
 					</SidebarMenuButton>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent side="right" align="end" className="w-48">
 					<DropdownMenuItem asChild>
-						<Link to="/admin/$userId/setting" params={{ userId: "1" }}>
+						<Link
+							to="/admin/$userId/setting"
+							params={{ userId: data.user?.id || "" }}
+						>
 							<UserCog2Icon className="mr-2 w-4 h-4" />
 							<span>Cài đặt tài khoản</span>
 						</Link>

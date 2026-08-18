@@ -23,6 +23,7 @@ import { Route as AdminMessageRouteImport } from './routes/admin/message'
 import { Route as AdminPrivatePolicyRouteImport } from './routes/admin/private-policy'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminUserIdChangePasswordRouteImport } from './routes/admin/$userId/change-password'
+import { Route as AdminUserIdEditRouteImport } from './routes/admin/$userId/edit'
 import { Route as AdminUserIdSettingRouteImport } from './routes/admin/$userId/setting'
 import { Route as AdminauthSignInRouteImport } from './routes/admin/(auth)/sign-in'
 import { Route as AdminauthSignUpRouteImport } from './routes/admin/(auth)/sign-up'
@@ -99,6 +100,11 @@ const AdminUserIdChangePasswordRoute =
     path: '/$userId/change-password',
     getParentRoute: () => AdminRouteRoute,
   } as any)
+const AdminUserIdEditRoute = AdminUserIdEditRouteImport.update({
+  id: '/$userId/edit',
+  path: '/$userId/edit',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminUserIdSettingRoute = AdminUserIdSettingRouteImport.update({
   id: '/$userId/setting',
   path: '/$userId/setting',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
+  '/admin/$userId/edit': typeof AdminUserIdEditRoute
   '/admin/$userId/setting': typeof AdminUserIdSettingRoute
   '/admin/sign-in': typeof AdminauthSignInRoute
   '/admin/sign-up': typeof AdminauthSignUpRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin': typeof AdminIndexRoute
   '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
+  '/admin/$userId/edit': typeof AdminUserIdEditRoute
   '/admin/$userId/setting': typeof AdminUserIdSettingRoute
   '/admin/sign-in': typeof AdminauthSignInRoute
   '/admin/sign-up': typeof AdminauthSignUpRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
+  '/admin/$userId/edit': typeof AdminUserIdEditRoute
   '/admin/$userId/setting': typeof AdminUserIdSettingRoute
   '/admin/(auth)/sign-in': typeof AdminauthSignInRoute
   '/admin/(auth)/sign-up': typeof AdminauthSignUpRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/'
     | '/admin/$userId/change-password'
+    | '/admin/$userId/edit'
     | '/admin/$userId/setting'
     | '/admin/sign-in'
     | '/admin/sign-up'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin'
     | '/admin/$userId/change-password'
+    | '/admin/$userId/edit'
     | '/admin/$userId/setting'
     | '/admin/sign-in'
     | '/admin/sign-up'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/'
     | '/admin/$userId/change-password'
+    | '/admin/$userId/edit'
     | '/admin/$userId/setting'
     | '/admin/(auth)/sign-in'
     | '/admin/(auth)/sign-up'
@@ -350,6 +362,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUserIdChangePasswordRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/$userId/edit': {
+      id: '/admin/$userId/edit'
+      path: '/$userId/edit'
+      fullPath: '/admin/$userId/edit'
+      preLoaderRoute: typeof AdminUserIdEditRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/$userId/setting': {
       id: '/admin/$userId/setting'
       path: '/$userId/setting'
@@ -391,6 +410,7 @@ interface AdminRouteRouteChildren {
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AdminUserIdChangePasswordRoute: typeof AdminUserIdChangePasswordRoute
+  AdminUserIdEditRoute: typeof AdminUserIdEditRoute
   AdminUserIdSettingRoute: typeof AdminUserIdSettingRoute
   AdminauthSignInRoute: typeof AdminauthSignInRoute
   AdminauthSignUpRoute: typeof AdminauthSignUpRoute
@@ -407,6 +427,7 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminSettingsRoute: AdminSettingsRoute,
   AdminIndexRoute: AdminIndexRoute,
   AdminUserIdChangePasswordRoute: AdminUserIdChangePasswordRoute,
+  AdminUserIdEditRoute: AdminUserIdEditRoute,
   AdminUserIdSettingRoute: AdminUserIdSettingRoute,
   AdminauthSignInRoute: AdminauthSignInRoute,
   AdminauthSignUpRoute: AdminauthSignUpRoute,

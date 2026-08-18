@@ -5,6 +5,7 @@ import {
 	changePasswordServer,
 	confirmServer,
 	signInServer,
+	signOutServer,
 	signUpServer,
 } from "../server/auth.server";
 import type { ChangePassword } from "#/schema/change-password.schema";
@@ -36,4 +37,8 @@ const changePasswordFn = createServerFn({ method: "POST" })
 		async ({ context, data }) =>
 			await changePasswordServer({ ...data, userId: context.session.userId }),
 	);
-export { signUpFn, signInFn, confirmPasswordFn, changePasswordFn };
+
+const signOutFn = createServerFn({ method: "POST" }).handler(
+	async () => await signOutServer(),
+);
+export { signUpFn, signInFn, confirmPasswordFn, changePasswordFn, signOutFn };

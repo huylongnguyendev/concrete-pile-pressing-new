@@ -191,4 +191,28 @@ const changePasswordServer = async ({
 	}
 };
 
-export { signUpServer, signInServer, confirmServer, changePasswordServer };
+const signOutServer = async () => {
+	const session = await useAppSession();
+
+	try {
+		await session.clear();
+		return {
+			success: true,
+			message: "Đăng xuất thành công!",
+		};
+	} catch (error) {
+		if (error instanceof Error) throw new Error(error.message);
+		return {
+			success: false,
+			message: "Lỗi hệ thống!",
+		};
+	}
+};
+
+export {
+	signUpServer,
+	signInServer,
+	confirmServer,
+	changePasswordServer,
+	signOutServer,
+};

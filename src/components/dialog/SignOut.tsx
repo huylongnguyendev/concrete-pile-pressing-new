@@ -1,3 +1,5 @@
+import { useAuthSignOut } from "#/hooks/query/use-auth-query";
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "../ui/button";
 import {
 	DialogClose,
@@ -8,7 +10,15 @@ import {
 	DialogTitle,
 } from "../ui/dialog";
 
-export function Logout() {
+export function SignOut() {
+	const { mutate } = useAuthSignOut();
+	const navigate = useNavigate();
+
+	const handleSignOut = async () => {
+		await mutate();
+		navigate({ to: "/admin/sign-in" });
+	};
+
 	return (
 		<DialogContent>
 			<DialogHeader>
@@ -19,7 +29,9 @@ export function Logout() {
 				<DialogClose asChild>
 					<Button variant={"destructive"}>Hủy bỏ</Button>
 				</DialogClose>
-				<Button variant={"ghost"}>Xác nhận</Button>
+				<Button variant={"ghost"} onClick={handleSignOut}>
+					Xác nhận
+				</Button>
 			</DialogFooter>
 		</DialogContent>
 	);

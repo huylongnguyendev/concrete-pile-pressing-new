@@ -5,7 +5,7 @@ import {
 	Repeat2Icon,
 	ShieldEllipsisIcon,
 } from "lucide-react";
-import { Logout } from "#/components/dialog/Logout";
+import { SignOut } from "#/components/dialog/SignOut";
 import { Avatar, AvatarImage } from "#/components/ui/avatar";
 import { Button } from "#/components/ui/button";
 import {
@@ -18,11 +18,8 @@ import {
 	CardTitle,
 } from "#/components/ui/card";
 import { DialogTrigger } from "#/components/ui/dialog";
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
-} from "#/components/ui/tooltip";
+import { UserInfo } from "#/components/admin/user/UserInfo";
+import { Suspense } from "react";
 
 export const Route = createFileRoute("/admin/$userId/setting")({
 	component: RouteComponent,
@@ -38,44 +35,9 @@ function RouteComponent() {
 						Xem thông tin cá nhân của bạn hoặc thay đổi thông tin
 					</CardDescription>
 				</CardHeader>
-				<CardContent className="space-y-4">
-					<div className="flex justify-between">
-						<div className="flex items-center gap-4">
-							<Avatar size="lg">
-								<AvatarImage
-									src="https://api.dicebear.com/10.x/adventurer-neutral/svg?seed=Felix"
-									alt="avatar"
-								/>
-							</Avatar>
-							<div className="font-semibold">
-								<h2 className="text-lg">name</h2>
-								<p className="text-sm text-muted-foreground">@username</p>
-							</div>
-						</div>
-						<Button variant={"outline"} asChild className="max-md:hidden">
-							<Link to="/">Sửa thông tin</Link>
-						</Button>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<Button
-									variant={"outline"}
-									size={"icon"}
-									asChild
-									className="md:hidden"
-								>
-									<Link to="/">
-										<EllipsisVerticalIcon />
-									</Link>
-								</Button>
-							</TooltipTrigger>
-							<TooltipContent>Sửa thông tin</TooltipContent>
-						</Tooltip>
-					</div>
-					<div className="space-y-2">
-						<p>Số điện thoại:</p>
-						<p>Email:</p>
-					</div>
-				</CardContent>
+				<Suspense>
+					<UserInfo />
+				</Suspense>
 			</Card>
 			<Card>
 				<CardHeader>
@@ -103,13 +65,13 @@ function RouteComponent() {
 				</CardContent>
 				<CardFooter>
 					<CardAction className="w-full justify-end flex">
-						<DialogTrigger>
+						<DialogTrigger asChild>
 							<Button variant={"destructive"}>
 								<LogOutIcon />
 								<span>Đăng xuất</span>
 							</Button>
 						</DialogTrigger>
-						<Logout />
+						<SignOut />
 					</CardAction>
 				</CardFooter>
 			</Card>
