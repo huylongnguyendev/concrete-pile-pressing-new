@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import type { ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
+import type { ChangePassword, ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
 import { authMiddleware } from "../middleware/auth.middleware";
 import {
 	changePasswordServer,
@@ -8,7 +8,6 @@ import {
 	signOutServer,
 	signUpServer,
 } from "../server/auth.server";
-import type { ChangePassword } from "#/schema/change-password.schema";
 
 const signUpFn = createServerFn({ method: "POST" })
 	.validator((data: SignUp) => data)

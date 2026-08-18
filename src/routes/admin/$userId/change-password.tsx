@@ -2,6 +2,7 @@ import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { EyeIcon, EyeOffIcon, SendIcon } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "#/components/ui/button";
 import {
 	Card,
@@ -21,13 +22,9 @@ import {
 	InputGroupAddon,
 	InputGroupInput,
 } from "#/components/ui/input-group";
-import {
-	type ChangePassword,
-	ChangePasswordSchema,
-} from "#/schema/change-password.schema";
 import { Spinner } from "#/components/ui/spinner";
 import { changePasswordFn } from "#/db/services/auth.service";
-import { toast } from "sonner";
+import { type ChangePassword, ChangePasswordSchema } from "#/schema/auth.schema";
 
 export const Route = createFileRoute("/admin/$userId/change-password")({
 	component: RouteComponent,
@@ -199,7 +196,7 @@ function RouteComponent() {
 						</FieldGroup>
 						<div className="flex justify-end items-center gap-2">
 							<Button variant={"secondary"} asChild>
-								<Link to="/admin/$userId/setting" params={{ userId: "1" }}>
+								<Link to="/admin">
 									Hủy bỏ
 								</Link>
 							</Button>

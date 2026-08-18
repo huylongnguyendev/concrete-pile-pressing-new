@@ -1,7 +1,7 @@
 import { prisma } from "#/db";
 import type { CustomerMessage } from "#/types/message.type";
 
-async function sendMessageServer(data: CustomerMessage) {
+const sendMessageServer = async(data: CustomerMessage) => {
 	try {
 		await prisma.message.create({ data });
 		return { success: true, message: "Gửi tin nhắn thành công!" };

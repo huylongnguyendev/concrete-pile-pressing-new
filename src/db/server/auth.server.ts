@@ -2,8 +2,7 @@ import { hash, verify } from "argon2";
 import { prisma } from "#/db";
 import type { Role } from "#/generated/prisma/enums";
 import { useAppSession } from "#/lib/utils/session";
-import type { ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
-import type { ChangePassword } from "#/schema/change-password.schema";
+import type { ChangePassword, ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
 
 const signUpServer = async ({ data }: { data: SignUp }) => {
 	const adminCode = process.env.ADMIN;
