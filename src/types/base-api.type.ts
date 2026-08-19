@@ -3,4 +3,10 @@ interface TimeApi {
 	updatedAt: Date;
 }
 
-export type { TimeApi };
+interface Pagination {
+	page: number;
+	totalItem: number;
+	totalPage: number;
+}
+
+export type { TimeApi, Pagination };

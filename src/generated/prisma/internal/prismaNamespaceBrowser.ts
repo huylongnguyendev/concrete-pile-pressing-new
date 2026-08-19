@@ -56,7 +56,9 @@ export const ModelName = {
   Email: 'Email',
   Address: 'Address',
   User: 'User',
-  Message: 'Message'
+  Message: 'Message',
+  Customer: 'Customer',
+  ServiceSession: 'ServiceSession'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -146,6 +148,33 @@ export const MessageScalarFieldEnum = {
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const CustomerScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  phoneNumber: 'phoneNumber',
+  location: 'location',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const ServiceSessionScalarFieldEnum = {
+  id: 'id',
+  service: 'service',
+  price: 'price',
+  paid: 'paid',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  customerId: 'customerId'
+} as const
+
+export type ServiceSessionScalarFieldEnum = (typeof ServiceSessionScalarFieldEnum)[keyof typeof ServiceSessionScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -16,3 +16,22 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const CustomerType = {
+  CLIENT: 'CLIENT',
+  SUPPLIER: 'SUPPLIER'
+} as const
+
+export type CustomerType = (typeof CustomerType)[keyof typeof CustomerType]
+
+
+export const ServiceStatus = {
+  PENDING: 'PENDING',
+  SERVING: 'SERVING',
+  PAYING: 'PAYING',
+  COMPLETED: 'COMPLETED',
+  IDLE: 'IDLE'
+} as const
+
+export type ServiceStatus = (typeof ServiceStatus)[keyof typeof ServiceStatus]

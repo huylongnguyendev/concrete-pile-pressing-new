@@ -71,3 +71,13 @@ export type User = Prisma.UserModel
  * 
  */
 export type Message = Prisma.MessageModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model ServiceSession
+ * 
+ */
+export type ServiceSession = Prisma.ServiceSessionModel
