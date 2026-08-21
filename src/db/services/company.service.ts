@@ -1,10 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
+import type { Company } from "#/types/company.type";
 import { authMiddleware } from "../middleware/auth.middleware";
 import {
 	getCompanyServer,
 	updateCompanyServer,
 } from "../server/company.server";
-import type { Company } from "#/types/company.type";
 
 const getCompanyFn = createServerFn({ method: "GET" }).handler(
 	async () => await getCompanyServer(),
