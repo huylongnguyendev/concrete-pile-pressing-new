@@ -21,16 +21,27 @@ export function NavList() {
 		<nav
 			ref={ref}
 			className={cn(
-				"max-lg:absolute -top-250 left-0 z-999 max-lg:w-full max-lg:bg-background/80 backdrop-blur-2xl rounded-md max-lg:shadow-md max-lg:p-4 transition-all duration-300",
-				isOpenMenu && "top-0",
+				// Mobile drawer styling
+				"max-lg:fixed max-lg:inset-x-0 max-lg:top-0 max-lg:z-50 max-lg:bg-background/95 max-lg:backdrop-blur-xl max-lg:p-6 max-lg:shadow-2xl max-lg:border-b max-lg:border-border",
+				// Transition animation for mobile
+				"max-lg:transition-transform max-lg:duration-300 max-lg:ease-in-out",
+				isOpenMenu ? "max-lg:translate-y-0" : "max-lg:-translate-y-100",
+				// Desktop styling
+				"lg:flex lg:items-center",
 			)}
 		>
-			<ul className="flex max-lg:flex-col items-center lg:gap-8 capitalize font-semibold text-muted-foreground">
-				<li className="ms-auto lg:hidden">
+			<ul className="flex max-lg:flex-col lg:items-center lg:gap-8 capitalize font-medium text-muted-foreground">
+				{/* Nút đóng menu trên mobile */}
+				<li className="flex items-center justify-between pb-4 mb-2 border-b border-border lg:hidden">
+					<span className="text-sm font-semibold text-foreground">Menu</span>
 					<CloseMenu />
 				</li>
+
 				{navList.map((nav) => (
-					<li key={nav.value}>
+					<li
+						key={nav.value}
+						className="transition-colors hover:text-foreground"
+					>
 						<NavItem item={nav} onCloseMenu={setCloseMenu} />
 					</li>
 				))}

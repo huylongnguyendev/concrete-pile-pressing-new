@@ -1,7 +1,5 @@
 import { Building2Icon, ShieldCheckIcon } from "lucide-react";
-import { Suspense } from "react";
 import { FooterWithData } from "./FooterWithData";
-import { FooterSkeleton } from "#/components/pending/client/FooterSkeleton";
 
 export function Footer() {
 	return (
@@ -76,9 +74,8 @@ export function Footer() {
 					<h3 className="text-white font-bold mb-4 tracking-wide uppercase text-xs">
 						Liên Hệ Trực Tiếp
 					</h3>
-					<Suspense fallback={<FooterSkeleton />}>
-						<FooterWithData />
-					</Suspense>
+
+					<FooterWithData />
 				</div>
 			</div>
 

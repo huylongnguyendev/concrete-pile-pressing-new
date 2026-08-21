@@ -14,12 +14,6 @@ const navList: NavItem[] = [
 			"ép cọc bê tông hùng dũng - đơn vị ép cọc bê tông uy tín tại Đồng Nai và Bà Rịa - Vũng Tàu",
 	},
 	{
-		value: "project-nav",
-		label: "Dự án",
-		href: "/du-an",
-		title: "các dự án của ép cọc bê tông Hùng Dũng",
-	},
-	{
 		value: "service-price-nav",
 		label: "bảng giá dịch vụ",
 		href: "/bang-gia",

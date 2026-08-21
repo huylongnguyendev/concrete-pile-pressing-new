@@ -1,13 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import { Building2Icon, PhoneCallIcon, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { CountUp } from "#/components/CountUp";
-import { Button } from "#/components/ui/button";
+import { HerroAction } from "#/components/HerroAction";
 import { quickFeature, quickStat } from "#/data/hero.data";
 import { Animate } from "../animation/Animate";
 import { Section } from "./Section";
-import { HerroAction } from "#/components/HerroAction";
-import { Suspense } from "react";
-import { HeroActionSkeleton } from "#/components/pending/client/HeroActionSkeleton";
 
 export function Hero() {
 	return (
@@ -37,7 +33,9 @@ export function Hero() {
 								</span>{" "}
 								Tại
 							</span>
-							<span className="block mt-2">Đồng Nai & Bà Rịa - Vũng Tàu</span>
+							<span className="block mt-2">
+								Đồng Nai, Bà Rịa - Vũng Tàu & Miền Nam
+							</span>
 						</h1>
 					</Animate>
 
@@ -89,9 +87,7 @@ export function Hero() {
 						})}
 					</div>
 
-					<Suspense fallback={<HeroActionSkeleton />}>
-						<HerroAction />
-					</Suspense>
+					<HerroAction />
 				</div>
 
 				<Animate
@@ -102,7 +98,7 @@ export function Hero() {
 				>
 					<div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-100 aspect-video lg:aspect-4/3 w-full">
 						<img
-							src="/images/ep-coc-be-tong-dong-nai-vung-tau.jpg"
+							src="/hero-image.jpg"
 							alt="Thi công ép cọc bê tông cốt thép uy tín tại Đồng Nai và Bà Rịa Vũng Tàu"
 							className="w-full h-full object-cover"
 							loading="eager"

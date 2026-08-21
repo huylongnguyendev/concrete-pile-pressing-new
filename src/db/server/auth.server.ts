@@ -2,7 +2,12 @@ import { hash, verify } from "argon2";
 import { prisma } from "#/db";
 import type { Role } from "#/generated/prisma/enums";
 import { useAppSession } from "#/lib/utils/session";
-import type { ChangePassword, ConfirmType, SignIn, SignUp } from "#/schema/auth.schema";
+import type {
+	ChangePassword,
+	ConfirmType,
+	SignIn,
+	SignUp,
+} from "#/schema/auth.schema";
 
 const signUpServer = async ({ data }: { data: SignUp }) => {
 	const adminCode = process.env.ADMIN;
@@ -45,10 +50,9 @@ const signUpServer = async ({ data }: { data: SignUp }) => {
 			message: "Đăng ký tài khoản thành công!",
 		};
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
 		return {
 			success: false,
-			message: "Lỗi hệ thống!",
+			message: error instanceof Error ? error.message : "Lỗi hệ thống!",
 		};
 	}
 };
@@ -79,17 +83,20 @@ const signInServer = async ({ data }: { data: SignIn }) => {
 				message: "Tên đăng nhập hoặc mật khẩu không đúng!",
 			};
 
-		await session.update({ userId: user.id, role: user.role });
+		await session.update({
+			userId: user.id,
+			role: user.role,
+			isConfirm: false,
+		});
 
 		return {
 			success: true,
 			message: "Đăng nhập thành công!",
 		};
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
 		return {
 			success: false,
-			message: "Lỗi hệ thống!",
+			message: error instanceof Error ? error.message : "Lỗi hệ thống!",
 		};
 	}
 };
@@ -97,6 +104,7 @@ const signInServer = async ({ data }: { data: SignIn }) => {
 const confirmServer = async (
 	data: ConfirmType & { id: string; role: Role },
 ) => {
+	const session = await useAppSession();
 	try {
 		const { id, password, role } = data;
 		const user = await prisma.user.findUnique({
@@ -118,15 +126,18 @@ const confirmServer = async (
 				message: "Không thể thực hiện xác thực!",
 			};
 
+		const sessionData = session.data;
+		await session.update({ ...sessionData, isConfirm: true });
+		console.log(sessionData);
+
 		return {
 			success: true,
 			message: "Xác thực thành công!",
 		};
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
 		return {
 			success: false,
-			message: "Lỗi hệ thống!",
+			message: error instanceof Error ? error.message : "Lỗi hệ thống!",
 		};
 	}
 };
@@ -138,7 +149,6 @@ const changePasswordServer = async ({
 	userId,
 }: ChangePassword & { userId: string }) => {
 	const session = await useAppSession();
-
 	try {
 		if (newPassword !== confirmPassword)
 			return {
@@ -182,10 +192,9 @@ const changePasswordServer = async ({
 
 		return { success: true, message: "Thay đổi mật khẩu thành công!" };
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
 		return {
 			success: false,
-			message: "Lỗi hệ thống!",
+			message: error instanceof Error ? error.message : "Lỗi hệ thống!",
 		};
 	}
 };
@@ -200,10 +209,9 @@ const signOutServer = async () => {
 			message: "Đăng xuất thành công!",
 		};
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
 		return {
 			success: false,
-			message: "Lỗi hệ thống!",
+			message: error instanceof Error ? error.message : "Lỗi hệ thống!",
 		};
 	}
 };

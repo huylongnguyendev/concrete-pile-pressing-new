@@ -12,12 +12,17 @@ export function NavItem({
 		<Link
 			to={item.href}
 			title={item.title}
-			className="flex justify-center items-center py-4 hover:text-primary transition-colors duration-300 relative group"
-			activeProps={{ className: "text-primary [&_div]:w-full" }}
+			// Dùng py-3 trên mobile để bấm dễ hơn, lg:py-0 để cân đối trong thanh nav ngang
+			className="group relative flex items-center py-3 text-sm font-medium transition-colors hover:text-primary lg:py-2"
+			activeProps={{
+				className: "text-primary font-semibold [&_.nav-indicator]:w-full",
+			}}
 			onClick={onCloseMenu}
 		>
-			{item.label}
-			<div className="absolute w-0 h-1 bg-primary bottom-0 group-hover:w-full transition-all duration-300" />
+			<span>{item.label}</span>
+
+			{/* Thanh gạch chân hiện đại (chỉ hiển thị đẹp trên desktop, trên mobile có thể tuỳ biến hoặc ẩn đi) */}
+			<span className="nav-indicator absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 ease-out group-hover:w-full max-lg:hidden" />
 		</Link>
 	);
 }

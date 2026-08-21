@@ -20,6 +20,7 @@ import { ContactInputForm } from "./ContactInputForm";
 import { AddressForm } from "./input-forms/AddressForm";
 import { EmailForm } from "./input-forms/EmailForm";
 import { PhoneForm } from "./input-forms/PhoneForm";
+import { DialogTrigger } from "#/components/ui/dialog";
 
 export function Contact({ company }: { company: Company }) {
 	const { id, addresses, emails, phoneNumber } = company;
@@ -29,6 +30,8 @@ export function Contact({ company }: { company: Company }) {
 		(s) => s,
 	);
 	const { mutate, isPending } = useUpdateContactMutation();
+
+	const [isConfirm] = useAppStore(store.confirmPassword, (s) => s.isConfirm);
 
 	const handleReset = () => {
 		setAll(
@@ -103,19 +106,29 @@ export function Contact({ company }: { company: Company }) {
 					<Button variant={"secondary"} onClick={handleReset}>
 						Hủy bỏ
 					</Button>
-					<Button disabled={!canSubmit} onClick={() => mutate(values)}>
-						{isPending ? (
-							<>
-								<Spinner />
-								<span>Đang xử lý...</span>
-							</>
-						) : (
-							<>
+
+					{isConfirm ? (
+						<Button disabled={!canSubmit} onClick={() => mutate(values)}>
+							{isPending ? (
+								<>
+									<Spinner />
+									<span>Đang xử lý...</span>
+								</>
+							) : (
+								<>
+									<SaveIcon />
+									<span>Lưu thông tin</span>
+								</>
+							)}
+						</Button>
+					) : (
+						<DialogTrigger asChild>
+							<Button disabled={!canSubmit}>
 								<SaveIcon />
 								<span>Lưu thông tin</span>
-							</>
-						)}
-					</Button>
+							</Button>
+						</DialogTrigger>
+					)}
 				</CardAction>
 			</CardFooter>
 		</Card>

@@ -1,9 +1,10 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	MoreHorizontalIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { customersQuery } from "#/db/query/customer.query";
 import { Button } from "../ui/button";
 import {
 	Pagination,
@@ -11,13 +12,24 @@ import {
 	PaginationItem,
 } from "../ui/pagination";
 
-export function AppPagination() {
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const totalPages = 50;
+export function AppPagination({
+	currentPage,
+	onSelectPage,
+}: {
+	currentPage: number;
+	onSelectPage: (page: number) => void;
+}) {
+	const { data } = useSuspenseQuery(customersQuery({ page: currentPage }));
+
+	if (!data || !data.success) return null;
+
+	const totalPages = data.totalPage;
+
+	if (totalPages <= 1) return null;
 
 	const getPageNumbers = () => {
 		const pages: (number | string)[] = [];
-		const delta = 1; // Số trang hiển thị xung quanh trang hiện tại
+		const delta = 1;
 
 		for (let i = 1; i <= totalPages; i++) {
 			if (
@@ -35,11 +47,17 @@ export function AppPagination() {
 		}
 		return pages;
 	};
+
 	return (
 		<Pagination>
 			<PaginationContent>
 				<PaginationItem>
-					<Button variant={"ghost"} size={"icon"}>
+					<Button
+						variant={"ghost"}
+						size={"icon"}
+						disabled={currentPage === 1}
+						onClick={() => onSelectPage(currentPage - 1)}
+					>
 						<ChevronLeftIcon />
 					</Button>
 				</PaginationItem>
@@ -65,7 +83,7 @@ export function AppPagination() {
 							<Button
 								variant={isSelected ? "default" : "ghost"}
 								size="icon"
-								onClick={() => setCurrentPage(pageNum)}
+								onClick={() => onSelectPage(pageNum)}
 								className={`h-9 w-9 text-sm font-semibold transition-all ${
 									isSelected
 										? "shadow-sm shadow-primary/20"
@@ -79,7 +97,12 @@ export function AppPagination() {
 				})}
 
 				<PaginationItem>
-					<Button variant={"ghost"} size={"icon"}>
+					<Button
+						variant={"ghost"}
+						size={"icon"}
+						disabled={currentPage === totalPages}
+						onClick={() => onSelectPage(currentPage + 1)}
+					>
 						<ChevronRightIcon />
 					</Button>
 				</PaginationItem>

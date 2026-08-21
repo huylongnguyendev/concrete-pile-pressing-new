@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { Contact } from "#/components/admin/website/contact/Contact";
 import { Display } from "#/components/admin/website/display/Display";
 import { ConfirmPassword } from "#/components/dialog/ConfirmPassword";
+import { Dialog } from "#/components/ui/dialog";
 import { getCompanyFn } from "#/db/services/company.service";
 import type { Company } from "#/types/company.type";
 
@@ -29,16 +30,18 @@ function RouteComponent() {
 	}, [companies]);
 
 	return (
-		<div className="py-4 space-y-8">
-			<h1 className="font-semibold text-xl capitalize text-primary text-center">
-				Thiết lập website
-			</h1>
+		<Dialog>
+			<div className="py-4 space-y-8">
+				<h1 className="font-semibold text-xl capitalize text-primary text-center">
+					Thiết lập website
+				</h1>
 
-			<div className="space-y-6">
-				<Contact company={company} />
-				<Display />
+				<div className="space-y-6">
+					<Contact company={company} />
+					<Display />
+				</div>
+				<ConfirmPassword />
 			</div>
-			<ConfirmPassword />
-		</div>
+		</Dialog>
 	);
 }

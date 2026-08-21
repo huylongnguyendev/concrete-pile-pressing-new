@@ -1,6 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
 import type { CustomerQuery } from "#/types/customer.type";
-import { getCustomersFn } from "../services/customer.service";
+import {
+	getCustomerByIdFn,
+	getCustomersFn,
+} from "../services/customer.service";
 
 const customersQuery = (data: CustomerQuery) =>
 	queryOptions({
@@ -8,4 +11,9 @@ const customersQuery = (data: CustomerQuery) =>
 		queryFn: () => getCustomersFn({ data }),
 	});
 
-export { customersQuery };
+const customerQueryById = (customerId: string) =>
+	queryOptions({
+		queryKey: ["customers", customerId],
+		queryFn: () => getCustomerByIdFn({ data: { customerId } }),
+	});
+export { customersQuery, customerQueryById };

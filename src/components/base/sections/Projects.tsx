@@ -1,28 +1,46 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowRightIcon, CheckCircle2Icon, MapPinIcon } from "lucide-react";
+import { CheckCircle2Icon, MapPinIcon, PhoneCallIcon } from "lucide-react";
 import { Button } from "#/components/ui/button";
 import { Animate } from "../animation/Animate";
 import { Section } from "./Section";
 
 export function Projects() {
+	// Danh sách dự án đã được chọn lọc và chuẩn hóa câu chữ sắc bén hơn
 	const projectList = [
 		{
-			title: "Thi Công Ép Cọc Biệt Thự Phố",
+			title: "Ép Cọc Tải Sắt Nhà Phố",
 			location: "Thành phố Biên Hòa, Đồng Nai",
-			specs: "Ép cọc tải sắt - Cọc 250x250mm",
-			image: "/images/du-an-bien-hoa.jpg",
+			specs: "Tải trọng 60 - 80 tấn • Cọc 250x250mm",
+			image: "/ep-coc-nha-dan-bien-hoa.jpg",
 		},
 		{
-			title: "Ép Cọc Nhà Dân 3 Tầng",
+			title: "Ép Cọc Neo Nhà Hẻm Nhỏ",
 			location: "Huyện Long Thành, Đồng Nai",
-			specs: "Ép cọc neo - Phù hợp hẻm nhỏ",
-			image: "/images/du-an-long-thanh.jpg",
+			specs: "Thiết bị chuyên dụng • Phù hợp hẻm hẹp < 2m",
+			image: "/ep-coc-nha-dan-long-thanh.jpg",
 		},
 		{
-			title: "Công Trình Nhà Xưởng Công Nghiệp",
+			title: "Ép Móng Nhà Xưởng Công Nghiệp",
+			location: "KCN Biên Hòa, Đồng Nai",
+			specs: "Ép tải trọng lớn • Tiến độ nhanh chóng",
+			image: "/ep-coc-nha-xuong-vung-tau.jpg",
+		},
+		{
+			title: "Ép Cọc Biệt Thự & Nhà 3 Tầng",
+			location: "Thành phố Hồ Chí Minh",
+			specs: "Đảm bảo kỹ thuật • Không lún nứt",
+			image: "/ep-coc-nha-xuong-dong-nai.jpg",
+		},
+		{
+			title: "Ép Cọc Neo Nhà Dân Cấp 4 / Lầu",
+			location: "Tỉnh Bình Dương",
+			specs: "Thi công nhanh gọn • Chi phí tối ưu",
+			image: "/ep-coc-hem-nho-can-tho.jpg",
+		},
+		{
+			title: "Ép Tải Công Trình Dân Dụng",
 			location: "Thành phố Vũng Tàu, BR-VT",
-			specs: "Ép tải trọng lớn - Tải 80 tấn",
-			image: "/images/du-an-vung-tau.jpg",
+			specs: "Khảo sát & ép thử tải chuẩn xác",
+			image: "/ep-coc-nha-dan-hcm.jpg",
 		},
 	];
 
@@ -56,11 +74,11 @@ export function Projects() {
 						animate={{ opacity: 1, transform: "translateY(0)" }}
 						transition={{ delay: 0.4 }}
 					>
-						<Button asChild variant="outline" className="w-full md:w-auto">
-							<Link to="/du-an">
-								<span>Xem Thêm Dự Án Khác</span>
-								<ArrowRightIcon className="w-4 h-4 ml-2" />
-							</Link>
+						<Button asChild className="w-full md:w-auto">
+							<a href="tel:09xxxxxxx">
+								<PhoneCallIcon className="w-4 h-4 mr-2" />
+								<span>Nhận Tư Vấn Miễn Phí</span>
+							</a>
 						</Button>
 					</Animate>
 				</div>
@@ -73,7 +91,7 @@ export function Projects() {
 							initial={{ opacity: 0, transform: "translateY(20px)" }}
 							animate={{ opacity: 1, transform: "translateY(0px)" }}
 							transition={{ delay: 0.2 * index }}
-							className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 flex flex-col"
+							className="group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-100 dark:border-zinc-800 transition-all duration-300 flex flex-col"
 						>
 							<div className="aspect-video w-full overflow-hidden relative">
 								<img
@@ -81,6 +99,8 @@ export function Projects() {
 									alt={project.title}
 									className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
 									loading="lazy"
+									width="400"
+									height="225"
 								/>
 								<div className="absolute top-3 right-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md flex items-center gap-1">
 									<CheckCircle2Icon className="w-3.5 h-3.5" />
@@ -101,7 +121,7 @@ export function Projects() {
 								</div>
 
 								<div className="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between">
-									<span className="text-xs sm:text-sm font-medium text-gray-600">
+									<span className="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400">
 										{project.specs}
 									</span>
 								</div>

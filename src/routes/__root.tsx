@@ -12,8 +12,6 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
 import { Footer } from "#/components/base/footer/Footer";
 import { Header } from "#/components/base/header/Header";
-import { PageLoading } from "#/components/pending/client/PageLoading";
-import { companyQuery } from "#/db/query/company.query";
 import { AppProvider } from "#/providers/AppProvider";
 import appCss from "../styles.css?url";
 
@@ -42,9 +40,7 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 		],
 	}),
-	loader: ({ context }) => context.queryClient.prefetchQuery(companyQuery),
 	shellComponent: RootDocument,
-	pendingComponent: () => <PageLoading />,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {

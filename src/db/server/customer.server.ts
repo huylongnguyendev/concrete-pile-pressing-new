@@ -1,4 +1,5 @@
 import { prisma } from "#/db";
+import type { Role } from "#/generated/prisma/enums";
 import type { CreateCustomer } from "#/schema/customer.schema";
 import type { CustomerQuery } from "#/types/customer.type";
 
@@ -53,6 +54,39 @@ const getCustomersServer = async ({
 	}
 };
 
+const getCustomerByIdServer = async ({
+	customerId,
+	userId,
+}: {
+	userId: string;
+	customerId: string;
+}) => {
+	try {
+		const customer = await prisma.customer.findUnique({
+			where: { id: customerId, userId },
+		});
+
+		if (!customer)
+			return {
+				success: false,
+				message: "Khách hàng không tồn tại!",
+				customer,
+			};
+
+		return {
+			success: true,
+			message: "Tìm kiếm khách hàng thành công!",
+			customer,
+		};
+	} catch (error) {
+		return {
+			success: false,
+			message: error instanceof Error ? error.message : "Lỗi hệ thống",
+			customer: null,
+		};
+	}
+};
+
 const createCustomerServer = async ({
 	userId,
 	fullName,
@@ -88,4 +122,39 @@ const createCustomerServer = async ({
 	}
 };
 
-export { getCustomersServer, createCustomerServer };
+const deleteCustomersServer = async ({
+	ids,
+	role,
+}: {
+	ids: string[];
+	role: Role;
+}) => {
+	try {
+		if (role !== "ADMIN")
+			return {
+				success: false,
+				message: "Không thể xóa khách hàng!",
+			};
+
+		if (ids.length === 1)
+			await prisma.customer.delete({ where: { id: ids[0] } });
+		else await prisma.customer.deleteMany({ where: { id: { in: ids } } });
+
+		return {
+			success: true,
+			message: "Xóa khách hàng thành công!",
+		};
+	} catch (error) {
+		return {
+			success: false,
+			message: error instanceof Error ? error.message : "Lỗi hệ thống",
+		};
+	}
+};
+
+export {
+	getCustomersServer,
+	createCustomerServer,
+	getCustomerByIdServer,
+	deleteCustomersServer,
+};

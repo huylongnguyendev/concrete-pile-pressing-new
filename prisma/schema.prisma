@@ -118,20 +118,6 @@ enum ServiceStatus {
   IDLE
 }
 
-// model Project {
-//   id        String   @id @default(uuid())
-//   title     String
-//   location  String
-//   category  String
-//   specs     String
-//   scale     String
-//   image     String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   @@index([category])
-// }
-
 //badung83
 //0967386080
 //Badung_1983

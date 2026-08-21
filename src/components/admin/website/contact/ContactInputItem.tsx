@@ -2,7 +2,6 @@ import { useAppStore } from "@lavaz/store";
 import { KeyRoundIcon, MinusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "#/components/ui/button";
-import { DialogTrigger } from "#/components/ui/dialog";
 import { Input } from "#/components/ui/input";
 import {
 	Tooltip,
@@ -34,22 +33,12 @@ export function ContactInputItem({
 		store.companyInput,
 		(s) => s[type],
 	);
-	const [isConfirm, { setIsConfirm }] = useAppStore(
-		store.confirmPassword,
-		(s) => s.isConfirm,
-	);
 	const [currentValue, setCurrentValue] = useState<string>("");
 	const { debounced } = useDebounce(currentValue);
 
 	useEffect(() => {
 		setValue({ id, type, value: debounced });
 	}, [id, type, debounced, setValue]);
-
-	useEffect(() => {
-		if (!isConfirm) return;
-		setPriority({ id, type });
-		setIsConfirm(false);
-	}, [isConfirm, setPriority, id, type, setIsConfirm]);
 
 	useEffect(() => {
 		setCurrentValue(value);
@@ -64,16 +53,15 @@ export function ContactInputItem({
 			/>
 			<Tooltip>
 				<TooltipTrigger asChild>
-					<DialogTrigger asChild>
-						<Button
-							type="button"
-							variant={"outline"}
-							size={"icon"}
-							disabled={(index === 0 && isManyData) || priority || !value}
-						>
-							<KeyRoundIcon />
-						</Button>
-					</DialogTrigger>
+					<Button
+						type="button"
+						variant={"outline"}
+						size={"icon"}
+						disabled={(index === 0 && isManyData) || priority || !value}
+						onClick={() => setPriority({ id, type })}
+					>
+						<KeyRoundIcon />
+					</Button>
 				</TooltipTrigger>
 				<TooltipContent>Đặt làm liên hệ chính</TooltipContent>
 			</Tooltip>

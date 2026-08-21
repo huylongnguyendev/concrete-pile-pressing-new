@@ -45,7 +45,7 @@ export function About() {
 				>
 					<div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-100 aspect-video lg:aspect-4/3 w-full">
 						<img
-							src="/images/ve-chung-toi-ep-coc-be-tong.jpg"
+							src="/about-us-img.jpg"
 							alt="Giới thiệu đơn vị ép cọc bê tông uy tín tại Đồng Nai và Bà Rịa Vũng Tàu"
 							className="w-full h-full object-cover"
 							loading="lazy"

@@ -10,10 +10,18 @@ import {
 } from "#/components/ui/dropdown-menu";
 import type { Customer } from "#/types/customer.type";
 
-export function CustomerItem({ item }: { item: Customer }) {
+export function CustomerItem({
+	item,
+	onSelect,
+	isSelect,
+}: {
+	item: Customer;
+	onSelect: (id: string) => void;
+	isSelect: boolean;
+}) {
 	return (
 		<div className="flex justify-between items-center">
-			<Checkbox />
+			<Checkbox checked={isSelect} onClick={() => onSelect(item.id)} />
 			<Link
 				to="/admin/customers/$customerId"
 				params={{ customerId: item.id }}

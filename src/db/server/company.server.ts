@@ -1,5 +1,6 @@
 import { prisma } from "#/db";
 import type { Role } from "#/generated/prisma/enums";
+import { useAppSession } from "#/lib/utils/session";
 import type { Company } from "#/types/company.type";
 
 const getCompanyServer = async () => {
@@ -26,8 +27,20 @@ const getCompanyServer = async () => {
 	}
 };
 
-const updateCompanyServer = async (data: Company, role: Role) => {
+const updateCompanyServer = async (
+	data: Company,
+	role: Role,
+) => {
+	const session = await useAppSession();
+	const isConfirm = session.data?.isConfirm;
 	try {
+		if (!isConfirm) {
+			return {
+				success: false,
+				message: "Chưa xác nhận mật khẩu!",
+			};
+		}
+
 		const { addresses, emails, phoneNumber, id: companyId } = data;
 		if (
 			addresses.length === 0 &&
@@ -115,13 +128,18 @@ const updateCompanyServer = async (data: Company, role: Role) => {
 			});
 		}
 
+		const sessionData = session.data;
+		await session.update({ ...sessionData, isConfirm: false });
+
 		return {
 			success: true,
 			message: "Cập nhật thông tin thành công!",
 		};
 	} catch (error) {
-		if (error instanceof Error) throw new Error(error.message);
-		return { success: false, message: "Lỗi hệ thống!" };
+		return {
+			success: false,
+			message: error instanceof Error ? error.message : "Lỗi hệ thống",
+		};
 	}
 };
 

@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as BangGiaRouteImport } from './routes/bang-gia'
-import { Route as DuAnRouteImport } from './routes/du-an'
 import { Route as LienHeRouteImport } from './routes/lien-he'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
@@ -44,11 +43,6 @@ const AdminRouteRoute = AdminRouteRouteImport.update({
 const BangGiaRoute = BangGiaRouteImport.update({
   id: '/bang-gia',
   path: '/bang-gia',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DuAnRoute = DuAnRouteImport.update({
-  id: '/du-an',
-  path: '/du-an',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LienHeRoute = LienHeRouteImport.update({
@@ -145,7 +139,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
-  '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/company': typeof AdminCompanyRoute
@@ -167,7 +160,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bang-gia': typeof BangGiaRoute
-  '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/company': typeof AdminCompanyRoute
@@ -191,7 +183,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
-  '/du-an': typeof DuAnRoute
   '/lien-he': typeof LienHeRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/company': typeof AdminCompanyRoute
@@ -216,7 +207,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/bang-gia'
-    | '/du-an'
     | '/lien-he'
     | '/admin/analytics'
     | '/admin/company'
@@ -238,7 +228,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/bang-gia'
-    | '/du-an'
     | '/lien-he'
     | '/admin/analytics'
     | '/admin/company'
@@ -261,7 +250,6 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/bang-gia'
-    | '/du-an'
     | '/lien-he'
     | '/admin/analytics'
     | '/admin/company'
@@ -285,7 +273,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   BangGiaRoute: typeof BangGiaRoute
-  DuAnRoute: typeof DuAnRoute
   LienHeRoute: typeof LienHeRoute
 }
 
@@ -310,13 +297,6 @@ declare module '@tanstack/react-router' {
       path: '/bang-gia'
       fullPath: '/bang-gia'
       preLoaderRoute: typeof BangGiaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/du-an': {
-      id: '/du-an'
-      path: '/du-an'
-      fullPath: '/du-an'
-      preLoaderRoute: typeof DuAnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lien-he': {
@@ -487,7 +467,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
   BangGiaRoute: BangGiaRoute,
-  DuAnRoute: DuAnRoute,
   LienHeRoute: LienHeRoute,
 }
 export const routeTree = rootRouteImport

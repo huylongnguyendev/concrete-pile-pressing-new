@@ -1,8 +1,13 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
-import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
+import {
+	createFileRoute,
+	Outlet,
+	redirect,
+	useMatches,
+	useNavigate,
+} from "@tanstack/react-router";
 import { useEffect } from "react";
 import { AppSidebar } from "#/components/base/sidebar/AppSidebar";
-import { Dialog } from "#/components/ui/dialog";
 import { SidebarProvider, SidebarTrigger } from "#/components/ui/sidebar";
 import { companyQuery } from "#/db/query/company.query";
 import { userQuery } from "#/db/query/user.query";
@@ -10,16 +15,21 @@ import { collections } from "#/lib/screen";
 
 export const Route = createFileRoute("/admin")({
 	staticData: { isShowNav: false },
-	ssr: "data-only",
-	loader: async ({ context }) =>
-		await Promise.allSettled([
-			context.queryClient.ensureQueryData(companyQuery),
-			context.queryClient.ensureQueryData(userQuery),
-		]),
+	loader: async ({ context }) => {
+		try {
+			await Promise.all([
+				context.queryClient.ensureQueryData(companyQuery),
+				context.queryClient.ensureQueryData(userQuery),
+			]);
+		} catch (error) {
+			throw redirect({ to: "/admin/sign-in" });
+		}
+	},
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const navigate = useNavigate();
 	const { data } = useLiveQuery((q) =>
 		q.from({ pref: collections }).where(({ pref }) => eq(pref.id, "ui")),
 	);
@@ -47,18 +57,16 @@ function RouteComponent() {
 	}, [currentTheme, currentFontSize]);
 
 	return (
-		<Dialog>
-			<SidebarProvider>
-				{isShowSidebar && <AppSidebar />}
-				<div className="px-4 w-full">
-					<div className="flex items-center justify-between border-b pb-2 sticky top-0 z-9999 bg-background">
-						{isShowSidebar && (
-							<SidebarTrigger variant={"outline"} className="mt-2" />
-						)}
-					</div>
-					<Outlet />
+		<SidebarProvider>
+			{isShowSidebar && <AppSidebar />}
+			<div className="px-4 w-full">
+				<div className="flex items-center justify-between border-b pb-2 sticky top-0 z-9999 bg-background">
+					{isShowSidebar && (
+						<SidebarTrigger variant={"outline"} className="mt-2" />
+					)}
 				</div>
-			</SidebarProvider>
-		</Dialog>
+				<Outlet />
+			</div>
+		</SidebarProvider>
 	);
 }
