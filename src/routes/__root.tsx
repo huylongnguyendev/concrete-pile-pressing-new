@@ -41,7 +41,7 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 		],
 	}),
-	loader: ({ context }) => context.queryClient.prefetchQuery(companyQuery),
+	loader: async ({ context }) => await context.queryClient.prefetchQuery(companyQuery),
 	shellComponent: RootDocument,
 });
 
