@@ -20,7 +20,7 @@ export const Route = createFileRoute("/admin")({
 				context.queryClient.ensureQueryData(companyQuery),
 				context.queryClient.ensureQueryData(userQuery),
 			]);
-		} catch (error) {
+		} catch (_error) {
 			throw redirect({ to: "/admin/sign-in" });
 		}
 	},
