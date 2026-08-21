@@ -1,14 +1,26 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { About } from "#/components/base/sections/About";
+import { ContactCTA } from "#/components/base/sections/ContactCTA";
+import { Hero } from "#/components/base/sections/Hero";
+import { Projects } from "#/components/base/sections/Projects";
+import { Testimonials } from "#/components/base/sections/Testimonials";
+import { Workflow } from "#/components/base/sections/Workflow";
+import { companyQuery } from "#/db/query/company.query";
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute("/")({
+	component: Home,
+	loader: ({ context }) => context.queryClient.prefetchQuery(companyQuery),
+});
 
 function Home() {
-  return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
-    </div>
-  )
+	return (
+		<div>
+			<Hero />
+			<About />
+			<Workflow />
+			<Projects />
+			<Testimonials />
+			<ContactCTA />
+		</div>
+	);
 }
