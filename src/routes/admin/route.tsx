@@ -4,7 +4,6 @@ import {
 	Outlet,
 	redirect,
 	useMatches,
-	useNavigate,
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { AppSidebar } from "#/components/base/sidebar/AppSidebar";
@@ -29,7 +28,6 @@ export const Route = createFileRoute("/admin")({
 });
 
 function RouteComponent() {
-	const navigate = useNavigate();
 	const { data } = useLiveQuery((q) =>
 		q.from({ pref: collections }).where(({ pref }) => eq(pref.id, "ui")),
 	);
