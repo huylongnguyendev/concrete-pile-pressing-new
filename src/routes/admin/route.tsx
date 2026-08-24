@@ -14,7 +14,12 @@ import { collections } from "#/lib/screen";
 
 export const Route = createFileRoute("/admin")({
 	staticData: { isShowNav: false },
-	loader: async ({ context }) => {
+	loader: async ({ context, location }) => {
+		// Nếu đang ở trang sign-in thì bỏ qua kiểm tra, tránh vòng lặp vô tận!
+		if (location.pathname.includes("/admin/sign-in")) {
+			return;
+		}
+
 		try {
 			await Promise.all([
 				context.queryClient.ensureQueryData(companyQuery),
