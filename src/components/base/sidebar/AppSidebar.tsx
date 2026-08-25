@@ -1,5 +1,18 @@
 import { Link } from "@tanstack/react-router";
-import { GlobeIcon, LayoutDashboardIcon, SettingsIcon } from "lucide-react";
+import {
+	ChevronRightIcon,
+	LayoutDashboardIcon,
+	LogOutIcon,
+	SettingsIcon,
+	UserIcon,
+} from "lucide-react";
+import { Button } from "#/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "#/components/ui/dropdown-menu";
 import {
 	Sidebar,
 	SidebarContent,
@@ -14,9 +27,9 @@ import {
 	useSidebar,
 } from "#/components/ui/sidebar";
 import { sidebarList } from "#/data/sidebar.data";
-import { UserSidebar } from "./UserSidebar";
+import { cn } from "#/lib/utils";
 
-export function AppSidebar() {
+export function AppSidebar({ userId }: { userId: string }) {
 	const { open } = useSidebar();
 
 	const overviewItem = sidebarList.find(
@@ -79,20 +92,6 @@ export function AppSidebar() {
 						</SidebarMenu>
 					</SidebarGroupContent>
 				</SidebarGroup>
-
-				<SidebarGroup>
-					{open && <SidebarGroupLabel>Thiết lập website</SidebarGroupLabel>}
-					<SidebarMenu>
-						<SidebarMenuItem>
-							<SidebarMenuButton asChild tooltip={"Thiết lập website"}>
-								<Link to="/admin/company">
-									<GlobeIcon />
-									<span>Thiết lập website</span>
-								</Link>
-							</SidebarMenuButton>
-						</SidebarMenuItem>
-					</SidebarMenu>
-				</SidebarGroup>
 			</SidebarContent>
 
 			<SidebarFooter className="p-2">
@@ -105,8 +104,43 @@ export function AppSidebar() {
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
-
-					<UserSidebar open={open} />
+					<SidebarMenuItem>
+						<DropdownMenu>
+							<SidebarMenuButton asChild tooltip={"Tài khoản"}>
+								<DropdownMenuTrigger asChild>
+									<Button
+										variant={"outline"}
+										size={open ? "default" : "icon"}
+										className={cn("w-full", open && "justify-between h-10")}
+									>
+										{open ? (
+											<>
+												<div className="inline-flex justify-center items-center gap-1">
+													<UserIcon />
+													<span>Tài khoản</span>
+												</div>
+												<ChevronRightIcon />
+											</>
+										) : (
+											<UserIcon />
+										)}
+									</Button>
+								</DropdownMenuTrigger>
+							</SidebarMenuButton>
+							<DropdownMenuContent>
+								<DropdownMenuItem asChild>
+									<Link to="/admin/$userId" params={{ userId }}>
+										<SettingsIcon />
+										<span>Thiết lập tài khoản</span>
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem variant="destructive">
+									<LogOutIcon />
+									<span>Đăng xuất</span>
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+					</SidebarMenuItem>
 				</SidebarMenu>
 			</SidebarFooter>
 		</Sidebar>

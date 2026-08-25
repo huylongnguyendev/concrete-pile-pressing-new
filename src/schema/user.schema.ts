@@ -22,6 +22,6 @@ const UserSchema = z.object({
 		.or(z.literal("")),
 });
 
-type UserChange = z.infer<typeof UserSchema>;
+type UserUpdate = z.infer<typeof UserSchema>;
 
-export { UserSchema, type UserChange };
+export { UserSchema, type UserUpdate };

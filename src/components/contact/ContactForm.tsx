@@ -2,8 +2,6 @@ import { useForm } from "@tanstack/react-form";
 import { AsteriskIcon, SendIcon } from "lucide-react";
 import { toast } from "sonner";
 import { locationSelect, methodSelect } from "#/data/contact.data";
-import { sendMessageFn } from "#/db/services/message.service";
-import { MessageSchema, type SendMessage } from "#/schema/message.schema";
 import type { CustomerMessage } from "#/types/message.type";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldLabel } from "../ui/field";

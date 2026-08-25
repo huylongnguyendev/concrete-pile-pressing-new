@@ -18,42 +18,7 @@ export { Prisma }
 export * as $Enums from './enums.ts'
 export * from './enums.ts';
 /**
- * Model Company
- * 
- */
-export type Company = Prisma.CompanyModel
-/**
- * Model PhoneNumber
- * 
- */
-export type PhoneNumber = Prisma.PhoneNumberModel
-/**
- * Model Email
- * 
- */
-export type Email = Prisma.EmailModel
-/**
- * Model Address
- * 
- */
-export type Address = Prisma.AddressModel
-/**
  * Model User
  * 
  */
 export type User = Prisma.UserModel
-/**
- * Model Message
- * 
- */
-export type Message = Prisma.MessageModel
-/**
- * Model Customer
- * 
- */
-export type Customer = Prisma.CustomerModel
-/**
- * Model ServiceSession
- * 
- */
-export type ServiceSession = Prisma.ServiceSessionModel

@@ -8,12 +8,5 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Company.ts'
-export type * from './models/PhoneNumber.ts'
-export type * from './models/Email.ts'
-export type * from './models/Address.ts'
 export type * from './models/User.ts'
-export type * from './models/Message.ts'
-export type * from './models/Customer.ts'
-export type * from './models/ServiceSession.ts'
 export type * from './commonInputTypes.ts'

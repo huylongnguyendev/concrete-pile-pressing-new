@@ -51,14 +51,7 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Company: 'Company',
-  PhoneNumber: 'PhoneNumber',
-  Email: 'Email',
-  Address: 'Address',
-  User: 'User',
-  Message: 'Message',
-  Customer: 'Customer',
-  ServiceSession: 'ServiceSession'
+  User: 'User'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -77,104 +70,19 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const CompanyScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
-
-
-export const PhoneNumberScalarFieldEnum = {
-  id: 'id',
-  number: 'number',
-  priority: 'priority',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  companyId: 'companyId'
-} as const
-
-export type PhoneNumberScalarFieldEnum = (typeof PhoneNumberScalarFieldEnum)[keyof typeof PhoneNumberScalarFieldEnum]
-
-
-export const EmailScalarFieldEnum = {
-  id: 'id',
-  mail: 'mail',
-  priority: 'priority',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  companyId: 'companyId'
-} as const
-
-export type EmailScalarFieldEnum = (typeof EmailScalarFieldEnum)[keyof typeof EmailScalarFieldEnum]
-
-
-export const AddressScalarFieldEnum = {
-  id: 'id',
-  address: 'address',
-  priority: 'priority',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  companyId: 'companyId'
-} as const
-
-export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
-
-
 export const UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
   phoneNumber: 'phoneNumber',
-  fullName: 'fullName',
   email: 'email',
-  hash: 'hash',
+  fullName: 'fullName',
+  hashed: 'hashed',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const MessageScalarFieldEnum = {
-  id: 'id',
-  from: 'from',
-  phoneNumber: 'phoneNumber',
-  location: 'location',
-  content: 'content',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
-
-
-export const CustomerScalarFieldEnum = {
-  id: 'id',
-  fullName: 'fullName',
-  phoneNumber: 'phoneNumber',
-  location: 'location',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-} as const
-
-export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
-
-
-export const ServiceSessionScalarFieldEnum = {
-  id: 'id',
-  service: 'service',
-  price: 'price',
-  paid: 'paid',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  customerId: 'customerId'
-} as const
-
-export type ServiceSessionScalarFieldEnum = (typeof ServiceSessionScalarFieldEnum)[keyof typeof ServiceSessionScalarFieldEnum]
 
 
 export const SortOrder = {
