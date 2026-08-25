@@ -6,18 +6,25 @@ import {
 	redirect,
 } from "@tanstack/react-router";
 import { AppSidebar } from "#/components/base/sidebar/AppSidebar";
+import { UISync } from "#/components/base/UISync";
 import { Dialog } from "#/components/ui/dialog";
 import { SidebarProvider, SidebarTrigger } from "#/components/ui/sidebar";
 import { getUserByIdFn } from "#/db/user.service";
 import { ThemeProvider } from "#/providers/ThemeProvider";
-import { UISync } from "#/components/base/UISync";
-import { LogOutDialog } from "#/components/dialog/LogOutDialog";
 
 export const Route = createFileRoute("/admin")({
 	staticData: {
 		isShowNav: false,
 	},
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				name: "robots",
+				content: "noindex, nofollow",
+			},
+		],
+	}),
 	beforeLoad: async ({ location }) => {
 		try {
 			const res = await getUserByIdFn();
