@@ -14,6 +14,8 @@ import { Footer } from "#/components/base/footer/Footer";
 import { Header } from "#/components/base/header/Header";
 import { AppProvider } from "#/providers/AppProvider";
 import appCss from "../styles.css?url";
+import { ZaloContact } from "#/components/base/ZaloContact";
+import { MessengerContact } from "#/components/base/MessengerContact";
 
 interface RootRouteContext {
 	queryClient: QueryClient;
@@ -169,6 +171,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<AppProvider>
 					{isShowNav && <Header />}
 					{children}
+					{isShowNav && (
+						<div className="fixed bottom-10 right-[4%] z-1000 flex flex-col gap-8">
+							<MessengerContact />
+							<ZaloContact />
+						</div>
+					)}
 					{isShowNav && <Footer />}
 					<Toaster closeButton richColors />
 				</AppProvider>

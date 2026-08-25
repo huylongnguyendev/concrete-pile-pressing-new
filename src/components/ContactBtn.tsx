@@ -13,7 +13,7 @@ export function ContactBtn() {
 		>
 			<a href={`tel:${phoneNumber}`}>
 				<PhoneCallIcon className="w-5 h-5 mr-2" />
-				<span>Gọi Tư Vấn Ngay: {phoneNumber.replace("+84", "0")}</span>
+				<span className="max-sm:text-xs">Gọi Tư Vấn Ngay: {phoneNumber.replace("+84", "0")}</span>
 			</a>
 		</Button>
 	);
