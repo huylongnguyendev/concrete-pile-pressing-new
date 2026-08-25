@@ -14,7 +14,6 @@ import { Footer } from "#/components/base/footer/Footer";
 import { Header } from "#/components/base/header/Header";
 import { AppProvider } from "#/providers/AppProvider";
 import appCss from "../styles.css?url";
-import { companyQuery } from "#/db/query/company.query";
 
 interface RootRouteContext {
 	queryClient: QueryClient;
@@ -154,7 +153,6 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 		],
 	}),
-	loader: async ({ context }) => await context.queryClient.prefetchQuery(companyQuery),
 	shellComponent: RootDocument,
 });
 
