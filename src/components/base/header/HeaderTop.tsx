@@ -5,7 +5,7 @@ export function HeaderTop() {
 	const { address, email, phoneNumber } = contact;
 	return (
 		<div className="bg-primary text-primary-foreground border-b border-primary-foreground/10 transition-all">
-			<div className="box flex flex-wrap items-center justify-between gap-4 py-2 text-xs font-medium">
+			<div className="box flex max-sm:hidden max-sm:justify-center items-center justify-between gap-4 py-2 text-xs font-medium">
 				<div className="flex flex-wrap items-center gap-6">
 					{phoneNumber && (
 						<a
