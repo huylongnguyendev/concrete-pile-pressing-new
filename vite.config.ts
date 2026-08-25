@@ -20,14 +20,14 @@ const config = defineConfig({
 			registerType: "autoUpdate",
 			includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
 			manifest: {
-				id: "/",
+				id: "/admin",
 				name: "Concrete Pressing Admin",
 				short_name: "AdminApp",
 				description: "Hệ thống quản lý ép cọc bê tông",
 				theme_color: "#ffffff",
 				background_color: "#ffffff",
 				display: "standalone",
-				start_url: "/",
+				start_url: "/admin",
 				icons: [
 					{
 						src: "/pwa-192x192.png",
