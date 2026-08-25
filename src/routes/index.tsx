@@ -8,6 +8,31 @@ import { Workflow } from "#/components/base/sections/Workflow";
 
 export const Route = createFileRoute("/")({
 	component: Home,
+	head: () => ({
+		meta: [
+			{
+				title: "Ép Cọc Bê Tông Hùng Dũng | Đơn Vị Thi Công Uy Tín Miền Nam",
+			},
+			{
+				name: "description",
+				content:
+					"Ép cọc bê tông uy tín tại Đồng Nai & miền Nam. Chuyên ép cọc tải, neo trọn gói, khảo sát miễn phí.",
+			},
+			{
+				property: "og:title",
+				content: "Ép Cọc Bê Tông Hùng Dũng | Đơn Vị Thi Công Uy Tín Miền Nam",
+			},
+			{
+				property: "og:description",
+				content:
+					"Ép cọc bê tông uy tín tại Đồng Nai & miền Nam. Chuyên ép cọc tải, neo trọn gói, khảo sát miễn phí.",
+			},
+			{
+				property: "og:url",
+				content: "http://localhost:3001/",
+			},
+		],
+	}),
 });
 
 function Home() {
