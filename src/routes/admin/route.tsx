@@ -1,12 +1,17 @@
 import {
+	ClientOnly,
 	createFileRoute,
 	isRedirect,
 	Outlet,
 	redirect,
 } from "@tanstack/react-router";
 import { AppSidebar } from "#/components/base/sidebar/AppSidebar";
+import { Dialog } from "#/components/ui/dialog";
 import { SidebarProvider, SidebarTrigger } from "#/components/ui/sidebar";
 import { getUserByIdFn } from "#/db/user.service";
+import { ThemeProvider } from "#/providers/ThemeProvider";
+import { UISync } from "#/components/base/UISync";
+import { LogOutDialog } from "#/components/dialog/LogOutDialog";
 
 export const Route = createFileRoute("/admin")({
 	staticData: {
@@ -37,12 +42,19 @@ export const Route = createFileRoute("/admin")({
 function RouteComponent() {
 	const { user } = Route.useRouteContext();
 	return (
-		<SidebarProvider>
-			<AppSidebar userId={user.id} />
-			<div className="px-4 w-full">
-				<SidebarTrigger />
-				<Outlet />
-			</div>
-		</SidebarProvider>
+		<ThemeProvider>
+			<ClientOnly fallback={null}>
+				<UISync />
+			</ClientOnly>
+			<Dialog>
+				<SidebarProvider>
+					<AppSidebar userId={user.id} />
+					<div className="px-4 w-full">
+						<SidebarTrigger />
+						<Outlet />
+					</div>
+				</SidebarProvider>
+			</Dialog>
+		</ThemeProvider>
 	);
 }

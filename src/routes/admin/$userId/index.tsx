@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AccInfo } from "#/components/admin/account/AccInfo";
 import { AccAuth } from "#/components/admin/account/AccAuth";
+import { AccInfo } from "#/components/admin/account/AccInfo";
 import { Dialog } from "#/components/ui/dialog";
 
 export const Route = createFileRoute("/admin/$userId/")({

@@ -20,6 +20,25 @@ import contact from "@/data/json/contact.json" with { type: "json" };
 
 export const Route = createFileRoute("/lien-he")({
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{ title: "Liên Hệ Tư Vấn Dịch Vụ Ép Cọc Bê Tông Miền Nam" },
+			{
+				name: "description",
+				content:
+					"Liên hệ đơn vị ép cọc bê tông uy tín tại Đồng Nai & Bà Rịa - Vũng Tàu...",
+			},
+			{
+				property: "og:title",
+				content: "Liên Hệ Tư Vấn Dịch Vụ Ép Cọc Bê Tông Miền Nam",
+			},
+			{
+				property: "og:description",
+				content:
+					"Khảo sát mặt bằng miễn phí, tư vấn giải pháp ép cọc tối ưu...",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {

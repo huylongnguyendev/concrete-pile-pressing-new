@@ -13,7 +13,7 @@ export function NavItem({
 			to={item.href}
 			title={item.title}
 			// Dùng py-3 trên mobile để bấm dễ hơn, lg:py-0 để cân đối trong thanh nav ngang
-			className="group relative flex items-center py-3 text-sm font-medium transition-colors hover:text-primary lg:py-2"
+			className="group relative flex items-center py-3 font-medium transition-colors hover:text-primary lg:py-2"
 			activeProps={{
 				className: "text-primary font-semibold [&_.nav-indicator]:w-full",
 			}}

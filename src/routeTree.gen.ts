@@ -16,7 +16,7 @@ import { Route as LienHeRouteImport } from './routes/lien-he'
 import { Route as AuthResetRouteImport } from './routes/_auth/reset'
 import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
 import { Route as AuthSignUpRouteImport } from './routes/_auth/sign-up'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminUserIdIndexRouteImport } from './routes/admin/$userId/index'
 
 const IndexRoute = IndexRouteImport.update({
@@ -54,9 +54,9 @@ const AuthSignUpRoute = AuthSignUpRouteImport.update({
   path: '/sign-up',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminUserIdIndexRoute = AdminUserIdIndexRouteImport.update({
@@ -73,17 +73,18 @@ export interface FileRoutesByFullPath {
   '/reset': typeof AuthResetRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/admin/': typeof AdminIndexRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/$userId/': typeof AdminUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
   '/lien-he': typeof LienHeRoute
   '/reset': typeof AuthResetRoute
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
-  '/admin': typeof AdminIndexRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/$userId': typeof AdminUserIdIndexRoute
 }
 export interface FileRoutesById {
@@ -95,7 +96,7 @@ export interface FileRoutesById {
   '/_auth/reset': typeof AuthResetRoute
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
-  '/admin/': typeof AdminIndexRoute
+  '/admin/settings': typeof AdminSettingsRoute
   '/admin/$userId/': typeof AdminUserIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -108,17 +109,18 @@ export interface FileRouteTypes {
     | '/reset'
     | '/sign-in'
     | '/sign-up'
-    | '/admin/'
+    | '/admin/settings'
     | '/admin/$userId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/bang-gia'
     | '/lien-he'
     | '/reset'
     | '/sign-in'
     | '/sign-up'
-    | '/admin'
+    | '/admin/settings'
     | '/admin/$userId'
   id:
     | '__root__'
@@ -129,7 +131,7 @@ export interface FileRouteTypes {
     | '/_auth/reset'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
-    | '/admin/'
+    | '/admin/settings'
     | '/admin/$userId/'
   fileRoutesById: FileRoutesById
 }
@@ -194,11 +196,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignUpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/$userId/': {
@@ -212,12 +214,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteRouteChildren {
-  AdminIndexRoute: typeof AdminIndexRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUserIdIndexRoute: typeof AdminUserIdIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminIndexRoute: AdminIndexRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
   AdminUserIdIndexRoute: AdminUserIdIndexRoute,
 }
 

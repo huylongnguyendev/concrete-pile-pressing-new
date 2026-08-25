@@ -2,17 +2,10 @@ import { Link } from "@tanstack/react-router";
 import {
 	ChevronRightIcon,
 	LayoutDashboardIcon,
-	LogOutIcon,
 	SettingsIcon,
 	UserIcon,
 } from "lucide-react";
 import { Button } from "#/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from "#/components/ui/dropdown-menu";
 import {
 	Sidebar,
 	SidebarContent,
@@ -105,41 +98,28 @@ export function AppSidebar({ userId }: { userId: string }) {
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 					<SidebarMenuItem>
-						<DropdownMenu>
-							<SidebarMenuButton asChild tooltip={"Tài khoản"}>
-								<DropdownMenuTrigger asChild>
-									<Button
-										variant={"outline"}
-										size={open ? "default" : "icon"}
-										className={cn("w-full", open && "justify-between h-10")}
-									>
-										{open ? (
-											<>
-												<div className="inline-flex justify-center items-center gap-1">
-													<UserIcon />
-													<span>Tài khoản</span>
-												</div>
-												<ChevronRightIcon />
-											</>
-										) : (
-											<UserIcon />
-										)}
-									</Button>
-								</DropdownMenuTrigger>
-							</SidebarMenuButton>
-							<DropdownMenuContent>
-								<DropdownMenuItem asChild>
-									<Link to="/admin/$userId" params={{ userId }}>
-										<SettingsIcon />
-										<span>Thiết lập tài khoản</span>
-									</Link>
-								</DropdownMenuItem>
-								<DropdownMenuItem variant="destructive">
-									<LogOutIcon />
-									<span>Đăng xuất</span>
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
+						<SidebarMenuButton asChild tooltip={"Tài khoản"}>
+							<Button
+								variant={"outline"}
+								size={open ? "default" : "icon"}
+								className={cn("w-full", open && "justify-between h-10")}
+								asChild
+							>
+								<Link to="/admin/$userId" params={{ userId }}>
+									{open ? (
+										<>
+											<div className="inline-flex justify-center items-center gap-1">
+												<UserIcon />
+												<span>Tài khoản</span>
+											</div>
+											<ChevronRightIcon />
+										</>
+									) : (
+										<UserIcon />
+									)}
+								</Link>
+							</Button>
+						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>
 			</SidebarFooter>

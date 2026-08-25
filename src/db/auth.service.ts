@@ -2,7 +2,8 @@ import { hash, verify } from "@node-rs/argon2";
 import { createServerFn } from "@tanstack/react-start";
 import type { Role } from "#/generated/prisma/enums";
 import { useAppSession } from "#/lib/utils/session";
-import type { SignIn, SignUp } from "#/schema/auth.schema";
+import { authMiddleware } from "#/middleware/auth.middleware";
+import type { ChangePassword, SignIn, SignUp } from "#/schema/auth.schema";
 import { prisma } from "@/db";
 
 const DUMMY_PASSWORD_HASH =
@@ -75,28 +76,36 @@ const signInFn = createServerFn({ method: "POST" })
 		const session = await useAppSession(
 			remember !== undefined ? remember : false,
 		);
+		try {
+			const existingUser = await prisma.user.findFirst({
+				where: {
+					OR: [{ username: identicator }, { phoneNumber: identicator }],
+				},
+				select: { id: true, hashed: true, role: true },
+			});
 
-		const existingUser = await prisma.user.findFirst({
-			where: { OR: [{ username: identicator }, { phoneNumber: identicator }] },
-			select: { id: true, hashed: true, role: true },
-		});
+			const passwordMacthes = await verify(
+				existingUser?.hashed ?? DUMMY_PASSWORD_HASH,
+				password,
+			);
 
-		const passwordMacthes = await verify(
-			existingUser?.hashed ?? DUMMY_PASSWORD_HASH,
-			password,
-		);
+			const ok = existingUser !== null && passwordMacthes;
 
-		const ok = existingUser !== null && passwordMacthes;
+			if (!ok)
+				return {
+					success: false,
+					message: "Tên tài khoản hoặc Mật khẩu không đúng!",
+				};
 
-		if (!ok)
-			return {
-				success: false,
-				message: "Tên tài khoản hoặc Mật khẩu không đúng!",
-			};
+			await session.update({
+				userId: existingUser.id,
+				role: existingUser.role,
+			});
 
-		await session.update({ userId: existingUser.id, role: existingUser.role });
-
-		return { success: true, message: "Đăng nhập thành công!" };
+			return { success: true, message: "Đăng nhập thành công!" };
+		} catch (_error) {
+			return { success: false, message: "Có lỗi xảy ra!" };
+		}
 	});
 
 const signOutFn = createServerFn({ method: "POST" }).handler(async () => {
@@ -110,4 +119,58 @@ const signOutFn = createServerFn({ method: "POST" }).handler(async () => {
 	}
 });
 
-export { signInFn, signUpFn, signOutFn };
+const changePasswordFn = createServerFn({ method: "POST" })
+	.middleware([authMiddleware])
+	.validator((data: ChangePassword) => data)
+	.handler(async ({ context, data }) => {
+		const session = await useAppSession();
+		try {
+			const { userId } = context.data;
+			const { confirmPassword, newPassword, password } = data;
+
+			if (newPassword !== confirmPassword) {
+				session.clear();
+				return {
+					success: false,
+					message: "Xác nhận mật khẩu không khớp!",
+				};
+			}
+
+			const user = await prisma.user.findUnique({
+				where: { id: userId },
+				select: { hashed: true },
+			});
+
+			const passwordMacthes = await verify(
+				user?.hashed ?? DUMMY_PASSWORD_HASH,
+				password,
+			);
+
+			const ok = user !== null && passwordMacthes;
+
+			if (!ok) {
+				session.clear();
+				return {
+					success: false,
+					message: "Cập nhật mật khẩu thất bại!",
+				};
+			}
+
+			const hashed = await hash(newPassword, {
+				algorithm: 2,
+				memoryCost: 32768,
+				timeCost: 3,
+				parallelism: 1,
+			});
+
+			await prisma.user.update({ where: { id: userId }, data: { hashed } });
+			return {
+				success: true,
+				message: "Cập nhật mật khẩu thành công!",
+			};
+		} catch (_error) {
+			return { success: false, message: "Có lỗi xảy ra!" };
+		}
+	});
+
+export { signInFn, signUpFn, signOutFn, changePasswordFn };

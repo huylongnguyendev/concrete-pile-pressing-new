@@ -27,6 +27,27 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "#/components/ui/tabs";
 
 export const Route = createFileRoute("/bang-gia")({
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{
+				title: "Bảng Giá Ép Cọc Bê Tông & Cọc Thi Công - Ép Cọc Hùng Dũng",
+			},
+			{
+				name: "description",
+				content:
+					"Xem chi tiết bảng giá ép cọc neo và cọc bê tông cốt thép (thép HVU, Việt Nhật) trọn gói, cạnh tranh nhất tại Đồng Nai và Bà Rịa - Vũng Tàu. Cam kết không phát sinh chi phí.",
+			},
+			{
+				property: "og:title",
+				content: "Bảng Giá Ép Cọc Bê Tông & Cọc Thi Công - Ép Cọc Hùng Dũng",
+			},
+			{
+				property: "og:description",
+				content:
+					"Bảng giá dịch vụ ép cọc bê tông chi tiết theo quy mô công trình và chủng loại thép tại Đồng Nai & Vũng Tàu. Khảo sát tư vấn miễn phí 24/7.",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {

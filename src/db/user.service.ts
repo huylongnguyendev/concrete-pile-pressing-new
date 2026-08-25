@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "#/middleware/auth.middleware";
-import { prisma } from "@/db";
 import type { UserUpdate } from "#/schema/user.schema";
+import { prisma } from "@/db";
 
 const getUserByIdFn = createServerFn({ method: "GET" })
 	.middleware([authMiddleware])
