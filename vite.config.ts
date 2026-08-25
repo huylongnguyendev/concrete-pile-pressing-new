@@ -19,6 +19,7 @@ const config = defineConfig({
 		VitePWA({
 			registerType: "autoUpdate",
 			includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+			injectRegister: 'auto',
 			manifest: {
 				id: "/admin",
 				name: "Concrete Pressing Admin",
