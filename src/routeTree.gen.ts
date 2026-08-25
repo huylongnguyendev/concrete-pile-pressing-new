@@ -13,22 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as BangGiaRouteImport } from './routes/bang-gia'
 import { Route as LienHeRouteImport } from './routes/lien-he'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminAnalyticsRouteImport } from './routes/admin/analytics'
-import { Route as AdminCompanyRouteImport } from './routes/admin/company'
-import { Route as AdminEmployeesRouteImport } from './routes/admin/employees'
-import { Route as AdminPrivatePolicyRouteImport } from './routes/admin/private-policy'
+import { Route as AuthResetRouteImport } from './routes/_auth/reset'
+import { Route as AuthSignInRouteImport } from './routes/_auth/sign-in'
+import { Route as AuthSignUpRouteImport } from './routes/_auth/sign-up'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
-import { Route as AdminUserIdChangePasswordRouteImport } from './routes/admin/$userId/change-password'
-import { Route as AdminUserIdEditRouteImport } from './routes/admin/$userId/edit'
-import { Route as AdminUserIdSettingRouteImport } from './routes/admin/$userId/setting'
-import { Route as AdminauthSignInRouteImport } from './routes/admin/(auth)/sign-in'
-import { Route as AdminauthSignUpRouteImport } from './routes/admin/(auth)/sign-up'
-import { Route as AdminCustomersIndexRouteImport } from './routes/admin/customers/index'
-import { Route as AdminCustomersCreateCustomerRouteImport } from './routes/admin/customers/create-customer'
-import { Route as AdminProjectsIndexRouteImport } from './routes/admin/projects/index'
-import { Route as AdminCustomersCustomerIdIndexRouteImport } from './routes/admin/customers/$customerId/index'
-import { Route as AdminCustomersCustomerIdEditRouteImport } from './routes/admin/customers/$customerId/edit'
+import { Route as AdminUserIdIndexRouteImport } from './routes/admin/$userId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -50,133 +39,53 @@ const LienHeRoute = LienHeRouteImport.update({
   path: '/lien-he',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRouteRoute,
+const AuthResetRoute = AuthResetRouteImport.update({
+  id: '/_auth/reset',
+  path: '/reset',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => AdminRouteRoute,
+const AuthSignInRoute = AuthSignInRouteImport.update({
+  id: '/_auth/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminCompanyRoute = AdminCompanyRouteImport.update({
-  id: '/company',
-  path: '/company',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminEmployeesRoute = AdminEmployeesRouteImport.update({
-  id: '/employees',
-  path: '/employees',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminPrivatePolicyRoute = AdminPrivatePolicyRouteImport.update({
-  id: '/private-policy',
-  path: '/private-policy',
-  getParentRoute: () => AdminRouteRoute,
+const AuthSignUpRoute = AuthSignUpRouteImport.update({
+  id: '/_auth/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminUserIdChangePasswordRoute =
-  AdminUserIdChangePasswordRouteImport.update({
-    id: '/$userId/change-password',
-    path: '/$userId/change-password',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
-const AdminUserIdEditRoute = AdminUserIdEditRouteImport.update({
-  id: '/$userId/edit',
-  path: '/$userId/edit',
+const AdminUserIdIndexRoute = AdminUserIdIndexRouteImport.update({
+  id: '/$userId/',
+  path: '/$userId/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminUserIdSettingRoute = AdminUserIdSettingRouteImport.update({
-  id: '/$userId/setting',
-  path: '/$userId/setting',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminauthSignInRoute = AdminauthSignInRouteImport.update({
-  id: '/(auth)/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminauthSignUpRoute = AdminauthSignUpRouteImport.update({
-  id: '/(auth)/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminCustomersIndexRoute = AdminCustomersIndexRouteImport.update({
-  id: '/customers/',
-  path: '/customers/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminCustomersCreateCustomerRoute =
-  AdminCustomersCreateCustomerRouteImport.update({
-    id: '/customers/create-customer',
-    path: '/customers/create-customer',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
-const AdminProjectsIndexRoute = AdminProjectsIndexRouteImport.update({
-  id: '/projects/',
-  path: '/projects/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminCustomersCustomerIdIndexRoute =
-  AdminCustomersCustomerIdIndexRouteImport.update({
-    id: '/customers/$customerId/',
-    path: '/customers/$customerId/',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
-const AdminCustomersCustomerIdEditRoute =
-  AdminCustomersCustomerIdEditRouteImport.update({
-    id: '/customers/$customerId/edit',
-    path: '/customers/$customerId/edit',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
   '/lien-he': typeof LienHeRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/company': typeof AdminCompanyRoute
-  '/admin/employees': typeof AdminEmployeesRoute
-  '/admin/private-policy': typeof AdminPrivatePolicyRoute
+  '/reset': typeof AuthResetRoute
+  '/sign-in': typeof AuthSignInRoute
+  '/sign-up': typeof AuthSignUpRoute
   '/admin/settings': typeof AdminSettingsRoute
-  '/admin/': typeof AdminIndexRoute
-  '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
-  '/admin/$userId/edit': typeof AdminUserIdEditRoute
-  '/admin/$userId/setting': typeof AdminUserIdSettingRoute
-  '/admin/sign-in': typeof AdminauthSignInRoute
-  '/admin/sign-up': typeof AdminauthSignUpRoute
-  '/admin/customers/create-customer': typeof AdminCustomersCreateCustomerRoute
-  '/admin/customers/': typeof AdminCustomersIndexRoute
-  '/admin/projects/': typeof AdminProjectsIndexRoute
-  '/admin/customers/$customerId/edit': typeof AdminCustomersCustomerIdEditRoute
-  '/admin/customers/$customerId/': typeof AdminCustomersCustomerIdIndexRoute
+  '/admin/$userId/': typeof AdminUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
   '/lien-he': typeof LienHeRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/company': typeof AdminCompanyRoute
-  '/admin/employees': typeof AdminEmployeesRoute
-  '/admin/private-policy': typeof AdminPrivatePolicyRoute
+  '/reset': typeof AuthResetRoute
+  '/sign-in': typeof AuthSignInRoute
+  '/sign-up': typeof AuthSignUpRoute
   '/admin/settings': typeof AdminSettingsRoute
-  '/admin': typeof AdminIndexRoute
-  '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
-  '/admin/$userId/edit': typeof AdminUserIdEditRoute
-  '/admin/$userId/setting': typeof AdminUserIdSettingRoute
-  '/admin/sign-in': typeof AdminauthSignInRoute
-  '/admin/sign-up': typeof AdminauthSignUpRoute
-  '/admin/customers/create-customer': typeof AdminCustomersCreateCustomerRoute
-  '/admin/customers': typeof AdminCustomersIndexRoute
-  '/admin/projects': typeof AdminProjectsIndexRoute
-  '/admin/customers/$customerId/edit': typeof AdminCustomersCustomerIdEditRoute
-  '/admin/customers/$customerId': typeof AdminCustomersCustomerIdIndexRoute
+  '/admin/$userId': typeof AdminUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -184,22 +93,11 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteRouteWithChildren
   '/bang-gia': typeof BangGiaRoute
   '/lien-he': typeof LienHeRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/company': typeof AdminCompanyRoute
-  '/admin/employees': typeof AdminEmployeesRoute
-  '/admin/private-policy': typeof AdminPrivatePolicyRoute
+  '/_auth/reset': typeof AuthResetRoute
+  '/_auth/sign-in': typeof AuthSignInRoute
+  '/_auth/sign-up': typeof AuthSignUpRoute
   '/admin/settings': typeof AdminSettingsRoute
-  '/admin/': typeof AdminIndexRoute
-  '/admin/$userId/change-password': typeof AdminUserIdChangePasswordRoute
-  '/admin/$userId/edit': typeof AdminUserIdEditRoute
-  '/admin/$userId/setting': typeof AdminUserIdSettingRoute
-  '/admin/(auth)/sign-in': typeof AdminauthSignInRoute
-  '/admin/(auth)/sign-up': typeof AdminauthSignUpRoute
-  '/admin/customers/create-customer': typeof AdminCustomersCreateCustomerRoute
-  '/admin/customers/': typeof AdminCustomersIndexRoute
-  '/admin/projects/': typeof AdminProjectsIndexRoute
-  '/admin/customers/$customerId/edit': typeof AdminCustomersCustomerIdEditRoute
-  '/admin/customers/$customerId/': typeof AdminCustomersCustomerIdIndexRoute
+  '/admin/$userId/': typeof AdminUserIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -208,65 +106,33 @@ export interface FileRouteTypes {
     | '/admin'
     | '/bang-gia'
     | '/lien-he'
-    | '/admin/analytics'
-    | '/admin/company'
-    | '/admin/employees'
-    | '/admin/private-policy'
+    | '/reset'
+    | '/sign-in'
+    | '/sign-up'
     | '/admin/settings'
-    | '/admin/'
-    | '/admin/$userId/change-password'
-    | '/admin/$userId/edit'
-    | '/admin/$userId/setting'
-    | '/admin/sign-in'
-    | '/admin/sign-up'
-    | '/admin/customers/create-customer'
-    | '/admin/customers/'
-    | '/admin/projects/'
-    | '/admin/customers/$customerId/edit'
-    | '/admin/customers/$customerId/'
+    | '/admin/$userId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/bang-gia'
     | '/lien-he'
-    | '/admin/analytics'
-    | '/admin/company'
-    | '/admin/employees'
-    | '/admin/private-policy'
+    | '/reset'
+    | '/sign-in'
+    | '/sign-up'
     | '/admin/settings'
-    | '/admin'
-    | '/admin/$userId/change-password'
-    | '/admin/$userId/edit'
-    | '/admin/$userId/setting'
-    | '/admin/sign-in'
-    | '/admin/sign-up'
-    | '/admin/customers/create-customer'
-    | '/admin/customers'
-    | '/admin/projects'
-    | '/admin/customers/$customerId/edit'
-    | '/admin/customers/$customerId'
+    | '/admin/$userId'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/bang-gia'
     | '/lien-he'
-    | '/admin/analytics'
-    | '/admin/company'
-    | '/admin/employees'
-    | '/admin/private-policy'
+    | '/_auth/reset'
+    | '/_auth/sign-in'
+    | '/_auth/sign-up'
     | '/admin/settings'
-    | '/admin/'
-    | '/admin/$userId/change-password'
-    | '/admin/$userId/edit'
-    | '/admin/$userId/setting'
-    | '/admin/(auth)/sign-in'
-    | '/admin/(auth)/sign-up'
-    | '/admin/customers/create-customer'
-    | '/admin/customers/'
-    | '/admin/projects/'
-    | '/admin/customers/$customerId/edit'
-    | '/admin/customers/$customerId/'
+    | '/admin/$userId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -274,6 +140,9 @@ export interface RootRouteChildren {
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   BangGiaRoute: typeof BangGiaRoute
   LienHeRoute: typeof LienHeRoute
+  AuthResetRoute: typeof AuthResetRoute
+  AuthSignInRoute: typeof AuthSignInRoute
+  AuthSignUpRoute: typeof AuthSignUpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -306,40 +175,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LienHeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/_auth/reset': {
+      id: '/_auth/reset'
+      path: '/reset'
+      fullPath: '/reset'
+      preLoaderRoute: typeof AuthResetRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/analytics': {
-      id: '/admin/analytics'
-      path: '/analytics'
-      fullPath: '/admin/analytics'
-      preLoaderRoute: typeof AdminAnalyticsRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/_auth/sign-in': {
+      id: '/_auth/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof AuthSignInRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/company': {
-      id: '/admin/company'
-      path: '/company'
-      fullPath: '/admin/company'
-      preLoaderRoute: typeof AdminCompanyRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/employees': {
-      id: '/admin/employees'
-      path: '/employees'
-      fullPath: '/admin/employees'
-      preLoaderRoute: typeof AdminEmployeesRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/private-policy': {
-      id: '/admin/private-policy'
-      path: '/private-policy'
-      fullPath: '/admin/private-policy'
-      preLoaderRoute: typeof AdminPrivatePolicyRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/_auth/sign-up': {
+      id: '/_auth/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/settings': {
       id: '/admin/settings'
@@ -348,115 +203,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/$userId/change-password': {
-      id: '/admin/$userId/change-password'
-      path: '/$userId/change-password'
-      fullPath: '/admin/$userId/change-password'
-      preLoaderRoute: typeof AdminUserIdChangePasswordRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/$userId/edit': {
-      id: '/admin/$userId/edit'
-      path: '/$userId/edit'
-      fullPath: '/admin/$userId/edit'
-      preLoaderRoute: typeof AdminUserIdEditRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/$userId/setting': {
-      id: '/admin/$userId/setting'
-      path: '/$userId/setting'
-      fullPath: '/admin/$userId/setting'
-      preLoaderRoute: typeof AdminUserIdSettingRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/(auth)/sign-in': {
-      id: '/admin/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/admin/sign-in'
-      preLoaderRoute: typeof AdminauthSignInRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/(auth)/sign-up': {
-      id: '/admin/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/admin/sign-up'
-      preLoaderRoute: typeof AdminauthSignUpRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/customers/': {
-      id: '/admin/customers/'
-      path: '/customers'
-      fullPath: '/admin/customers/'
-      preLoaderRoute: typeof AdminCustomersIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/customers/create-customer': {
-      id: '/admin/customers/create-customer'
-      path: '/customers/create-customer'
-      fullPath: '/admin/customers/create-customer'
-      preLoaderRoute: typeof AdminCustomersCreateCustomerRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/projects/': {
-      id: '/admin/projects/'
-      path: '/projects'
-      fullPath: '/admin/projects/'
-      preLoaderRoute: typeof AdminProjectsIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/customers/$customerId/': {
-      id: '/admin/customers/$customerId/'
-      path: '/customers/$customerId'
-      fullPath: '/admin/customers/$customerId/'
-      preLoaderRoute: typeof AdminCustomersCustomerIdIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/customers/$customerId/edit': {
-      id: '/admin/customers/$customerId/edit'
-      path: '/customers/$customerId/edit'
-      fullPath: '/admin/customers/$customerId/edit'
-      preLoaderRoute: typeof AdminCustomersCustomerIdEditRouteImport
+    '/admin/$userId/': {
+      id: '/admin/$userId/'
+      path: '/$userId'
+      fullPath: '/admin/$userId/'
+      preLoaderRoute: typeof AdminUserIdIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
   }
 }
 
 interface AdminRouteRouteChildren {
-  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
-  AdminCompanyRoute: typeof AdminCompanyRoute
-  AdminEmployeesRoute: typeof AdminEmployeesRoute
-  AdminPrivatePolicyRoute: typeof AdminPrivatePolicyRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminIndexRoute: typeof AdminIndexRoute
-  AdminUserIdChangePasswordRoute: typeof AdminUserIdChangePasswordRoute
-  AdminUserIdEditRoute: typeof AdminUserIdEditRoute
-  AdminUserIdSettingRoute: typeof AdminUserIdSettingRoute
-  AdminauthSignInRoute: typeof AdminauthSignInRoute
-  AdminauthSignUpRoute: typeof AdminauthSignUpRoute
-  AdminCustomersCreateCustomerRoute: typeof AdminCustomersCreateCustomerRoute
-  AdminCustomersIndexRoute: typeof AdminCustomersIndexRoute
-  AdminProjectsIndexRoute: typeof AdminProjectsIndexRoute
-  AdminCustomersCustomerIdEditRoute: typeof AdminCustomersCustomerIdEditRoute
-  AdminCustomersCustomerIdIndexRoute: typeof AdminCustomersCustomerIdIndexRoute
+  AdminUserIdIndexRoute: typeof AdminUserIdIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminAnalyticsRoute: AdminAnalyticsRoute,
-  AdminCompanyRoute: AdminCompanyRoute,
-  AdminEmployeesRoute: AdminEmployeesRoute,
-  AdminPrivatePolicyRoute: AdminPrivatePolicyRoute,
   AdminSettingsRoute: AdminSettingsRoute,
-  AdminIndexRoute: AdminIndexRoute,
-  AdminUserIdChangePasswordRoute: AdminUserIdChangePasswordRoute,
-  AdminUserIdEditRoute: AdminUserIdEditRoute,
-  AdminUserIdSettingRoute: AdminUserIdSettingRoute,
-  AdminauthSignInRoute: AdminauthSignInRoute,
-  AdminauthSignUpRoute: AdminauthSignUpRoute,
-  AdminCustomersCreateCustomerRoute: AdminCustomersCreateCustomerRoute,
-  AdminCustomersIndexRoute: AdminCustomersIndexRoute,
-  AdminProjectsIndexRoute: AdminProjectsIndexRoute,
-  AdminCustomersCustomerIdEditRoute: AdminCustomersCustomerIdEditRoute,
-  AdminCustomersCustomerIdIndexRoute: AdminCustomersCustomerIdIndexRoute,
+  AdminUserIdIndexRoute: AdminUserIdIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
@@ -468,6 +232,9 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRouteRoute: AdminRouteRouteWithChildren,
   BangGiaRoute: BangGiaRoute,
   LienHeRoute: LienHeRoute,
+  AuthResetRoute: AuthResetRoute,
+  AuthSignInRoute: AuthSignInRoute,
+  AuthSignUpRoute: AuthSignUpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

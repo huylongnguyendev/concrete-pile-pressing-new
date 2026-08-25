@@ -12,13 +12,13 @@ export const Route = createFileRoute("/")({
 
 function Home() {
 	return (
-		<div>
+		<>
 			<Hero />
 			<About />
 			<Workflow />
 			<Projects />
 			<Testimonials />
 			<ContactCTA />
-		</div>
+		</>
 	);
 }

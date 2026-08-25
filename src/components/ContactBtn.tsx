@@ -1,12 +1,9 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { PhoneCallIcon } from "lucide-react";
-import { companyQuery } from "#/db/query/company.query";
+import contact from "@/data/json/contact.json" with { type: "json" };
 import { Button } from "./ui/button";
 
 export function ContactBtn() {
-	const { data } = useSuspenseQuery(companyQuery);
-
-	const phoneNumber = data?.companies[0]?.phoneNumber ?? [];
+	const { phoneNumber } = contact;
 
 	return (
 		<Button
@@ -14,11 +11,9 @@ export function ContactBtn() {
 			className="py-4 h-auto text-base font-bold shadow-md hover:shadow-lg transition-all"
 			asChild
 		>
-			<a href={`tel:${phoneNumber[0]?.number}`}>
+			<a href={`tel:${phoneNumber}`}>
 				<PhoneCallIcon className="w-5 h-5 mr-2" />
-				<span>
-					Gọi Tư Vấn Ngay: {phoneNumber[0]?.number.replace("+84", "0")}
-				</span>
+				<span>Gọi Tư Vấn Ngay: {phoneNumber.replace("+84", "0")}</span>
 			</a>
 		</Button>
 	);

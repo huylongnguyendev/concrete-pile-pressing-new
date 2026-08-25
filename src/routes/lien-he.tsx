@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import {
 	CheckCircle2Icon,
@@ -17,24 +16,33 @@ import {
 	CardHeader,
 	CardTitle,
 } from "#/components/ui/card";
-import { companyQuery } from "#/db/query/company.query";
+import contact from "@/data/json/contact.json" with { type: "json" };
 
 export const Route = createFileRoute("/lien-he")({
 	component: RouteComponent,
+	head: () => ({
+		meta: [
+			{ title: "Liên Hệ Tư Vấn Dịch Vụ Ép Cọc Bê Tông Miền Nam" },
+			{
+				name: "description",
+				content:
+					"Liên hệ đơn vị ép cọc bê tông uy tín tại Đồng Nai & Bà Rịa - Vũng Tàu...",
+			},
+			{
+				property: "og:title",
+				content: "Liên Hệ Tư Vấn Dịch Vụ Ép Cọc Bê Tông Miền Nam",
+			},
+			{
+				property: "og:description",
+				content:
+					"Khảo sát mặt bằng miễn phí, tư vấn giải pháp ép cọc tối ưu...",
+			},
+		],
+	}),
 });
 
 function RouteComponent() {
-	const { data } = useSuspenseQuery(companyQuery);
-
-	const company = data?.companies[0];
-	const phoneObj =
-		company?.phoneNumber?.find((p) => p.priority) || company?.phoneNumber?.[0];
-	const emailObj =
-		company?.emails?.find((e) => e.priority) || company?.emails?.[0];
-
-	const phoneNumber = phoneObj?.number ?? "";
-	const email = emailObj?.mail ?? "";
-
+	const { address, email, phoneNumber } = contact;
 	return (
 		<div className="pt-20 flex-1 flex flex-col">
 			<Section className="bg-gray-50/50 dark:bg-zinc-900/50 pt-12 pb-8 lg:py-16">
@@ -100,7 +108,7 @@ function RouteComponent() {
 													Địa chỉ cơ sở
 												</p>
 												<p className="text-muted-foreground mt-0.5">
-													Khu vực Biên Hòa, Đồng Nai & Các vùng lân cận Miền Nam
+													{address}
 												</p>
 											</div>
 										</div>

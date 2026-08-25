@@ -2,9 +2,8 @@ import { useForm } from "@tanstack/react-form";
 import { AsteriskIcon, SendIcon } from "lucide-react";
 import { toast } from "sonner";
 import { locationSelect, methodSelect } from "#/data/contact.data";
-import { sendMessageFn } from "#/db/services/message.service";
-import { MessageSchema, type SendMessage } from "#/schema/message.schema";
-import type { CustomerMessage } from "#/types/message.type";
+import { sendMessageFn } from "#/db/message.service";
+import { type Message, MessageSchema } from "#/schema/message.schema";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
@@ -27,23 +26,13 @@ export function ContactForm() {
 			location: "",
 			method: "",
 			phoneNumber: "",
-		} as SendMessage,
+		} as Message,
 		validators: {
 			onBlur: MessageSchema,
 			onChange: MessageSchema,
 		},
 		onSubmit: async ({ value }) => {
-			const { content, fullName, method, phoneNumber, location } = value;
-			const data: CustomerMessage = {
-				from: fullName,
-				phoneNumber,
-				location: location || "Khu vực khác miền Nam",
-				content: [method ? `[${method}]` : "", content]
-					.filter(Boolean)
-					.join("\n"),
-			};
-
-			const res = await sendMessageFn({ data });
+			const res = await sendMessageFn({ data: value });
 
 			if (res.success) {
 				toast.success(res.message);

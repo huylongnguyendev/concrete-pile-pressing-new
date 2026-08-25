@@ -1,18 +1,20 @@
 import { useSession } from "@tanstack/react-start/server";
+import type { Role } from "#/generated/prisma/enums";
 
-export function useAppSession(remember?: boolean) {
-	const password = process.env.SESSION_SECRET;
+type SessionData = {
+	userId?: string;
+	role?: Role;
+};
 
-	if (!password) throw new Error("Phiên đã hết hạn!");
-
-	return useSession({
+export function useAppSession(remember: boolean = false) {
+	return useSession<SessionData>({
 		name: "app-session",
-		password,
+		password: process.env.SESSION_SECRET || "", // Tối thiểu 32 ký tự
 		cookie: {
-			secure: process.env.NODE_ENV === "production",
-			sameSite: "lax",
-			httpOnly: true,
-			maxAge: remember ? 7 * 24 * 60 * 60 : undefined,
+			secure: process.env.NODE_ENV === "production", // Chỉ HTTPS trên production
+			sameSite: "lax", // Bảo vệ CSRF
+			httpOnly: true, // Bảo vệ XSS
+			maxAge: remember ? 7 * 24 * 60 * 60 : undefined, // 7 ngày
 		},
 	});
 }

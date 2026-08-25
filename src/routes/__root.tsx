@@ -31,13 +31,126 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "Ép cọc bê tông Hùng Dũng",
+				property: "og:locale",
+				content: "vi_VN",
+			},
+			{
+				property: "og:type",
+				content: "website",
+			},
+			{
+				property: "og:site_name",
+				content: "Ép Cọc Bê Tông Hùng Dũng",
+			},
+			{
+				property: "og:title",
+				content: "Ép Cọc Bê Tông Hùng Dũng - Uy Tín & Chuyên Nghiệp Miền Nam",
+			},
+			{
+				property: "og:description",
+				content:
+					"Chuyên cung cấp dịch vụ ép cọc bê tông trọn gói tại Đồng Nai, TP.HCM, Bình Dương, Long An và Vũng Tàu.",
+			},
+			{
+				property: "og:image",
+				content: "http://localhost:3001/og-image.png", // Dùng URL tuyệt đối để devtool hiện ảnh preview
+			},
+			{
+				property: "og:url",
+				content: "http://localhost:3001/",
+			},
+			// --- CÁC THẺ CHO TWITTER / X ---
+			{
+				name: "twitter:card",
+				content: "summary_large_image",
+			},
+			{
+				name: "twitter:title",
+				content: "Ép Cọc Bê Tông Hùng Dũng - Uy Tín & Chuyên Nghiệp Miền Nam",
+			},
+			{
+				name: "twitter:description",
+				content:
+					"Chuyên cung cấp dịch vụ ép cọc bê tông trọn gói tại Đồng Nai, TP.HCM, Bình Dương, Long An và Vũng Tàu.",
+			},
+			{
+				name: "twitter:image",
+				content: "http://localhost:3001/og-image.png",
+			},
+			{
+				name: "twitter:url",
+				content: "http://localhost:3001/",
 			},
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
+			},
+			{
+				rel: "apple-touch-icon",
+				sizes: "180x180",
+				href: "/apple-touch-icon.png",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "32x32",
+				href: "/favicon-32x32.png",
+			},
+			{
+				rel: "icon",
+				type: "image/png",
+				sizes: "16x16",
+				href: "/favicon-16x16.png",
+			},
+			{
+				rel: "manifest",
+				href: "/site.webmanifest",
+			},
+			{
+				rel: "icon",
+				href: "/favicon.ico",
+			},
+		],
+		scripts: [
+			{
+				type: "application/ld+json",
+				children: JSON.stringify({
+					"@context": "https://schema.org",
+					"@type": "Organization",
+					name: "Ép Cọc Bê Tông Hùng Dũng",
+					url: "https://epcochungdung.vn",
+					logo: "https://epcochungdung.vn/logo.png",
+					contactPoint: {
+						"@type": "ContactPoint",
+						telephone: "0967386080",
+						contactType: "customer service",
+						areaServed: [
+							{
+								"@type": "AdministrativeArea",
+								name: "Đồng Nai",
+							},
+							{
+								"@type": "AdministrativeArea",
+								name: "Bà Rịa - Vũng Tàu",
+							},
+							{
+								"@type": "AdministrativeArea",
+								name: "Thành phố Hồ Chí Minh",
+							},
+							{
+								"@type": "AdministrativeArea",
+								name: "Bình Dương",
+							},
+							{
+								"@type": "AdministrativeArea",
+								name: "Long An",
+							},
+						],
+						availableLanguage: "Vietnamese",
+					},
+				}),
 			},
 		],
 	}),
@@ -50,7 +163,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 	const isShowNav = !matches.some((m) => m.staticData?.isShowNav === false);
 
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="vi" suppressHydrationWarning>
 			<head>
 				<HeadContent />
 			</head>
