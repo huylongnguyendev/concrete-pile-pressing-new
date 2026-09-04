@@ -48,6 +48,7 @@ export const Route = createFileRoute("/admin")({
 
 function RouteComponent() {
 	const { user } = Route.useRouteContext();
+
 	return (
 		<ThemeProvider>
 			<ClientOnly fallback={null}>

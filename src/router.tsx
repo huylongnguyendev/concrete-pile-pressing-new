@@ -42,18 +42,6 @@ export function getRouter() {
 				</div>
 			</div>
 		),
-		defaultErrorComponent: () => (
-			<div className="flex-1 flex flex-col items-center justify-center py-20 px-4 text-center">
-				<h1 className="text-6xl font-bold text-primary mb-4">404</h1>
-				<h2 className="text-2xl font-semibold mb-2">Không tìm thấy trang</h2>
-				<p className="text-muted-foreground mb-6 max-w-md">
-					Xin lỗi, trang bạn đang truy cập không tồn tại hoặc đã bị di chuyển.
-				</p>
-				<Button asChild>
-					<Link to="/">Quay về trang chủ</Link>
-				</Button>
-			</div>
-		),
 		defaultNotFoundComponent: () => (
 			<div className="w-full flex flex-col justify-center items-center place-items-center h-dvh!">
 				<div className="relative mb-6">
@@ -87,6 +75,18 @@ export function getRouter() {
 						Trang trước đó
 					</Button>
 				</div>
+			</div>
+		),
+		defaultErrorComponent: () => (
+			<div className="flex-1 flex flex-col items-center justify-center py-20 px-4 text-center">
+				<h1 className="text-6xl font-bold text-primary mb-4">404</h1>
+				<h2 className="text-2xl font-semibold mb-2">Không tìm thấy trang</h2>
+				<p className="text-muted-foreground mb-6 max-w-md">
+					Xin lỗi, trang bạn đang truy cập không tồn tại hoặc đã bị di chuyển.
+				</p>
+				<Button asChild>
+					<Link to="/">Quay về trang chủ</Link>
+				</Button>
 			</div>
 		),
 	});

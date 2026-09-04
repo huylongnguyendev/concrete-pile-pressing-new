@@ -13,7 +13,7 @@ export function Projects() {
 			image: "/ep-coc-nha-dan-bien-hoa.jpg",
 		},
 		{
-			title: "Ép Cọc Neo Nhà Hẻm Nhỏ",
+			title: "Ép Cọc Tải Thép Nhà Phố",
 			location: "Huyện Long Thành, Đồng Nai",
 			specs: "Thiết bị chuyên dụng • Phù hợp hẻm hẹp < 2m",
 			image: "/ep-coc-nha-dan-long-thanh.jpg",
@@ -25,19 +25,19 @@ export function Projects() {
 			image: "/ep-coc-nha-xuong-vung-tau.jpg",
 		},
 		{
-			title: "Ép Cọc Biệt Thự & Nhà 3 Tầng",
+			title: "Ép Cọc Nhà Xưởng",
 			location: "Thành phố Hồ Chí Minh",
 			specs: "Đảm bảo kỹ thuật • Không lún nứt",
 			image: "/ep-coc-nha-xuong-dong-nai.jpg",
 		},
 		{
-			title: "Ép Cọc Neo Nhà Dân Cấp 4 / Lầu",
+			title: "Ép Cọc Nhà Dân Dụng",
 			location: "Tỉnh Bình Dương",
 			specs: "Thi công nhanh gọn • Chi phí tối ưu",
 			image: "/ep-coc-hem-nho-can-tho.jpg",
 		},
 		{
-			title: "Ép Tải Công Trình Dân Dụng",
+			title: "Ép Tải Công Trình Nhà Cao Tầng",
 			location: "Thành phố Vũng Tàu, BR-VT",
 			specs: "Khảo sát & ép thử tải chuẩn xác",
 			image: "/ep-coc-nha-dan-hcm.jpg",

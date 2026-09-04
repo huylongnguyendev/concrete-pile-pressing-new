@@ -1,4 +1,9 @@
-import { BarChart3, BookUser, FolderKanban, Users } from "lucide-react";
+import {
+	BarChart3Icon,
+	FolderKanbanIcon,
+	StickyNoteIcon,
+	UsersIcon,
+} from "lucide-react";
 
 interface ISidebar {
 	id: string;
@@ -12,29 +17,29 @@ const sidebarList: ISidebar[] = [
 	{
 		id: "overview-analytics",
 		href: "/admin/analytics",
-		icon: BarChart3,
+		icon: BarChart3Icon,
 		label: "Phân tích hệ thống",
 		type: "overview",
 	},
 	{
 		id: "manage-customers",
 		href: "/admin/customers",
-		icon: Users,
+		icon: UsersIcon,
 		label: "Quản lý khách hàng",
 		type: "manage",
 	},
 	{
 		id: "manage-projects",
 		href: "/admin/projects",
-		icon: FolderKanban,
+		icon: FolderKanbanIcon,
 		label: "Quản lý dự án",
 		type: "manage",
 	},
 	{
-		id: "manage-employees",
-		href: "/admin/employees",
-		icon: BookUser,
-		label: "Quản lý nhân viên",
+		id: "manage-posts",
+		href: "/admin/posts",
+		icon: StickyNoteIcon,
+		label: "Quản lý bài viết",
 		type: "manage",
 	},
 ];

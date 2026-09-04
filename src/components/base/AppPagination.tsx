@@ -1,10 +1,8 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import {
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	MoreHorizontalIcon,
 } from "lucide-react";
-import { customersQuery } from "#/db/query/customer.query";
 import { Button } from "../ui/button";
 import {
 	Pagination,
@@ -15,16 +13,12 @@ import {
 export function AppPagination({
 	currentPage,
 	onSelectPage,
+	totalPages,
 }: {
 	currentPage: number;
 	onSelectPage: (page: number) => void;
+	totalPages: number;
 }) {
-	const { data } = useSuspenseQuery(customersQuery({ page: currentPage }));
-
-	if (!data || !data.success) return null;
-
-	const totalPages = data.totalPage;
-
 	if (totalPages <= 1) return null;
 
 	const getPageNumbers = () => {

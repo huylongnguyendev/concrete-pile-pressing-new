@@ -9,4 +9,12 @@ interface Pagination {
 	totalPage: number;
 }
 
-export type { TimeApi, Pagination };
+type Sort = "asc" | "desc";
+
+interface PaginationQuery {
+	page: number;
+	search?: string;
+	sort?: Sort;
+}
+
+export type { TimeApi, Pagination, PaginationQuery, Sort };
