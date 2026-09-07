@@ -54,11 +54,11 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 			{
 				property: "og:image",
-				content: "http://localhost:3001/og-image.png", // Dùng URL tuyệt đối để devtool hiện ảnh preview
+				content: "https://www.epcocbetongmiennam.vn/og-image.png", // Dùng URL tuyệt đối để devtool hiện ảnh preview
 			},
 			{
 				property: "og:url",
-				content: "http://localhost:3001/",
+				content: "https://www.epcocbetongmiennam.vn",
 			},
 			// --- CÁC THẺ CHO TWITTER / X ---
 			{
@@ -76,11 +76,11 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 			{
 				name: "twitter:image",
-				content: "http://localhost:3001/og-image.png",
+				content: "https://www.epcocbetongmiennam.vn/og-image.png",
 			},
 			{
 				name: "twitter:url",
-				content: "http://localhost:3001/",
+				content: "https://www.epcocbetongmiennam.vn",
 			},
 		],
 		links: [
