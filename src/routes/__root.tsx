@@ -54,7 +54,7 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 			{
 				property: "og:image",
-				content: "https://www.epcocbetongmiennam.vn/og-image.png", // Dùng URL tuyệt đối để devtool hiện ảnh preview
+				content: "https://www.epcocbetongmiennam.vn/hero-image.jpg", // Dùng URL tuyệt đối để devtool hiện ảnh preview
 			},
 			{
 				property: "og:url",
@@ -76,7 +76,7 @@ export const Route = createRootRouteWithContext<RootRouteContext>()({
 			},
 			{
 				name: "twitter:image",
-				content: "https://www.epcocbetongmiennam.vn/og-image.png",
+				content: "https://www.epcocbetongmiennam.vn/hero-image.jpg",
 			},
 			{
 				name: "twitter:url",
