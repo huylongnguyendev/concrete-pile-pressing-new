@@ -3,7 +3,7 @@ import contact from "#/data/json/contact.json" with { type: "json" };
 export function MessengerContact() {
 	return (
 		<a
-			href={`${contact.messenger}`}
+			href={`https://www.facebook.com/profile.php?id=61593806262489&locale=vi_VN`}
 			className="relative transition-transform hover:scale-110"
 			title="Liên hệ qua Messenger/Facebook"
 		>
